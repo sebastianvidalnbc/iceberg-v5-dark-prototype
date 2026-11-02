@@ -44,6 +44,8 @@ import {
   moveWithin,
   renameNode,
   setNodeContent,
+  setNodeDesign,
+  DESIGN_FIELD,
   toggleDisabled,
 } from "./structureOps";
 import type { StructureNode, StructureObjectType } from "./data";
@@ -508,6 +510,10 @@ export function WorkspaceShell({
   // node, so the tree and the panel's tabs show the title the author set.
   const handleEditField = useCallback(
     (nodeId: string, label: string, value: string) => {
+      if (label === DESIGN_FIELD) {
+        updateStructure((nodes) => setNodeDesign(nodes, nodeId, value as StructureNode["design"]));
+        return;
+      }
       updateStructure((nodes) => {
         const next = setNodeContent(nodes, nodeId, label, value);
         const node = findNodeById(nodes, nodeId);

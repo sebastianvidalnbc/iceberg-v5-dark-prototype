@@ -9,8 +9,7 @@ import { EmptyState } from "../ui-lib/EmptyState";
 import { buildWidgetRows, routes, navigate, type WidgetRow, type WidgetFormat, type WidgetType } from "../browse";
 import type { WidgetChildRow } from "../browse";
 import { SortHeaderCell, compareSortValues, nextSort, type SortState } from "../ui-lib/SortableHeader";
-import { LayoutPicker } from "../regions/LayoutPicker";
-import { createWidgetFromLayout } from "../widget-create";
+import { CreateWidgetDialog } from "../regions/CreateWidgetDialog";
 import { LAYOUT_TYPES, layoutTypeOf, type LayoutTypeId } from "../layout-identity";
 import { layoutDefForWidget } from "../layout-widgets";
 
@@ -56,17 +55,18 @@ function formatGlyph(format: WidgetFormat): string {
 
 // Widgets list — the real production Widgets screen (259 widgets), now a flat
 // table: Format filter (All / HTML / JSON), slug search, sortable columns.
-// "+" starts a new widget from the Layout Picker and opens it in the editor
-// with that layout as its first section, the same way a Page gets sections.
+// "+" opens production's Create new Widget dialog (name + HTML/JSON template).
 export function WidgetsView() {
-  const allRows = useMemo(() => buildWidgetRows(), []);
+  // Bumped when a widget is created, so the rows include it.
+  const [rowsVersion, setRowsVersion] = useState(0);
+  const allRows = useMemo(() => buildWidgetRows(), [rowsVersion]);
   const [query, setQuery] = useState("");
   const [formatFilter, setFormatFilter] = useState<"all" | WidgetFormat>("all");
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [sort, setSort] = useState<SortState<SortKey>>({ key: "modifiedAt", dir: "desc" });
   const onSort = (key: SortKey) => setSort((prev) => nextSort(prev, key));
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false);
   // Rows expand independently to show the pages each widget is used on.
   const [openIds, setOpenIds] = useState<Set<string>>(() => new Set());
   const toggleRow = (id: string) =>
@@ -107,7 +107,7 @@ export function WidgetsView() {
             icon="plus"
             aria-label="Create widget"
             className="ui-ws-browse__add"
-            onClick={() => setPickerOpen(true)}
+            onClick={() => setCreateOpen(true)}
           />
         </div>
       </header>
@@ -176,14 +176,12 @@ export function WidgetsView() {
         onPageSizeChange={setPageSize}
       />
 
-      <LayoutPicker
-        open={pickerOpen}
-        onOpenChange={setPickerOpen}
-        contextLabel="a new widget"
-        onSelect={(layoutId) => {
-          setPickerOpen(false);
-          const id = createWidgetFromLayout(layoutId);
-          if (id) navigate(routes.editor("widget", id));
+      <CreateWidgetDialog
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onCreated={(id, openEditor) => {
+          if (openEditor) navigate(routes.editor("widget", id));
+          else setRowsVersion((v) => v + 1);
         }}
       />
     </div>

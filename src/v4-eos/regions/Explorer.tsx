@@ -8,6 +8,7 @@ import {
 } from "react";
 import { Panel, PanelHeader, SearchInput } from "@/v4-eos/ui/panel";
 import { chromeType } from "@/v4-eos/ui/chrome-type";
+import { inspectorType } from "@/v4-eos/ui/property";
 import { cn } from "@/v4-eos/ui/lib/utils";
 import { StructureTreeRow } from "@/v4-eos/ui/structure-tree-row";
 import { getStructureNodeVisual } from "@/v4-eos/ui/structure-tree-visual";
@@ -491,7 +492,7 @@ function StructureTabs({
   return (
     <div
       role="tablist"
-      className="mb-2 flex w-full items-center gap-3 border-b border-[var(--color-border-subtle)] px-1"
+      className="-mx-3 flex items-center gap-3 border-b border-[var(--color-border-subtle)]"
     >
       {tab("config", "Configurations")}
       {/* §item2 Anna: "Content" didn't read right for the offer section. */}
@@ -515,6 +516,7 @@ function StructureTree({
   allowRowActions,
   minimalRowActions,
   grouped,
+  activeTab = "config",
   noTrailingFade,
 }: {
   nodes: StructureNode[];
@@ -529,6 +531,8 @@ function StructureTree({
   // Widget context: split the top level into CONFIGURATION + CONTENT sections
   // and wrap the content collections in a boxed, collapsible group.
   grouped?: boolean;
+  // Widget context: which top-level split is shown (tabs live in the pane header).
+  activeTab?: StructureTab;
   // Widget context: drop the trailing overflow menu's faded band/gradient.
   noTrailingFade?: boolean;
 }) {
@@ -547,15 +551,6 @@ function StructureTree({
   };
   const cancelRename = () => setRenamingId(null);
 
-  // Widget top level is presented as two tabs; Configurations opens by default.
-  const [activeTab, setActiveTab] = useState<StructureTab>("config");
-  // A widget with sections but no configuration nodes (e.g. built from a layout)
-  // opens on Authoring, where its sections live.
-  const hasConfigNodes = nodes.some((n) => WIDGET_CONFIG_NODE_IDS.has(n.id));
-  const hasContentNodes = nodes.some((n) => !WIDGET_CONFIG_NODE_IDS.has(n.id));
-  useEffect(() => {
-    if (!hasConfigNodes && hasContentNodes) setActiveTab("content");
-  }, [hasConfigNodes, hasContentNodes]);
 
   // Render one top-level sibling list. In grouped (widget) mode the top level is
   // a fixed schema, so its rows aren't drag-reorderable — and splitting the list
@@ -606,11 +601,10 @@ function StructureTree({
     <div className="structure-tree-root flex min-w-max flex-col" role="tree">
       {grouped ? (
         <>
-          <StructureTabs active={activeTab} onChange={setActiveTab} />
           {activeTab === "config" ? (
             // Each configuration panel is a self-contained boxed CTA — clicking
             // it opens that global settings form in Properties.
-            <div className="flex w-full flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-1.5 px-3 pt-2">
               {configNodes.map((n) => (
                 <div key={n.id} className={boxClass(n.id)}>
                   {level([n], true)}
@@ -621,7 +615,7 @@ function StructureTree({
             // Each content collection is its own boxed, expandable tab (Offers /
             // Segmentation / Survey Responses) rather than one shared group, so
             // each reads as a distinct top-level unit.
-            <div className="flex w-full flex-col gap-1.5">
+            <div className="flex w-full flex-col gap-1.5 px-3 pt-2">
               {contentNodes.map((n) => (
                 <div key={n.id} className={boxClass(n.id)}>
                   {level([n], true)}
@@ -723,6 +717,17 @@ export function Explorer({
   const [widgetPaneCollapsed, setWidgetPaneCollapsed] = useState(true);
   const collectionCollapsed = context === "widget" && widgetPaneCollapsed;
   const currentWidgetLabel = activeExperience?.name ?? routeLabel ?? "—";
+
+  // Widget Structure tabs (Configurations / Authoring) sit in the pane header
+  // with the title, so the tab state lives here. A widget with sections but no
+  // configuration nodes (e.g. built from a layout) opens on Authoring.
+  const [structureTab, setStructureTab] = useState<StructureTab>("config");
+  const structureNodes = activeExperience?.structure ?? [];
+  const hasConfigNodes = structureNodes.some((n) => WIDGET_CONFIG_NODE_IDS.has(n.id));
+  const hasContentNodes = structureNodes.some((n) => !WIDGET_CONFIG_NODE_IDS.has(n.id));
+  useEffect(() => {
+    if (!hasConfigNodes && hasContentNodes) setStructureTab("content");
+  }, [hasConfigNodes, hasContentNodes]);
 
   // Pages / Structure split (percentage of the Explorer height for the Pages
   // pane). Default is intentionally compact so Structure gets more room.
@@ -855,17 +860,18 @@ export function Explorer({
       )}
       {/* Structure pane — fills the remaining height. */}
       <div className="ui-ws-explorer__pane--structure flex min-h-0 flex-1 flex-col bg-[var(--color-bg-panel)]">
-        <PanelHeader
-          eyebrow="Structure"
-          sub={
-            context === "widget"
-              ? undefined
-              : activeExperience
-                ? activeExperience.name
-                : routeLabel ?? "—"
-          }
-          className="border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-panel)]"
-        />
+        {context === "widget" ? (
+          <div className="flex flex-col gap-[var(--grid-gutter)] bg-[var(--color-bg-panel)] px-[var(--grid-gutter)] pt-[var(--grid-gutter)]">
+            <h2 className={inspectorType.title}>Structure</h2>
+            <StructureTabs active={structureTab} onChange={setStructureTab} />
+          </div>
+        ) : (
+          <PanelHeader
+            eyebrow="Structure"
+            sub={activeExperience ? activeExperience.name : routeLabel ?? "—"}
+            className="border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-panel)]"
+          />
+        )}
         <ScrollArea className="min-h-0 flex-1" orientation="both">
           {activeExperience && activeExperience.structure.length === 0 && context === "widget" ? (
             <div className="flex flex-col items-start gap-3 p-4">
@@ -889,6 +895,7 @@ export function Explorer({
               allowRowActions
               minimalRowActions={context === "widget"}
               grouped={context === "widget"}
+              activeTab={structureTab}
               noTrailingFade={context === "widget"}
               onSelect={onSelectStructureNode}
               onToggle={onToggleExpand}

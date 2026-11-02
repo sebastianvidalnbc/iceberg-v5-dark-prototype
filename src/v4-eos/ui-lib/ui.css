@@ -615,7 +615,7 @@ button.ui-ws-nav__brand--link:focus-visible { outline: none; box-shadow: var(--f
 .ui-preview { display: flex; flex-direction: column; min-height: 0; flex: 1; user-select: none; }
 /* Eos §3.5 ".toolbar" is 48px: space-2 (8px) vertical padding + the 32px
    control row below sums to the canonical 48px toolbar height. */
-.ui-preview__toolbar { display: flex; flex-direction: column; justify-content: center; gap: var(--space-2); min-height: var(--region-band-h); box-sizing: border-box; padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid var(--color-border-subtle); }
+.ui-preview__toolbar { display: flex; flex-direction: column; justify-content: center; gap: var(--space-2); min-height: var(--region-band-h); box-sizing: border-box; padding: var(--space-2) var(--grid-gutter); border-bottom: var(--border-width) solid var(--color-border-subtle); }
 .ui-preview__toolbar-row { display: flex; align-items: center; gap: var(--space-3); min-height: 32px; }
 .ui-preview__field { display: flex; align-items: center; min-width: 0; }
 /* Controls (MVT / audience / size) sit at the left of the single toolbar row as

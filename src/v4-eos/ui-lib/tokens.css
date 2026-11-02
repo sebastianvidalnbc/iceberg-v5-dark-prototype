@@ -131,6 +131,10 @@
   /* V4 Properties inspector — scoped density on top of Eos tokens (see eos-design-system §7.11). */
   --inspector-pad-x: 12px;
   --inspector-pad-y: 12px;
+  /* Swiss grid: one left inset from every panel edge (header, tabs, tree, fields,
+     preview toolbar). Field rows add --inspector-pad-x, so the body adds the rest. */
+  --grid-gutter: 16px;
+  --inspector-body-x: calc(var(--grid-gutter) - var(--inspector-pad-x));
   --inspector-gap-section: 12px;
   --inspector-gap-field: 4px;
   --inspector-row-min-h: 36px;

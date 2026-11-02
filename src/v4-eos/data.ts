@@ -1202,7 +1202,8 @@ export interface PropertyField {
     | "switch"
     | "select"
     | "radio"
-    | "asset"; // asset/icon picker: preview + name + Remove
+    | "asset" // asset/icon picker: preview + name + Remove
+    | "device"; // one choice per device (Desktop / Tablet / Mobile); value is JSON
   required?: boolean;
   options?: string[]; // choices for "select" / "radio" kinds
   helper?: string; // helper text shown under the control

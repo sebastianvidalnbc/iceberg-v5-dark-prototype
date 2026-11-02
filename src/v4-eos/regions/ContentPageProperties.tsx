@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Panel } from "@/v4-eos/ui/panel";
 import {
   InspectorBody,
+  InspectorStickyHead,
   InspectorHeader,
   inspectorType,
   ListAccessory,
@@ -362,7 +363,9 @@ export function ContentPageProperties({
     <Panel className="ui-ws__region ui-ws-props" aria-label="Properties">
       <div className="min-h-0 flex-1 overflow-y-auto">
         <InspectorBody>
-          <InspectorHeader title={title} />
+          <InspectorStickyHead>
+            <InspectorHeader title={title} />
+          </InspectorStickyHead>
           <PropertyRows>
             {group === "overview" && (
               <>

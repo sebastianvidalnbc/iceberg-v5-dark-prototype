@@ -4,6 +4,7 @@
 import type {
   ObjectProperties,
   PreviewData,
+  PropertyField,
   ResolvedProperties,
   SectionDesign,
 } from "./data";
@@ -113,18 +114,75 @@ export function controlSchema(label: string): ObjectProperties {
 // Section Options has two real shapes depending on the section's Design mode.
 // Custom → the layout/whitespace field list (screenshots 3–4).
 // Intelligent authoring → the variant-name list (screenshot 8).
+// Intelligent authoring (the Experimenter Layouts section, schema
+// section-client-custom-layout). Device-dependent options are one `device`
+// field each: a choice per Desktop / Tablet / Mobile, stored as JSON.
+const SPACING_OPTIONS = ["72px", "64px", "56px", "48px", "40px", "32px", "24px", "16px", "8px", "None"];
+const CORNER_OPTIONS = ["None", "5px", "10px"];
+const deviceField = (label: string, options: string[], choice: string): PropertyField => ({
+  label,
+  kind: "device",
+  options,
+  value: JSON.stringify({ desktop: choice, tablet: choice, mobile: choice }),
+});
+
 export function sectionOptionsSchema(design?: SectionDesign): ObjectProperties {
   if (design === "Intelligent authoring") {
     return {
       eyebrow: "SECTION OPTIONS",
       name: "Section Options",
-      fields: [
-        { label: "Label", value: "Premium card first test" },
-        { label: "Type", value: "Modules" },
-        { label: "Control / Default Variant - Name", value: "Control" },
-        { label: "Variant A - Name", value: "Variant A" },
-        { label: "Variant B - Name", value: "" },
-        { label: "Variant C - Name", value: "" },
+      groups: [
+        {
+          fields: [
+            { label: "Label", value: "Premium card first test" },
+            { label: "Type", value: "Modules" },
+            { label: "Activate Tablet View", value: "false", kind: "switch" },
+          ],
+        },
+        {
+          header: "LAYOUT",
+          fields: [
+            { label: "Make section Full Width", value: "false", kind: "checkbox" },
+            { label: "Hide section", value: "false", kind: "checkbox" },
+            { label: "Include Vertical Whitespace (Gutters)", value: "false", kind: "checkbox" },
+            { label: "Include Horizontal Whitespace", value: "false", kind: "checkbox" },
+            { label: "Section Background Colour", value: "None", kind: "select", options: BACKGROUNDS },
+            deviceField("Section Overlap Size", SPACING_OPTIONS, "None"),
+          ],
+        },
+        {
+          header: "PLACEMENT",
+          fields: [
+            deviceField("Placeholder Vertical Alignment", ["Top", "Center", "Bottom"], "Center"),
+          ],
+        },
+        {
+          header: "INNER PADDING",
+          fields: [
+            deviceField("Padding Top", SPACING_OPTIONS, "None"),
+            deviceField("Padding Right", SPACING_OPTIONS, "None"),
+            deviceField("Padding Bottom", SPACING_OPTIONS, "None"),
+            deviceField("Padding Left", SPACING_OPTIONS, "None"),
+          ],
+        },
+        {
+          header: "ROUNDED CORNERS",
+          fields: [
+            deviceField("Top Left", CORNER_OPTIONS, "None"),
+            deviceField("Top Right", CORNER_OPTIONS, "None"),
+            deviceField("Bottom Left", CORNER_OPTIONS, "None"),
+            deviceField("Bottom Right", CORNER_OPTIONS, "None"),
+          ],
+        },
+        {
+          header: "VARIANT NAMES",
+          fields: [
+            { label: "Control / Default Variant - Name", value: "Control" },
+            { label: "Variant A - Name", value: "Variant A" },
+            { label: "Variant B - Name", value: "" },
+            { label: "Variant C - Name", value: "" },
+          ],
+        },
       ],
     };
   }

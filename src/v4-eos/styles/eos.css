@@ -410,12 +410,15 @@
 }
 
 /* Preview toolbar + property fields: full-width controls, readable truncation. */
+/* Preview toolbar selects sit on the same 32px compact row as the header
+   actions (Preview / Variants / Publish): 32px box, Label Medium text. */
 .ui-preview__controls [data-slot="select-trigger"] {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  font-size: var(--type-body-md-size);
-  line-height: var(--type-body-md-lh);
+  height: var(--control-height-sm);
+  font-size: var(--type-label-md-size);
+  line-height: var(--type-label-md-lh);
 }
 .ui-preview__controls [data-slot="select-value"] {
   min-width: 0;

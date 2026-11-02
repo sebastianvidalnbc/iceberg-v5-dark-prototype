@@ -97,6 +97,22 @@ export function setNodeContent(
   });
 }
 
+// The Design radio on a section writes here (not to content): design is a
+// structural property of the section, read by its Section Options.
+export const DESIGN_FIELD = "Design";
+
+export function setNodeDesign(
+  nodes: StructureNode[],
+  id: string,
+  design: StructureNode["design"],
+): StructureNode[] {
+  return nodes.map((n) => {
+    if (n.id === id) return { ...n, design };
+    if (n.children) return { ...n, children: setNodeDesign(n.children, id, design) };
+    return n;
+  });
+}
+
 export function toggleDisabled(
   nodes: StructureNode[],
   id: string,

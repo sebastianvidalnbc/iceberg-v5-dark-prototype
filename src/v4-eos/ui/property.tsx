@@ -18,7 +18,7 @@ export const inspectorType = {
   title:
     "text-[length:var(--inspector-title-size)] font-semibold leading-[length:var(--inspector-title-lh)] tracking-[-0.01em] text-balance text-foreground",
   section:
-    "text-[length:var(--inspector-section-size)] font-semibold leading-[length:var(--inspector-section-lh)] text-foreground",
+    "text-[length:var(--inspector-section-size)] font-bold leading-[length:var(--inspector-section-lh)] text-foreground",
   fieldLabel:
     "text-[length:var(--inspector-label-size)] font-medium leading-[length:var(--inspector-label-lh)] text-[var(--color-text-secondary)]",
   value:
@@ -41,10 +41,20 @@ export function sentenceCase(text: string): string {
 }
 
 /** Context line for the inspector header; omitted when it would repeat the title. */
-export function inspectorKindLabel(eyebrow: string, title: string): string | undefined {
-  const kind = sentenceCase(eyebrow.trim());
-  if (!kind || kind.toLowerCase() === title.trim().toLowerCase()) return undefined;
-  return `Selected ${kind}`;
+// Kind line removed: the panel heading is the only header label.
+export function inspectorKindLabel(_eyebrow: string, _title: string): string | undefined {
+  return undefined;
+}
+
+// Pins the panel's top block (object header, plus the tab strip for tabbed
+// collections) while the rest of the panel scrolls. Only one sticky block per
+// scroll area: nested sticky headers paint over each other.
+export function InspectorStickyHead({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="sticky top-0 z-10 -mx-[var(--inspector-body-x)] -mt-[var(--inspector-pad-y)] bg-[var(--color-bg-surface)] px-[var(--grid-gutter)] pt-[var(--grid-gutter)]">
+      {children}
+    </div>
+  );
 }
 
 // --- Inspector header ---------------------------------------------------------
@@ -57,7 +67,8 @@ export function InspectorHeader({
   actions,
   className,
 }: {
-  title: React.ReactNode;
+  // Omit the title when the enclosing tab already names the object.
+  title?: React.ReactNode;
   kind?: string;
   children?: React.ReactNode;
   actions?: React.ReactNode;
@@ -66,13 +77,13 @@ export function InspectorHeader({
   return (
     <header
       className={cn(
-        "flex flex-wrap items-start gap-x-2 gap-y-1 pb-[var(--inspector-gap-section)]",
+        "flex flex-wrap items-start gap-x-2 gap-y-1 pb-[var(--grid-gutter)]",
         className,
       )}
     >
       <div className="min-w-0 flex-1">
         {kind && <p className={inspectorType.kind}>{kind}</p>}
-        <h2 className={cn(inspectorType.title, kind && "mt-0.5")}>{title}</h2>
+        {title != null && <h2 className={cn(inspectorType.title, kind && "mt-0.5")}>{title}</h2>}
       </div>
       {(actions || children) && (
         <div className="ml-auto flex shrink-0 flex-wrap items-center gap-2 self-center">
@@ -114,7 +125,7 @@ export function InspectorBody({
   return (
     <div
       className={cn(
-        "flex min-w-0 flex-col gap-[var(--inspector-gap-section)] px-[var(--inspector-pad-x)] py-[var(--inspector-pad-y)]",
+        "flex min-w-0 flex-col gap-[var(--inspector-gap-section)] px-[var(--inspector-body-x)] py-[var(--inspector-pad-y)]",
         className,
       )}
     >

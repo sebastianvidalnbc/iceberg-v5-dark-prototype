@@ -5,7 +5,7 @@ import {
   type StructureNode,
   type TreeNode,
 } from "./data";
-import { buildLayoutNode, getLayoutDef } from "./layouts";
+import { buildLayoutNode } from "./layouts";
 import { LAYOUT_WIDGETS, layoutDefForWidget } from "./layout-widgets";
 import { WIDGET_VARIANTS } from "./widget-variants";
 
@@ -15,7 +15,6 @@ import { WIDGET_VARIANTS } from "./widget-variants";
 // in this session ("+" on the Widgets list) are prepended to the list.
 
 const CREATED: ProductionWidget[] = [];
-let createdSeq = 0;
 
 export function productionWidgetId(slug: string): string {
   return `wg-prod-${slug.replace(/^\//, "")}`;
@@ -128,19 +127,27 @@ function listDate(ts: number): string {
   return `${wd} ${dd} ${mon} ${yy}`;
 }
 
-// "+" on the Widgets list: a new widget starts from a layout. Returns the new
-// widget id (the editor route) or null if the layout is unknown.
-export function createWidgetFromLayout(layoutId: string): string | null {
-  const def = getLayoutDef(layoutId);
-  if (!def) return null;
-  createdSeq += 1;
-  const slug = `/new-widget-${createdSeq}`;
+// "+" on the Widgets list (production's Create new Widget dialog): a blank HTML or
+// JSON widget. Production has no separate name, so the name becomes the slug
+// (`Hero Promo` -> `/hero-promo`). Sections are added in the editor. Returns the
+// new widget's editor id, or an error for the dialog to show.
+export function createBlankWidget(
+  name: string,
+  format: "HTML" | "JSON",
+): { id: string } | { error: string } {
+  const slug = `/${name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")}`;
+  if (slug === "/") return { error: "Enter a name with at least one letter or number." };
+  if (allWidgets().some((w) => w.slug === slug)) {
+    return { error: `A widget with the slug ${slug} already exists.` };
+  }
   const now = Date.now();
-  // Production format for a layout-built widget is not confirmed; HTML is the
-  // default shown here.
   CREATED.unshift({
     slug,
-    format: "HTML",
+    format,
     status: "Draft",
     created: listDate(now),
     modified: "just now",
@@ -148,6 +155,6 @@ export function createWidgetFromLayout(layoutId: string): string | null {
     modifiedAt: now,
   });
   const id = productionWidgetId(slug);
-  registerConfig(id, slug, [buildLayoutNode(def)]);
-  return id;
+  registerConfig(id, slug, []);
+  return { id };
 }

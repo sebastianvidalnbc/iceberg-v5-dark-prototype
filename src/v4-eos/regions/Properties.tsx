@@ -23,6 +23,7 @@ import {
 } from "@/v4-eos/ui/form-controls";
 import {
   InspectorBody,
+  InspectorStickyHead,
   InspectorCallout,
   InspectorHeader,
   inspectorKindLabel,
@@ -61,7 +62,8 @@ import {
   type VariantWorkspace,
 } from "../data";
 import { allowedChildType, maxChildrenFor } from "../elements";
-import { findNodeById } from "../structureOps";
+import { DESIGN_FIELD, findNodeById } from "../structureOps";
+import { LAYOUT_CATALOG } from "../layouts";
 import { classifyWidget, WIDGET_FAMILY_HUE } from "../browse";
 import { analyzePanel, panelItemTitle, panelListsOf } from "../structure-panel";
 
@@ -110,6 +112,65 @@ interface PropertiesProps {
 // controls render label-less. Controls are CONTROLLED: `value` is the effective
 // value (schema default with the author's edit layered on) and `onEdit` records
 // a new edit, which flows to the live preview.
+// Intelligent authoring: the Experimenter Layouts choice on a section. Starts on
+// the generic layout, then lists the experiment layouts from the catalog.
+const EXPERIMENTER_FIELD = "Experimenter Layouts";
+const EXPERIMENTER_OPTIONS = [
+  "Experimenter Layouts",
+  ...LAYOUT_CATALOG.filter((d) => d.experiment).map((d) => d.name),
+];
+
+const DEVICES: { key: "desktop" | "tablet" | "mobile"; name: string }[] = [
+  { key: "desktop", name: "Desktop" },
+  { key: "tablet", name: "Tablet" },
+  { key: "mobile", name: "Mobile" },
+];
+
+// A device field's value is JSON, one choice per device. An unreadable value
+// falls back to the first option for every device.
+function parseDevices(value: string, options: string[]): Record<string, string> {
+  const fallback = options[0] ?? "";
+  try {
+    const parsed = JSON.parse(value) as Record<string, string>;
+    return Object.fromEntries(
+      DEVICES.map(({ key }) => [key, parsed[key] ?? fallback]),
+    );
+  } catch {
+    return Object.fromEntries(DEVICES.map(({ key }) => [key, fallback]));
+  }
+}
+
+// Three compact selects side by side, one per device.
+function DeviceControl({
+  field,
+  value,
+  onEdit,
+  id,
+}: {
+  field: PropertyField;
+  value: string;
+  onEdit: (value: string) => void;
+  id: string;
+}) {
+  const choices = parseDevices(value, field.options ?? []);
+  return (
+    <div className="grid grid-cols-3 gap-1.5">
+      {DEVICES.map(({ key, name }) => (
+        <div key={key} className="flex min-w-0 flex-col gap-1">
+          <span className="text-xs text-muted-foreground">{name}</span>
+          <SelectField
+            id={`${id}-${key}`}
+            value={choices[key]}
+            onValueChange={(v) => onEdit(JSON.stringify({ ...choices, [key]: v }))}
+            options={field.options ?? []}
+            polished
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function PropertyControl({
   field,
   value,
@@ -143,6 +204,9 @@ function PropertyControl({
   }
   if (field.kind === "asset") {
     return <AssetPicker value={value} onEdit={onEdit} />;
+  }
+  if (field.kind === "device") {
+    return <DeviceControl field={field} value={value} onEdit={onEdit} id={id} />;
   }
   if (field.kind === "textarea") {
     return (
@@ -564,6 +628,17 @@ const FEATURE_ICONS: { value: string; label: string }[] = [
   { value: "family_restroom", label: "Profiles" },
 ];
 
+// Production stores feature icons as asset names from the layout schema (e.g.
+// "checkmark-black", "channels-outline-white"). The tile renders a Material
+// Symbols ligature, so an asset name would print as text. Map those to the
+// nearest Material glyph; anything unknown falls back to "check".
+function materialFeatureIcon(value: string): string {
+  if (FEATURE_ICONS.some((ic) => ic.value === value)) return value;
+  if (value.startsWith("checkmark")) return "check";
+  if (value.startsWith("channels")) return "live_tv";
+  return "check";
+}
+
 // The icon tile: a single quiet control that shows the current glyph (or a muted
 // "add" hint when empty) and opens a picker on click. No floating corner badges
 // — clearing lives inside the picker as a "Remove icon" row. Writes the chosen
@@ -576,6 +651,7 @@ function FeatureIconTile({
   onChange: (value: string) => void;
 }) {
   const has = value.trim() !== "";
+  const glyph = materialFeatureIcon(value);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -585,7 +661,7 @@ function FeatureIconTile({
           className="grid size-9 shrink-0 place-items-center rounded-[var(--radius-field)] border border-[var(--color-border-default)] bg-[var(--color-bg-subtle)] text-foreground transition-colors hover:bg-[var(--color-bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
         >
           {has ? (
-            <MSym name={value} size={20} />
+            <MSym name={glyph} size={20} />
           ) : (
             <MSym name="add" size={18} className="text-muted-foreground" />
           )}
@@ -599,11 +675,11 @@ function FeatureIconTile({
               type="button"
               title={ic.label}
               aria-label={ic.label}
-              aria-pressed={value === ic.value}
+              aria-pressed={glyph === ic.value}
               onClick={() => onChange(ic.value)}
               className={cn(
                 "grid size-9 place-items-center rounded-sm text-foreground transition-colors hover:bg-[var(--color-bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
-                value === ic.value &&
+                glyph === ic.value &&
                   "bg-[var(--color-bg-selected)] text-[var(--color-action-primary)]",
               )}
             >
@@ -973,7 +1049,9 @@ function PropertiesBody({
   onAddChild,
   onRemoveChild,
   onReorderChild,
+  hideTitle = false,
 }: {
+  hideTitle?: boolean;
   context: AuthoringContext;
   variant: VariantWorkspace;
   nodeId: string;
@@ -1038,13 +1116,17 @@ function PropertiesBody({
               onAddChild={onAddChild}
               onRemoveChild={onRemoveChild}
               onReorderChild={onReorderChild}
+              hideTitle
             />
           );
         }}
       />
     );
   }
-  if (resolved.kind === "metadata") return <MetadataBody data={resolved.data} />;
+  if (resolved.kind === "metadata")
+    return (
+      <MetadataBody data={resolved.data} overrides={overridesForNode} onEdit={onEdit} />
+    );
   if (resolved.kind === "notice") return <NoticeBody data={resolved.data} />;
   // key={nodeId} remounts FieldsBody per selected object so its per-group
   // expand/collapse memory resets to the default (all open) on each new object.
@@ -1054,6 +1136,7 @@ function PropertiesBody({
   return (
     <FieldsBody
       key={nodeId}
+      hideTitle={hideTitle}
       data={titled(resolved.data)}
       overridesForNode={overridesForNode}
       invalidFields={invalidFields}
@@ -1078,6 +1161,7 @@ function PropertiesBody({
                 onAddChild={onAddChild}
                 onRemoveChild={onRemoveChild}
                 onReorderChild={onReorderChild}
+                hideTitle
               />
             );
           }}
@@ -1108,7 +1192,9 @@ function FieldsBody({
   onEdit,
   footerKeys = [],
   footer,
+  hideTitle = false,
 }: {
+  hideTitle?: boolean;
   data: ObjectProperties;
   overridesForNode: Record<string, string>;
   invalidFields: Set<string>;
@@ -1172,11 +1258,10 @@ function FieldsBody({
   const collapseAll = () => setCollapsed(new Set(headers));
   const expandAll = () => setCollapsed(new Set());
 
-  return (
-    <>
+  const header = (
       <InspectorHeader
-        title={name}
-        kind={inspectorKindLabel(eyebrow, name)}
+        title={hideTitle ? undefined : name}
+        kind={hideTitle ? undefined : inspectorKindLabel(eyebrow, name)}
         actions={
           headers.length > 1 ? (
             <Button
@@ -1190,6 +1275,10 @@ function FieldsBody({
           ) : undefined
         }
       />
+  );
+  return (
+    <>
+      {hideTitle ? header : <InspectorStickyHead>{header}</InspectorStickyHead>}
       <div className="flex min-w-0 flex-col">
         {groups.map((group, i) => (
           <GroupSection
@@ -1255,23 +1344,16 @@ function CollectionBody({
   const displayName = name ?? sentenceCase(eyebrow);
   return (
     <>
+      <InspectorStickyHead>
       <InspectorHeader
         title={displayName}
         kind={inspectorKindLabel(eyebrow, displayName)}
-        actions={
-          <span className={inspectorType.meta}>
-            {count}
-            {max != null ? ` / ${max}` : ""} {count === 1 ? nounLower : `${nounLower}s`}
-          </span>
-        }
       />
-
       {tabbed && active && renderItem && (
-        <>
           <div
             role="tablist"
             aria-label={`${itemNoun} tabs`}
-            className="flex items-center gap-1 overflow-x-auto border-b border-[var(--color-border-subtle)]"
+            className="-mx-3 flex items-center gap-1 overflow-x-auto border-b border-[var(--color-border-subtle)]"
           >
             {items.map((item) => (
               <button
@@ -1291,6 +1373,10 @@ function CollectionBody({
               </button>
             ))}
           </div>
+      )}
+      </InspectorStickyHead>
+      {tabbed && active && renderItem && (
+        <>
           {renderItem(active.id)}
           <div className="flex items-center gap-0.5 border-t border-[var(--color-border-subtle)] pt-3">
             <span className={cn("mr-auto truncate", inspectorType.meta)}>{active.label}</span>
@@ -1320,7 +1406,7 @@ function CollectionBody({
               onClick={() => onRemoveChild(active.id)}
               className="text-muted-foreground hover:text-[var(--color-status-danger)]"
             >
-              <MSym name="delete" size={15} />
+              <MSym name="delete" size={16} />
             </Button>
           </div>
         </>
@@ -1382,7 +1468,7 @@ function CollectionBody({
                   onClick={() => onRemoveChild(item.id)}
                   className="text-muted-foreground hover:text-[var(--color-status-danger)]"
                 >
-                  <MSym name="delete" size={15} />
+                  <MSym name="delete" size={16} />
                 </Button>
               </div>
             </li>
@@ -1412,17 +1498,27 @@ function CollectionBody({
 
 // Page section: PAGE SECTION eyebrow + name, status badge, Section ID, a Design
 // mode radio, an Intelligent-authoring affordance, and no-op Duplicate / Delete.
-function MetadataBody({ data }: { data: SectionMetadata }) {
+function MetadataBody({
+  data,
+  overrides,
+  onEdit,
+}: {
+  data: SectionMetadata;
+  overrides: Record<string, string>;
+  onEdit: (label: string, value: string) => void;
+}) {
   const { eyebrow, name, role, status, sectionId, note, design, designOptions } = data;
   const badgeVariant =
     status === "published" ? "success" : status === "in-review" ? "warning" : "secondary";
   return (
     <>
+      <InspectorStickyHead>
       <InspectorHeader
         title={name}
         kind={inspectorKindLabel(eyebrow, name)}
         actions={status ? <Badge variant={badgeVariant}>{status}</Badge> : undefined}
       />
+      </InspectorStickyHead>
       <div className="flex flex-col gap-2">
         <PropertyRows>
           {role && (
@@ -1445,6 +1541,17 @@ function MetadataBody({ data }: { data: SectionMetadata }) {
                 name={`design-${sectionId}`}
                 value={design ?? designOptions[0]}
                 options={designOptions}
+                onValueChange={(v) => onEdit(DESIGN_FIELD, v)}
+              />
+            </PropRow>
+          )}
+          {data.intelligentAffordance && (
+            <PropRow label="Experimenter layout">
+              <SelectField
+                value={overrides[EXPERIMENTER_FIELD] ?? EXPERIMENTER_OPTIONS[0]}
+                onValueChange={(v) => onEdit(EXPERIMENTER_FIELD, v)}
+                options={EXPERIMENTER_OPTIONS}
+                polished
               />
             </PropRow>
           )}
@@ -1480,7 +1587,9 @@ function NoticeBody({ data }: { data: NoticeProperties }) {
   const [galleryOpen, setGalleryOpen] = useState(false);
   return (
     <>
-      <InspectorHeader title={name} kind={inspectorKindLabel(eyebrow, name)} />
+      <InspectorStickyHead>
+        <InspectorHeader title={name} kind={inspectorKindLabel(eyebrow, name)} />
+      </InspectorStickyHead>
       <InspectorCallout title={message}>{detail}</InspectorCallout>
       <div className="flex flex-wrap gap-2">
         <Button variant="secondary" size="sm" onClick={() => setGalleryOpen((v) => !v)}>
