@@ -22,7 +22,7 @@ import { cn } from "@/v4-eos/ui/lib/utils";
 // Inspector fields: Eos standard control height (36px) with body-sized values.
 // Same outlined white surface as the polished select (Figma SV_Playground).
 const FIELD =
-  "h-[var(--control-height-md)] rounded-[var(--radius-field)] border border-[var(--color-border-strong)] bg-[var(--color-bg-elevated)] px-3 text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] shadow-none focus-visible:bg-[var(--color-bg-elevated)]";
+  "h-[var(--control-height-sm)] rounded-[var(--radius-field)] border border-[var(--color-border-strong)] bg-[var(--color-bg-elevated)] px-3 text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] shadow-none focus-visible:bg-[var(--color-bg-elevated)]";
 
 export function TextField(
   props: React.ComponentProps<typeof Input> & { invalid?: boolean },

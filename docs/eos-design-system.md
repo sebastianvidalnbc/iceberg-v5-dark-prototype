@@ -594,6 +594,14 @@ only by `ui/property.tsx` and the Properties regions.
 Apply roles via `inspectorType` in `ui/property.tsx` (kind / title / section /
 fieldLabel / value / help / meta).
 
+**Dense V4 density (Swiss grid pass).** Eos has no control height below 32px,
+so fields use `--control-height-sm` (32px). These V4-only values are not Eos
+tokens: Structure and preview gutter `--grid-gutter` 12px, Properties side inset
+`--inspector-side` 24px, inspector padding 8px, section gap 8px, section headers
+28px, tree rows `--structure-tree-row-h` 26px. Labels stay above their controls.
+Helper text moves behind the label's info icon; only validation errors render
+under a control.
+
 ### 7.13 V4 Structure tree (Explorer)
 
 Tokens: `--structure-tree-size` (13px), `--structure-tree-lh`, `--structure-tree-row-h`

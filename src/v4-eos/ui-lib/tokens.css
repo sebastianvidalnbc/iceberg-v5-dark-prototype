@@ -130,14 +130,17 @@
   --control-pad-x: 12px;       /* Eos field pad-x; Eos button pad-x is 16px (component-phase item) */
   /* V4 Properties inspector — scoped density on top of Eos tokens (see eos-design-system §7.11). */
   --inspector-pad-x: 12px;
-  --inspector-pad-y: 12px;
+  --inspector-pad-y: 8px;
   /* Swiss grid: one left inset from every panel edge (header, tabs, tree, fields,
      preview toolbar). Field rows add --inspector-pad-x, so the body adds the rest. */
-  --grid-gutter: 16px;
-  --inspector-body-x: calc(var(--grid-gutter) - var(--inspector-pad-x));
-  --inspector-gap-section: 12px;
+  --grid-gutter: 12px;
+  /* Properties panel: 24px from each side edge to its content (headers, tabs,
+     fields, sections). The body supplies what the rows don't. */
+  --inspector-side: 24px;
+  --inspector-body-x: calc(var(--inspector-side) - var(--inspector-pad-x));
+  --inspector-gap-section: 8px;
   --inspector-gap-field: 4px;
-  --inspector-row-min-h: 36px;
+  --inspector-row-min-h: 32px;  /* Eos --control-height-sm: densest Eos control height */
   --inspector-title-size: var(--type-title-md-size);
   --inspector-title-lh: var(--type-title-md-lh);
   --inspector-kind-size: var(--type-body-sm-size);
@@ -153,7 +156,7 @@
   /* V4 Structure explorer tree (Figma Layers–inspired density). */
   --structure-tree-size: 12px;
   --structure-tree-lh: 16px;
-  --structure-tree-row-h: 32px;
+  --structure-tree-row-h: 26px;  /* V4 dense tree rows (not an Eos token) */
   --structure-tree-pad-x: 6px;
   /* Border width / radius — Eos §2.3 shape scale. */
   --border-width: 1px;

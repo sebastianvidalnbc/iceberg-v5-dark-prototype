@@ -604,7 +604,7 @@ function StructureTree({
           {activeTab === "config" ? (
             // Each configuration panel is a self-contained boxed CTA — clicking
             // it opens that global settings form in Properties.
-            <div className="flex w-full flex-col gap-1.5 px-3 pt-2">
+            <div className="flex w-full flex-col gap-1.5 px-[calc(var(--grid-gutter)-var(--space-1))] pt-2">
               {configNodes.map((n) => (
                 <div key={n.id} className={boxClass(n.id)}>
                   {level([n], true)}
@@ -615,7 +615,7 @@ function StructureTree({
             // Each content collection is its own boxed, expandable tab (Offers /
             // Segmentation / Survey Responses) rather than one shared group, so
             // each reads as a distinct top-level unit.
-            <div className="flex w-full flex-col gap-1.5 px-3 pt-2">
+            <div className="flex w-full flex-col gap-1.5 px-[calc(var(--grid-gutter)-var(--space-1))] pt-2">
               {contentNodes.map((n) => (
                 <div key={n.id} className={boxClass(n.id)}>
                   {level([n], true)}

@@ -51,7 +51,7 @@ export function inspectorKindLabel(_eyebrow: string, _title: string): string | u
 // scroll area: nested sticky headers paint over each other.
 export function InspectorStickyHead({ children }: { children: React.ReactNode }) {
   return (
-    <div className="sticky top-0 z-10 -mx-[var(--inspector-body-x)] -mt-[var(--inspector-pad-y)] bg-[var(--color-bg-surface)] px-[var(--grid-gutter)] pt-[var(--grid-gutter)]">
+    <div className="sticky top-0 z-10 -mx-[var(--inspector-body-x)] -mt-[var(--inspector-pad-y)] bg-[var(--color-bg-surface)] px-[var(--inspector-side)] pt-[var(--grid-gutter)]">
       {children}
     </div>
   );
@@ -353,7 +353,7 @@ export function PropertySection({
       className={cn("min-w-0 py-1", borderedTop && "border-t border-[var(--color-border-subtle)] pt-2")}
     >
       <div className="flex items-center gap-1">
-        <CollapsibleTrigger className="group flex h-8 min-w-0 flex-1 items-center gap-2 rounded-sm px-[var(--inspector-pad-x)] text-left transition-colors hover:bg-[var(--color-bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus-ring)]">
+        <CollapsibleTrigger className="group flex h-7 min-w-0 flex-1 items-center gap-2 rounded-sm px-[var(--inspector-pad-x)] text-left transition-colors hover:bg-[var(--color-bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus-ring)]">
           <span className={cn("min-w-0 flex-1 truncate", inspectorType.section)}>
             {sentenceCase(header)}
           </span>

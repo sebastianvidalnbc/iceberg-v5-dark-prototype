@@ -439,8 +439,8 @@ function PropertyFieldRow({
 }) {
   const id = useId();
   const errId = invalid ? `${id}-err` : undefined;
-  const helpId = field.helper ? `${id}-help` : undefined;
-  const label = <FieldLabel label={field.label} tooltip={field.tooltip} />;
+  // Helper text lives behind the label's info icon (no line under the control).
+  const label = <FieldLabel label={field.label} tooltip={field.tooltip ?? field.helper} />;
   // §item4 A field can present a read-only status badge in place of an editable
   // control (e.g. an offer's "Expired" pill in STATUS) — no input, no id wiring.
   if (field.badge) {
@@ -461,15 +461,12 @@ function PropertyFieldRow({
       <ListItem
         primary={label}
         labelFor={id}
-        secondary={field.helper}
-        secondaryId={helpId}
         trailing={
           <ListAccessory type="switch">
             <SwitchField
               id={id}
               checked={value === "true"}
               onCheckedChange={(v) => onEdit(v ? "true" : "false")}
-              aria-describedby={helpId}
             />
           </ListAccessory>
         }
@@ -482,8 +479,6 @@ function PropertyFieldRow({
       <ListItem
         primary={label}
         rowFor={id}
-        secondary={field.helper}
-        secondaryId={helpId}
         leading={
           <ListAccessory>
             <CheckboxField
@@ -496,14 +491,11 @@ function PropertyFieldRow({
       />
     );
   }
-  const help =
-    invalid ? (
-      <span id={errId} className="text-[var(--color-status-danger)]">
-        {field.label} is required.
-      </span>
-    ) : field.helper ? (
-      <span id={helpId}>{field.helper}</span>
-    ) : undefined;
+  const help = invalid ? (
+    <span id={errId} className="text-[var(--color-status-danger)]">
+      {field.label} is required.
+    </span>
+  ) : undefined;
 
   const control = (
     <PropertyControl
@@ -511,7 +503,7 @@ function PropertyFieldRow({
       value={value}
       onEdit={onEdit}
       id={id}
-      describedBy={errId ?? helpId}
+      describedBy={errId}
       invalid={invalid}
     />
   );
@@ -1378,7 +1370,7 @@ function CollectionBody({
       {tabbed && active && renderItem && (
         <>
           {renderItem(active.id)}
-          <div className="flex items-center gap-0.5 border-t border-[var(--color-border-subtle)] pt-3">
+          <div className="flex items-center gap-0.5 border-t border-[var(--color-border-subtle)] px-[var(--inspector-pad-x)] pt-3">
             <span className={cn("mr-auto truncate", inspectorType.meta)}>{active.label}</span>
             <Button
               variant="ghost"
@@ -1413,7 +1405,7 @@ function CollectionBody({
       )}
 
       {count > 0 && !tabbed && (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-2 px-[var(--inspector-pad-x)]">
           {items.map((item, i) => (
             <li
               key={item.id}
@@ -1476,7 +1468,7 @@ function CollectionBody({
         </ul>
       )}
 
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2 px-[var(--inspector-pad-x)]">
         <Button
           variant="secondary"
           size="sm"
@@ -1590,12 +1582,14 @@ function NoticeBody({ data }: { data: NoticeProperties }) {
       <InspectorStickyHead>
         <InspectorHeader title={name} kind={inspectorKindLabel(eyebrow, name)} />
       </InspectorStickyHead>
-      <InspectorCallout title={message}>{detail}</InspectorCallout>
-      <div className="flex flex-wrap gap-2">
-        <Button variant="secondary" size="sm" onClick={() => setGalleryOpen((v) => !v)}>
-          <Icon name="plus" size={16} />
-          Add module
-        </Button>
+      <div className="flex flex-col gap-2 px-[var(--inspector-pad-x)]">
+        <InspectorCallout title={message}>{detail}</InspectorCallout>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="secondary" size="sm" onClick={() => setGalleryOpen((v) => !v)}>
+            <Icon name="plus" size={16} />
+            Add module
+          </Button>
+        </div>
       </div>
       {galleryOpen && (
         <TemplateGallery
