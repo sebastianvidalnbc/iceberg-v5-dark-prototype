@@ -20,7 +20,7 @@ export const inspectorType = {
   section:
     "text-[length:var(--inspector-section-size)] font-semibold leading-[length:var(--inspector-section-lh)] text-foreground",
   fieldLabel:
-    "text-[length:var(--inspector-label-size)] font-medium leading-[length:var(--inspector-label-lh)] text-[var(--color-text-secondary)]",
+    "text-[length:var(--type-label-xs-size)] font-medium leading-[length:var(--type-label-xs-lh)] text-[var(--color-text-secondary)]",
   value:
     "text-[length:var(--inspector-value-size)] font-normal leading-[length:var(--inspector-value-lh)] text-foreground",
   help: "text-[length:var(--inspector-help-size)] font-normal leading-[length:var(--inspector-help-lh)] text-[var(--color-text-secondary)]",
@@ -52,14 +52,21 @@ export function inspectorKindLabel(_eyebrow: string, _title: string): string | u
 export function InspectorStickyHead({
   children,
   divider = false,
+  borderedTop = false,
 }: {
   children: React.ReactNode;
   divider?: boolean;
+  // A footer section (e.g. a tabbed collection) that follows other sections:
+  // the same divider-above spacing PropertySection uses.
+  borderedTop?: boolean;
 }) {
   return (
     <div
       className={cn(
-        "sticky top-0 z-10 -mx-[var(--inspector-body-x)] -mt-[var(--inspector-pad-y)] bg-[var(--color-bg-surface)] px-[var(--inspector-side)] pt-[var(--grid-gutter)]",
+        "sticky top-0 z-10 -mx-[var(--inspector-body-x)] bg-[var(--color-bg-surface)] px-[var(--inspector-side)]",
+        borderedTop
+          ? "mt-2 border-t border-[var(--color-border-default)] pt-[18px]"
+          : "-mt-[var(--inspector-pad-y)] pt-[var(--grid-gutter)]",
         // Divider sits 24px below the header text (InspectorHeader's 12px + 12px here).
         divider && "-mb-2 border-b border-[var(--color-border-default)] pb-3",
       )}
@@ -70,14 +77,32 @@ export function InspectorStickyHead({
 }
 
 // --- Inspector header ---------------------------------------------------------
-// One primary title (selected object) + optional kind line. Replaces the old
-// uppercase eyebrow + duplicate panel "Properties" chrome.
+// Steps up one level in the Structure tree (the parent of the object shown).
+export function InspectorBackButton({ onClick, label = "Up one level" }: { onClick: () => void; label?: string }) {
+  return (
+    // 16px box (the label line height) with a 24px hit area: the chevron centres
+    // on the label's line, not on a taller button.
+    <button
+      type="button"
+      title={label}
+      aria-label={label}
+      onClick={onClick}
+      className="-m-1 flex size-6 shrink-0 items-center justify-center rounded-sm p-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+    >
+      <MSym name="chevron_left" size={16} />
+    </button>
+  );
+}
+
+// One primary title (selected object) + optional kind line. The title uses the
+// same uppercase eyebrow style as the PAGES / STRUCTURE pane headers.
 export function InspectorHeader({
   title,
   kind,
   children,
   actions,
   className,
+  onBack,
 }: {
   // Omit the title when the enclosing tab already names the object.
   title?: React.ReactNode;
@@ -85,17 +110,28 @@ export function InspectorHeader({
   children?: React.ReactNode;
   actions?: React.ReactNode;
   className?: string;
+  onBack?: () => void;
 }) {
   return (
     <header
       className={cn(
-        "flex flex-wrap items-start gap-x-2 gap-y-1 pb-[var(--grid-gutter)]",
+        "flex flex-wrap items-center gap-x-2 gap-y-1 pb-[var(--grid-gutter)]",
         className,
       )}
     >
+      {onBack && <InspectorBackButton onClick={onBack} />}
       <div className="min-w-0 flex-1">
         {kind && <p className={inspectorType.kind}>{kind}</p>}
-        {title != null && <h2 className={cn(inspectorType.title, kind && "mt-0.5")}>{title}</h2>}
+        {title != null && (
+          <h2
+            className={cn(
+              "text-[length:var(--type-label-md-size)] font-semibold uppercase leading-[length:var(--type-label-md-lh)] tracking-[0.06em] text-muted-foreground",
+              kind && "mt-0.5",
+            )}
+          >
+            {title}
+          </h2>
+        )}
       </div>
       {(actions || children) && (
         <div className="ml-auto flex shrink-0 flex-wrap items-center gap-2 self-center">

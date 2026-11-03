@@ -2,6 +2,7 @@ import {
   createContext,
   Fragment,
   useContext,
+  useEffect,
   useId,
   useMemo,
   useState,
@@ -62,7 +63,7 @@ import {
   type VariantWorkspace,
 } from "../data";
 import { allowedChildType, maxChildrenFor } from "../elements";
-import { DESIGN_FIELD, findNodeById } from "../structureOps";
+import { ancestorIdsOf, DESIGN_FIELD, findNodeById } from "../structureOps";
 import { LAYOUT_CATALOG } from "../layouts";
 import { classifyWidget, WIDGET_FAMILY_HUE } from "../browse";
 import { analyzePanel, panelItemTitle, panelListsOf } from "../structure-panel";
@@ -76,6 +77,16 @@ const OFFER_TYPE_NOUN = "Offer Type";
 // Selects a structure node in the tree (the shell's selection). Collection rows
 // use it so clicking a row opens that item, as clicking it in the tree would.
 const SelectNodeContext = createContext<((nodeId: string) => void) | null>(null);
+
+// A tabbed collection's selected item reports its Expand/Collapse all up to the
+// nearest headed FieldsBody (the parent node's title row, e.g. "Plans").
+type CollapseControl = {
+  show: boolean;
+  allCollapsed: boolean;
+  collapseAll: () => void;
+  expandAll: () => void;
+};
+const CollapseSlotContext = createContext<((c: CollapseControl | null) => void) | null>(null);
 
 interface PropertiesProps {
   // Selects a structure node (see SelectNodeContext).
@@ -399,7 +410,7 @@ function TemplateGallery({
 // focus target carrying contextual help so the panel stays uncluttered — long
 // copy wraps in the Radix tooltip instead of overflowing the narrow panel.
 // A label's qualifier ("Voucher error text - displayed when …" or "Product ID
-// (for add to basket)") is supporting text: it renders as Label XS under the
+// (for add to basket)") is supporting text: it renders as Label Badge under the
 // field name instead of wrapping into the title.
 function splitLabel(label: string): { title: string; supporting?: string } {
   const dash = label.match(/^(.+?)\s+-\s+(.+)$/);
@@ -1110,8 +1121,10 @@ function PropertiesBody({
   onRemoveChild,
   onReorderChild,
   hideTitle = false,
+  borderedTop = false,
 }: {
   hideTitle?: boolean;
+  borderedTop?: boolean;
   context: AuthoringContext;
   variant: VariantWorkspace;
   nodeId: string;
@@ -1156,11 +1169,13 @@ function PropertiesBody({
       <CollectionBody
         data={titled(resolved.data)}
         nodeId={nodeId}
+        parentId={ancestorIdsOf(variant.structure, nodeId).slice(-1)[0]}
         objectType={objectType}
         onAddChild={onAddChild}
         onRemoveChild={onRemoveChild}
         onReorderChild={onReorderChild}
         tabbed={tabbed}
+        borderedTop={borderedTop}
         renderItem={(itemId) => {
           const item = findNodeById(variant.structure, itemId);
           return (
@@ -1196,6 +1211,7 @@ function PropertiesBody({
   return (
     <FieldsBody
       key={nodeId}
+      parentId={ancestorIdsOf(variant.structure, nodeId).slice(-1)[0]}
       hideTitle={hideTitle}
       data={titled(resolved.data)}
       overridesForNode={overridesForNode}
@@ -1222,6 +1238,7 @@ function PropertiesBody({
                 onRemoveChild={onRemoveChild}
                 onReorderChild={onReorderChild}
                 hideTitle
+                borderedTop
               />
             );
           }}
@@ -1253,8 +1270,11 @@ function FieldsBody({
   footerKeys = [],
   footer,
   hideTitle = false,
+  parentId,
 }: {
   hideTitle?: boolean;
+  // The Structure parent of this object; its chevron steps up to it.
+  parentId?: string;
   data: ObjectProperties;
   overridesForNode: Record<string, string>;
   invalidFields: Set<string>;
@@ -1318,49 +1338,82 @@ function FieldsBody({
   const collapseAll = () => setCollapsed(new Set(headers));
   const expandAll = () => setCollapsed(new Set());
 
+  // Tabbed items (hideTitle) report their control to the parent title row; a
+  // headed FieldsBody shows its own control, else the one reported from below.
+  const [slotControl, setSlotControl] = useState<CollapseControl | null>(null);
+  const reportToParent = useContext(CollapseSlotContext);
+  const selectNode = useContext(SelectNodeContext);
+  const onBack = parentId && selectNode ? () => selectNode(parentId) : undefined;
+  // Ungrouped leading fields (e.g. a category's title) sit under the object title
+  // with no divider; the divider falls below them, above the first headed section.
+  const leadingFields = groups.length > 0 && !groups[0].header;
+  const showAll = headers.length > 1;
+  const headersKey = headers.join("\u0000");
+  useEffect(() => {
+    if (!hideTitle || !reportToParent) return;
+    reportToParent({ show: showAll, allCollapsed, collapseAll, expandAll });
+    return () => reportToParent(null);
+    // collapseAll/expandAll read `headers`, which is covered by headersKey.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hideTitle, reportToParent, showAll, allCollapsed, headersKey]);
+  const control: CollapseControl | null = showAll
+    ? { show: true, allCollapsed, collapseAll, expandAll }
+    : slotControl;
+
   const header = (
       <InspectorHeader
         title={hideTitle ? undefined : name}
         kind={hideTitle ? undefined : inspectorKindLabel(eyebrow, name)}
+        onBack={hideTitle ? undefined : onBack}
+        className={leadingFields ? "pb-1" : undefined}
         actions={
-          headers.length > 1 ? (
+          control?.show ? (
             <Button
               variant="ghost"
               size="xs"
               className={cn(inspectorType.meta, "hover:text-foreground")}
-              onClick={allCollapsed ? expandAll : collapseAll}
+              onClick={control.allCollapsed ? control.expandAll : control.collapseAll}
             >
-              {allCollapsed ? "Expand all" : "Collapse all"}
+              {control.allCollapsed ? "Expand all" : "Collapse all"}
             </Button>
           ) : undefined
         }
       />
   );
   return (
-    <>
-      {/* With the tab already naming the object, the header only earns its
-          row when it carries the Expand/Collapse all actions. */}
-      {hideTitle
-        ? headers.length > 1 && header
-        : <InspectorStickyHead divider>{header}</InspectorStickyHead>}
+    <CollapseSlotContext.Provider value={hideTitle ? reportToParent : setSlotControl}>
+      {/* Tabbed items name their object in the collection header, so they render
+          no header row here (Expand/Collapse all lives on the parent title row). */}
+      {!hideTitle && <InspectorStickyHead divider={!leadingFields}>{header}</InspectorStickyHead>}
       <div className="flex min-w-0 flex-col">
-        {groups.map((group, i) => (
-          <GroupSection
-            key={`${group.header ?? "group"}-${i}`}
-            group={group}
-            expanded={group.header ? !collapsed.has(group.header) : true}
-            onToggle={group.header ? () => toggle(group.header!) : () => {}}
-            borderedTop={Boolean(
-              group.header && groups.slice(0, i).some((g) => g.header),
-            )}
-            overridesForNode={overridesForNode}
-            invalidFields={invalidFields}
-            onEdit={onEdit}
-          />
-        ))}
+        {groups.map((group, i) => {
+          const section = (
+            <GroupSection
+              group={group}
+              expanded={group.header ? !collapsed.has(group.header) : true}
+              onToggle={group.header ? () => toggle(group.header!) : () => {}}
+              borderedTop={Boolean(group.header && i > 0)}
+              overridesForNode={overridesForNode}
+              invalidFields={invalidFields}
+              onEdit={onEdit}
+            />
+          );
+          // The object's own fields under its title read as a compact header block:
+          // shorter inputs and tighter rows than the sections below.
+          return i === 0 && leadingFields ? (
+            <div
+              key={`${group.header ?? "group"}-${i}`}
+              className="-mt-2 [&_label]:order-last [&_input]:!h-6 [&_input]:!px-0 [&_input]:!py-0 [&_input]:!text-[length:var(--type-body-sm-size)] [&_input]:!leading-[length:var(--type-body-sm-lh)] [&_input]:!rounded-none [&_input]:!border-0 [&_input]:![border-bottom-width:1px] [&_input]:!border-b-[var(--color-border-strong)] [&_input]:!bg-transparent [&_input]:!shadow-none"
+            >
+              {section}
+            </div>
+          ) : (
+            <Fragment key={`${group.header ?? "group"}-${i}`}>{section}</Fragment>
+          );
+        })}
         {footer?.({ isOpen, toggle })}
       </div>
-    </>
+    </CollapseSlotContext.Provider>
   );
 }
 
@@ -1377,9 +1430,13 @@ function CollectionBody({
   onRemoveChild,
   onReorderChild,
   tabbed = false,
+  borderedTop = false,
+  parentId,
   renderItem,
 }: {
   data: CollectionProperties;
+  // The Structure parent of this collection; its chevron steps up to it.
+  parentId?: string;
   nodeId: string;
   objectType: StructureObjectType | null;
   onAddChild: (parentId: string, childType: StructureObjectType) => void;
@@ -1387,6 +1444,8 @@ function CollectionBody({
   onReorderChild: (parentId: string, from: number, to: number) => void;
   // Tabbed: one tab per item, the selected item's panel below (see PropertiesBody).
   tabbed?: boolean;
+  // Set when the list sits in a panel footer below other sections (divider above).
+  borderedTop?: boolean;
   renderItem?: (itemId: string) => ReactNode;
 }) {
   const { eyebrow, name, itemNoun, items } = data;
@@ -1406,13 +1465,33 @@ function CollectionBody({
   const showFam = itemNoun === OFFER_TYPE_NOUN;
 
   const displayName = name ?? sentenceCase(eyebrow);
+  const onBack = parentId && selectNode ? () => selectNode(parentId) : undefined;
   return (
     <>
-      <InspectorStickyHead>
-      <InspectorHeader
-        title={displayName}
-        kind={inspectorKindLabel(eyebrow, displayName)}
-      />
+      <InspectorStickyHead borderedTop={borderedTop}>
+      {tabbed ? (
+        // A list inside its node (Plans > Products > tabs): section size (14/20),
+        // with Add as a + icon on the title row.
+        <div className="flex h-8 min-w-0 items-center gap-1">
+          <h3 className={cn("min-w-0 flex-1 truncate", inspectorType.section)}>{displayName}</h3>
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            aria-label={`Add ${nounLower}`}
+            title={atMax ? `Maximum of ${max} reached` : `Add ${nounLower}`}
+            disabled={!canAdd}
+            onClick={() => childType && onAddChild(nodeId, childType)}
+          >
+            <MSym name="add" size={16} />
+          </Button>
+        </div>
+      ) : (
+        <InspectorHeader
+          title={displayName}
+          kind={inspectorKindLabel(eyebrow, displayName)}
+          onBack={onBack}
+        />
+      )}
       {tabbed && active && renderItem && (
           <div
             role="tablist"
@@ -1540,22 +1619,24 @@ function CollectionBody({
         </ul>
       )}
 
-      <div className="flex flex-wrap items-center gap-2 px-[var(--inspector-pad-x)]">
-        <Button
-          variant="secondary"
-          size="sm"
-          disabled={!canAdd}
-          onClick={() => childType && onAddChild(nodeId, childType)}
-        >
-          <Icon name="plus" size={16} />
-          Add {itemNoun}
-        </Button>
-        {atMax && (
-          <span className="text-[length:var(--type-body-sm-size)] text-muted-foreground">
-            Maximum of {max} reached.
-          </span>
-        )}
-      </div>
+      {!tabbed && (
+        <div className="flex flex-wrap items-center gap-2 px-[var(--inspector-pad-x)]">
+          <Button
+            variant="secondary"
+            size="sm"
+            disabled={!canAdd}
+            onClick={() => childType && onAddChild(nodeId, childType)}
+          >
+            <Icon name="plus" size={16} />
+            Add {itemNoun}
+          </Button>
+          {atMax && (
+            <span className="text-[length:var(--type-body-sm-size)] text-muted-foreground">
+              Maximum of {max} reached.
+            </span>
+          )}
+        </div>
+      )}
     </>
   );
 }
