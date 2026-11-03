@@ -18,7 +18,7 @@ export const inspectorType = {
   title:
     "text-[length:var(--inspector-title-size)] font-semibold leading-[length:var(--inspector-title-lh)] tracking-[-0.01em] text-balance text-foreground",
   section:
-    "text-[length:var(--inspector-section-size)] font-bold leading-[length:var(--inspector-section-lh)] text-foreground",
+    "text-[length:var(--inspector-section-size)] font-semibold leading-[length:var(--inspector-section-lh)] text-foreground",
   fieldLabel:
     "text-[length:var(--inspector-label-size)] font-medium leading-[length:var(--inspector-label-lh)] text-[var(--color-text-secondary)]",
   value:
@@ -49,9 +49,21 @@ export function inspectorKindLabel(_eyebrow: string, _title: string): string | u
 // Pins the panel's top block (object header, plus the tab strip for tabbed
 // collections) while the rest of the panel scrolls. Only one sticky block per
 // scroll area: nested sticky headers paint over each other.
-export function InspectorStickyHead({ children }: { children: React.ReactNode }) {
+export function InspectorStickyHead({
+  children,
+  divider = false,
+}: {
+  children: React.ReactNode;
+  divider?: boolean;
+}) {
   return (
-    <div className="sticky top-0 z-10 -mx-[var(--inspector-body-x)] -mt-[var(--inspector-pad-y)] bg-[var(--color-bg-surface)] px-[var(--inspector-side)] pt-[var(--grid-gutter)]">
+    <div
+      className={cn(
+        "sticky top-0 z-10 -mx-[var(--inspector-body-x)] -mt-[var(--inspector-pad-y)] bg-[var(--color-bg-surface)] px-[var(--inspector-side)] pt-[var(--grid-gutter)]",
+        // Divider sits 24px below the header text (InspectorHeader's 12px + 12px here).
+        divider && "-mb-2 border-b border-[var(--color-border-default)] pb-3",
+      )}
+    >
       {children}
     </div>
   );
@@ -125,7 +137,7 @@ export function InspectorBody({
   return (
     <div
       className={cn(
-        "flex min-w-0 flex-col gap-[var(--inspector-gap-section)] px-[var(--inspector-body-x)] py-[var(--inspector-pad-y)]",
+        "flex min-w-0 flex-col gap-[var(--inspector-gap-section)] px-[var(--inspector-body-x)] pb-4 pt-5",
         className,
       )}
     >
@@ -224,7 +236,6 @@ export function ListItem({
             disabled && "text-foreground/40",
             (labelFor || rowFor) && "cursor-pointer",
             !secondary && "break-words",
-            !secondary && density === "compact" && "line-clamp-2",
           )}
         >
           {primary}
@@ -252,16 +263,18 @@ export function PropertyRow({
   htmlFor,
   required,
   help,
+  inset = true,
   children,
 }: {
   label: React.ReactNode;
   htmlFor?: string;
   required?: boolean;
   help?: React.ReactNode;
+  inset?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-[var(--inspector-gap-field)] px-[var(--inspector-pad-x)] py-1.5">
+    <div className={cn("flex flex-col gap-[var(--inspector-gap-field)] pb-1.5 pt-2.5", inset && "px-[var(--inspector-pad-x)]")}>
       <label htmlFor={htmlFor} className={cn("min-w-0 break-words", inspectorType.fieldLabel)}>
         {label}
         {required && <span className="ml-0.5 text-destructive">*</span>}
@@ -315,7 +328,7 @@ export function PropertyRows({
   className?: string;
 }) {
   return (
-    <div className={cn("flex min-w-0 flex-col gap-0.5", className)}>{children}</div>
+    <div className={cn("flex min-w-0 flex-col", className)}>{children}</div>
   );
 }
 
@@ -350,10 +363,17 @@ export function PropertySection({
     <Collapsible
       open={expanded}
       onOpenChange={onToggle}
-      className={cn("min-w-0 py-1", borderedTop && "border-t border-[var(--color-border-subtle)] pt-2")}
+      // Bleed to the panel edge so the divider runs full width; the padding keeps the
+      // header and rows on the same inset as the title.
+      className={cn(
+        "-mx-[var(--inspector-body-x)] min-w-0 px-[var(--inspector-body-x)] pt-[18px]",
+        // Every header keeps 24px to its divider above and below (18px here or on
+        // the margin + the header row's 6px); the expanded rows follow the same rhythm.
+        borderedTop && "mt-[18px] border-t border-[var(--color-border-default)]",
+      )}
     >
       <div className="flex items-center gap-1">
-        <CollapsibleTrigger className="group flex h-7 min-w-0 flex-1 items-center gap-2 rounded-sm px-[var(--inspector-pad-x)] text-left transition-colors hover:bg-[var(--color-bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus-ring)]">
+        <CollapsibleTrigger className="group flex h-8 min-w-0 flex-1 items-center gap-2 rounded-sm px-[var(--inspector-pad-x)] text-left transition-colors hover:bg-[var(--color-bg-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--color-focus-ring)]">
           <span className={cn("min-w-0 flex-1 truncate", inspectorType.section)}>
             {sentenceCase(header)}
           </span>

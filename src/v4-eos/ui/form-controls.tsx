@@ -157,7 +157,7 @@ export function SelectField({
         className={cn(
           FIELD,
           polished && POLISHED_FIELD,
-          "data-[size=sm]:h-[var(--control-height-md)] w-full min-w-0 max-w-full [&_[data-slot=select-value]]:min-w-0 [&_[data-slot=select-value]]:truncate",
+          "w-full min-w-0 max-w-full [&_[data-slot=select-value]]:min-w-0 [&_[data-slot=select-value]]:truncate",
           triggerClassName,
         )}
       >

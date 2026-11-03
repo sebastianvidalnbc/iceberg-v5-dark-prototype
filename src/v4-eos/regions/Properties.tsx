@@ -278,7 +278,7 @@ function AssetPicker({
       <button
         type="button"
         onClick={() => onEdit(DEMO_ASSET)}
-        className="inline-flex h-[var(--control-height-md)] items-center gap-1.5 rounded-[var(--radius-field)] border border-dashed border-[var(--color-border-default)] px-2.5 text-[length:var(--type-label-md-size)] leading-[length:var(--type-label-md-lh)] font-medium text-muted-foreground transition-colors hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+        className="inline-flex h-[var(--control-height-sm)] items-center gap-1.5 rounded-[var(--radius-field)] border border-dashed border-[var(--color-border-default)] px-2.5 text-[length:var(--type-label-md-size)] leading-[length:var(--type-label-md-lh)] font-medium text-muted-foreground transition-colors hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
       >
         <MSym name="add_photo_alternate" size={16} />
         Choose image…
@@ -398,30 +398,61 @@ function TemplateGallery({
 // A field label with an optional info-icon tooltip (§6). The icon is a hover/
 // focus target carrying contextual help so the panel stays uncluttered — long
 // copy wraps in the Radix tooltip instead of overflowing the narrow panel.
-function FieldLabel({ label, tooltip }: { label: string; tooltip?: string }) {
-  if (!tooltip) return <>{label}</>;
-  return (
-    <span className="inline-flex items-center gap-1">
-      {label}
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span
-              tabIndex={0}
-              role="img"
-              aria-label={`Help: ${label}`}
-              onClick={(e) => e.preventDefault()}
-              className="inline-grid size-4 shrink-0 cursor-help place-items-center rounded-full text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-            >
-              <MSym name="info" size={14} />
-            </span>
-          </TooltipTrigger>
-          <TooltipContent side="top" className="max-w-[240px] text-balance">
-            {tooltip}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+// A label's qualifier ("Voucher error text - displayed when …" or "Product ID
+// (for add to basket)") is supporting text: it renders as Label XS under the
+// field name instead of wrapping into the title.
+function splitLabel(label: string): { title: string; supporting?: string } {
+  const dash = label.match(/^(.+?)\s+-\s+(.+)$/);
+  if (dash) return { title: dash[1], supporting: dash[2] };
+  const paren = label.match(/^(.+?)\s*(\(.+\))$/);
+  if (paren) return { title: paren[1], supporting: paren[2] };
+  return { title: label };
+}
+
+function FieldLabel({
+  label,
+  tooltip,
+  required,
+}: {
+  label: string;
+  tooltip?: string;
+  required?: boolean;
+}) {
+  const { title, supporting } = splitLabel(label);
+  const titleRow = (
+    <span className={cn(tooltip && "inline-flex items-center gap-1")}>
+      {title}
+      {required && <span className="ml-0.5 text-destructive">*</span>}
+      {tooltip && (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span
+                tabIndex={0}
+                role="img"
+                aria-label={`Help: ${label}`}
+                onClick={(e) => e.preventDefault()}
+                className="inline-grid size-4 shrink-0 cursor-help place-items-center rounded-full text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+              >
+                <MSym name="info" size={14} />
+              </span>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="max-w-[240px] text-balance">
+              {tooltip}
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      )}
     </span>
+  );
+  if (!supporting) return titleRow;
+  return (
+    <>
+      {titleRow}
+      <span className="block text-[length:var(--type-label-xs-size)] font-normal leading-[length:var(--type-label-xs-lh)] text-[var(--color-text-secondary)]">
+        {supporting}
+      </span>
+    </>
   );
 }
 
@@ -431,16 +462,20 @@ function PropertyFieldRow({
   value,
   invalid,
   onEdit,
+  inset = true,
 }: {
   field: PropertyField;
   value: string;
   invalid: boolean;
   onEdit: (value: string) => void;
+  inset?: boolean;
 }) {
   const id = useId();
   const errId = invalid ? `${id}-err` : undefined;
   // Helper text lives behind the label's info icon (no line under the control).
-  const label = <FieldLabel label={field.label} tooltip={field.tooltip ?? field.helper} />;
+  const label = (
+    <FieldLabel label={field.label} tooltip={field.tooltip ?? field.helper} required={field.required} />
+  );
   // §item4 A field can present a read-only status badge in place of an editable
   // control (e.g. an offer's "Expired" pill in STATUS) — no input, no id wiring.
   if (field.badge) {
@@ -509,7 +544,7 @@ function PropertyFieldRow({
   );
 
   return (
-    <PropRow label={label} htmlFor={id} required={field.required} help={help}>
+    <PropRow label={label} htmlFor={id} help={help} inset={inset}>
       {control}
     </PropRow>
   );
@@ -517,6 +552,20 @@ function PropertyFieldRow({
 
 // The rows of a group. Each field's value is the schema default with the
 // author's edit (if any) layered on; editing calls onEdit(label, value).
+// Short single-line values pair up two per row; everything else takes a full row.
+// The title and its supporting line must each fit a half-column on one line, or
+// the pair misaligns.
+const PAIR_LABEL_MAX = 24;
+function isPairable(field: PropertyField): boolean {
+  const { title, supporting } = splitLabel(field.label);
+  return (
+    (!field.kind || field.kind === "text" || field.kind === "select") &&
+    !field.badge &&
+    title.length <= PAIR_LABEL_MAX &&
+    (supporting?.length ?? 0) <= PAIR_LABEL_MAX
+  );
+}
+
 function GroupRows({
   group,
   overridesForNode,
@@ -528,19 +577,37 @@ function GroupRows({
   invalidFields: Set<string>;
   onEdit: (label: string, value: string) => void;
 }) {
-  return (
-    <PropertyRows>
-      {group.fields.map((field) => (
-        <PropertyFieldRow
-          key={field.label}
-          field={field}
-          value={overridesForNode[field.label] ?? field.value}
-          invalid={invalidFields.has(field.label)}
-          onEdit={(v) => onEdit(field.label, v)}
-        />
-      ))}
-    </PropertyRows>
+  const fields = group.fields;
+  const renderField = (field: PropertyField, inset: boolean) => (
+    <PropertyFieldRow
+      key={field.label}
+      field={field}
+      value={overridesForNode[field.label] ?? field.value}
+      invalid={invalidFields.has(field.label)}
+      onEdit={(v) => onEdit(field.label, v)}
+      inset={inset}
+    />
   );
+  const rows: ReactNode[] = [];
+  for (let i = 0; i < fields.length; i++) {
+    const field = fields[i];
+    const next = fields[i + 1];
+    if (isPairable(field) && next && isPairable(next)) {
+      rows.push(
+        <div
+          key={`${field.label}|${next.label}`}
+          className="grid grid-cols-2 gap-x-2 px-[var(--inspector-pad-x)]"
+        >
+          {renderField(field, false)}
+          {renderField(next, false)}
+        </div>,
+      );
+      i++;
+    } else {
+      rows.push(renderField(field, true));
+    }
+  }
+  return <PropertyRows>{rows}</PropertyRows>;
 }
 
 // A titled group of rows (PRODUCT / CTA / LEGAL …). Headed groups collapse.
@@ -890,6 +957,7 @@ function InlinePanelLists({
             header={`${list.label} · ${items.length}${max != null ? ` / ${max}` : ""}`}
             expanded={open}
             onToggle={() => onToggleList(list.id)}
+            borderedTop
           >
             <div className="flex flex-col px-3 py-2">
               {items.map((item, i) => {
@@ -942,7 +1010,7 @@ function InlinePanelLists({
                     onClick={() => childType && onAddChild(list.id, childType)}
                     title={`Add ${nounLower}`}
                     aria-label={`Add ${nounLower}`}
-                    className="inline-flex h-[var(--control-height-md)] items-center gap-1.5 rounded-[var(--radius-field)] border border-dashed border-[var(--color-border-default)] px-2.5 text-[length:var(--type-label-md-size)] leading-[length:var(--type-label-md-lh)] font-medium text-muted-foreground transition-colors hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40"
+                    className="inline-flex h-[var(--control-height-sm)] items-center gap-1.5 rounded-[var(--radius-field)] border border-dashed border-[var(--color-border-default)] px-2.5 text-[length:var(--type-label-md-size)] leading-[length:var(--type-label-md-lh)] font-medium text-muted-foreground transition-colors hover:border-[var(--color-action-primary)] hover:text-[var(--color-action-primary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:opacity-40"
                   >
                     <MSym name="add" size={16} />
                     Add {nounLower}
@@ -1270,7 +1338,11 @@ function FieldsBody({
   );
   return (
     <>
-      {hideTitle ? header : <InspectorStickyHead>{header}</InspectorStickyHead>}
+      {/* With the tab already naming the object, the header only earns its
+          row when it carries the Expand/Collapse all actions. */}
+      {hideTitle
+        ? headers.length > 1 && header
+        : <InspectorStickyHead divider>{header}</InspectorStickyHead>}
       <div className="flex min-w-0 flex-col">
         {groups.map((group, i) => (
           <GroupSection
@@ -1355,7 +1427,7 @@ function CollectionBody({
                 aria-selected={item.id === active.id}
                 onClick={() => setActiveId(item.id)}
                 className={cn(
-                  "-mb-px shrink-0 border-b-2 px-3 py-2 text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
+                  "-mb-px h-[var(--control-height-sm)] shrink-0 border-b-2 px-3 text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
                   item.id === active.id
                     ? "border-[var(--color-action-primary)] font-medium text-foreground"
                     : "border-transparent font-normal text-muted-foreground hover:text-foreground",

@@ -597,8 +597,26 @@ fieldLabel / value / help / meta).
 **Dense V4 density (Swiss grid pass).** Eos has no control height below 32px,
 so fields use `--control-height-sm` (32px). These V4-only values are not Eos
 tokens: Structure and preview gutter `--grid-gutter` 12px, Properties side inset
-`--inspector-side` 24px, inspector padding 8px, section gap 8px, section headers
-28px, tree rows `--structure-tree-row-h` 26px. Labels stay above their controls.
+`--inspector-side` 24px, inspector padding 8px, section gap 8px, tree rows
+`--structure-tree-row-h` 26px. Labels stay above their controls.
+
+Properties vertical rhythm (type → size, weight, height):
+- Panel title: Title M 16/24 semibold. Tab row, section headers: Title S 14/20
+  semibold; tabs and section headers 32px tall, 18px tab-to-first-field gap.
+- Field labels: Label M 12/16 medium, secondary colour, 4px above the control.
+- Supporting text in a label (a dash clause such as "Voucher error text - …", or
+  a parenthetical such as "Product ID (for add to basket)"): Label XS 10/16,
+  on its own line under the title.
+- Controls (text, select, Add): 32px (`--control-height-sm`), value text 12/16.
+- Field rows: 16px apart (10px top, 6px bottom padding on each stacked row, so
+  each label has room to be scanned); a section starts 12px below the previous one.
+- Section dividers: a 1px `--color-border-default` line runs the full panel
+  width between headed sections (not above the first), with 24px from the last
+  field above it. Every headed section (including footer lists) has a divider above it except the first, and each header title sits 24px from the divider above and 24px to the divider below, collapsed or expanded. The product title header has a full-width 1px divider beneath it (24px from its text, 12px to the first section). The scroll content keeps 24px on all four sides (top to title, bottom below the last control, left and right to the fields). Headed sections bleed to
+  the panel edge and pad back to the title inset.
+- Two-column pairs: only short labels (24 characters or fewer) and single-line
+  text or select fields. Longer labels stay full width so they cannot misalign
+  the pair.
 Helper text moves behind the label's info icon; only validation errors render
 under a control.
 

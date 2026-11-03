@@ -145,8 +145,8 @@
   --inspector-title-lh: var(--type-title-md-lh);
   --inspector-kind-size: var(--type-body-sm-size);
   --inspector-kind-lh: var(--type-body-sm-lh);
-  --inspector-section-size: var(--type-body-sm-size);
-  --inspector-section-lh: var(--type-body-sm-lh);
+  --inspector-section-size: var(--type-title-sm-size);
+  --inspector-section-lh: var(--type-title-sm-lh);
   --inspector-label-size: var(--type-label-md-size);
   --inspector-label-lh: var(--type-label-md-lh);
   --inspector-value-size: var(--type-body-sm-size);
