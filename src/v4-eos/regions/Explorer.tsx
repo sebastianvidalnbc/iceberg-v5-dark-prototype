@@ -286,6 +286,8 @@ function StructureLevel({
     <>
       {nodes.map((node, index) => {
         if (panelIds.has(node.id)) return null;
+        // Section Options and Behaviours are hidden from this prototype's Structure tree.
+        if (node.objectType === "section-options" || node.objectType === "behaviours") return null;
         const isOffers = node.id === WIDGET_OFFERS_NODE_ID;
         const isOfferGroup = node.objectType === "offer-group";
         const hasChildren = (node.children ?? []).some((c) => !panelIds.has(c.id));

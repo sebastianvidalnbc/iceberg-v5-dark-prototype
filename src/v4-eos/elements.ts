@@ -115,8 +115,6 @@ export const ELEMENT_REGISTRY: Partial<
     allowedChildren: [
       "content-area",
       "section-content",
-      "section-options",
-      "behaviours",
     ],
     build: fields((node) => metadata(node)),
   },
