@@ -1,4 +1,4 @@
-// Merges the production page inventory (cms-data/pages.txt, captured from the
+// Merges the production page inventory (page-inventory/pages.txt, captured from the
 // CMS Page List on stable-int) into the Pages tree.
 //
 // - Every production slug becomes a page node, nested under its longest
@@ -8,11 +8,11 @@
 // - Hand-built routes that do not exist in production are left in place
 //   without metadata. They are demo fixtures, not production copies.
 import type { CmsPageMeta, TreeNode } from "./data";
-// The raw capture lives in cms-data/ (local only, gitignored). Without it the
+// The inventory lives in page-inventory/ (tracked, brand names replaced with dummy names). Without it the
 // glob is empty and the Pages tree stays hand-built, so CI builds still pass.
 const pagesRaw: string =
   (Object.values(
-    import.meta.glob("./cms-data/pages.txt", { query: "?raw", import: "default", eager: true }),
+    import.meta.glob("./page-inventory/pages.txt", { query: "?raw", import: "default", eager: true }),
   )[0] as string | undefined) ?? "";
 
 // The CMS "modified" column is relative to the date the list was read.

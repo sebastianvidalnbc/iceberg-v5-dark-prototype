@@ -71,7 +71,7 @@ export type SectionDesign = "Custom" | "Intelligent authoring";
 export type SectionRole = "Page Title" | "Plan Picker" | "Footer" | (string & {});
 
 // Generic tree node reused by both the PAGES tree and Variant Structure trees.
-// Real list metadata for a page copied from production (cms-data/pages.txt).
+// Real list metadata for a page copied from production (page-inventory/pages.txt).
 export interface CmsPageMeta {
   status: "Draft" | "Published";
   visibility: "Visible" | "Hidden";
