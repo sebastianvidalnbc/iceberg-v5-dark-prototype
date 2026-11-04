@@ -607,11 +607,11 @@ button.ui-ws-nav__brand--link:focus-visible { outline: none; box-shadow: var(--f
 /* Structure empty state (shown when a Page — not a Variant — is selected). */
 .ui-ws-explorer__empty { margin: var(--space-2) var(--space-3); font-size: var(--type-body-sm-size); color: var(--color-text-muted); line-height: var(--type-body-sm-lh); }
 
-/* Live Preview — neutral central workspace hosting the Peacock preview pane. */
+/* Live Preview — neutral central workspace hosting the Streamly preview pane. */
 .ui-ws-preview { background: var(--color-bg-canvas); align-items: stretch; }
 .ui-ws-preview__inner { flex: 1; min-height: 0; display: flex; flex-direction: column; background: var(--color-bg-surface); overflow: hidden; }
 
-/* Reusable Peacock preview pane (recreated from V1 visuals, token-driven). */
+/* Reusable Streamly preview pane (recreated from V1 visuals, token-driven). */
 .ui-preview { display: flex; flex-direction: column; min-height: 0; flex: 1; user-select: none; }
 /* Eos §3.5 ".toolbar" is 48px: space-2 (8px) vertical padding + the 32px
    control row below sums to the canonical 48px toolbar height. */
@@ -704,7 +704,7 @@ button.ui-ws-nav__brand--link:focus-visible { outline: none; box-shadow: var(--f
 .ui-preview__json-body { margin: 0; padding: var(--space-3); font-family: var(--font-mono); font-size: var(--type-body-sm-size); line-height: 1.6; color: var(--color-text-primary); white-space: pre; }
 
 /* Widget preview — a selected saved offer rendered as a representative,
-   customer-facing offer card (item 7). Lives in the preview (Peacock) zone;
+   customer-facing offer card (item 7). Lives in the preview (Streamly) zone;
    styling is illustrative and deliberately distinct from the Eos editor chrome. */
 .ui-preview__canvas[data-mode="offer"] { display: grid; place-items: center; overflow: auto; padding: var(--space-6); }
 .ui-offer-preview { position: relative; width: min(420px, 100%); display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-6); border-radius: var(--radius-lg, 12px); background: linear-gradient(160deg, #241546, #0b0b1a); color: #fff; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); text-align: left; }
@@ -859,7 +859,7 @@ button.ui-ws-nav__brand--link:focus-visible { outline: none; box-shadow: var(--f
 .ui-ws-browse__table--widgets .ui-ws-browse__row,
 .ui-ws-browse__table--content-pages .ui-ws-browse__row { min-width: var(--browse-row-min); }
 .ui-ws-browse__row { display: grid; grid-template-columns: var(--browse-cols); align-items: center; gap: var(--space-3); padding: var(--space-2) var(--space-3); border-bottom: var(--border-width) solid var(--color-border-subtle); font-size: var(--type-body-sm-size); line-height: var(--type-body-sm-lh); }
-/* Variants: Name · QA · Optimizely · Publish · Scheduled · Un-Published · Created · Modified · By.
+/* Variants: Name · QA · Experiments · Publish · Scheduled · Un-Published · Created · Modified · By.
    Row actions float over the row on hover instead of taking a grid track, so the
    columns and their titles stay aligned. */
 .ui-ws-browse__table--variants { overflow-x: auto; }
@@ -1039,7 +1039,7 @@ button.ui-ws-nav__brand--link:focus-visible { outline: none; box-shadow: var(--f
   letter-spacing: 0.01em;
 }
 .ui-ws-browse__protect,
-.ui-ws-browse__optimizely {
+.ui-ws-browse__experiments {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1051,10 +1051,10 @@ button.ui-ws-nav__brand--link:focus-visible { outline: none; box-shadow: var(--f
 .ui-ws-browse__protect.is-on .eos-icon {
   font-variation-settings: "opsz" 20, "wght" 400, "FILL" 1, "GRAD" 0;
 }
-.ui-ws-browse__optimizely.is-on {
+.ui-ws-browse__experiments.is-on {
   color: var(--color-status-experiment);
 }
-.ui-ws-browse__optimizely.is-on .eos-icon {
+.ui-ws-browse__experiments.is-on .eos-icon {
   font-variation-settings: "opsz" 20, "wght" 400, "FILL" 1, "GRAD" 0;
 }
 .ui-ws-browse__actions { display: flex; align-items: center; gap: var(--space-1); justify-content: flex-end; }

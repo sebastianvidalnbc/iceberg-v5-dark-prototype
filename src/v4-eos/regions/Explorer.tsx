@@ -146,6 +146,8 @@ interface StructureActions {
     refId: string | null,
     refLabel?: string,
   ) => void;
+  // Save a top-level page section as a widget (page context only).
+  onSaveAsWidget?: (id: string) => void;
 }
 
 // A quiet, always-present insert point between top-level sections. Brightens on
@@ -367,7 +369,7 @@ function StructureLevel({
                     />
                   ) : node.badge ? (
                     // Inline status pill after the label: an offer's "Live" flag
-                    // (§4) or a segment's Optimizely mapping state (§11).
+                    // (§4) or a segment's Experiments mapping state (§11).
                     <span className="inline-flex items-center gap-1.5">
                       <span>{node.label}</span>
                       <span
@@ -394,6 +396,11 @@ function StructureLevel({
                       onPaste={() => actions.onPasteNode(node.id)}
                       onToggleDisabled={() => actions.onToggleDisabledNode(node.id)}
                       onDelete={() => actions.onDeleteNode(node.id)}
+                      onSaveAsWidget={
+                        isTopLevel && !node.widgetSlug && actions.onSaveAsWidget
+                          ? () => actions.onSaveAsWidget?.(node.id)
+                          : undefined
+                      }
                     />
                   ) : undefined
                 }
@@ -674,6 +681,7 @@ interface ExplorerProps {
     refId: string | null,
     refLabel?: string,
   ) => void;
+  onSaveAsWidget?: (id: string) => void;
 }
 
 // Explorer region: two persistent panes (collection / STRUCTURE) that scroll
@@ -703,6 +711,7 @@ export function Explorer({
   onDeleteNode,
   onMoveNode,
   onRequestAddLayout,
+  onSaveAsWidget,
 }: ExplorerProps) {
   const [collectionQuery, setCollectionQuery] = useState("");
   // The highlighted collection row is whichever of route/experience is active.
@@ -911,6 +920,7 @@ export function Explorer({
                 onDeleteNode,
                 onMoveNode,
                 onRequestAddLayout,
+                onSaveAsWidget,
               }}
             />
           ) : (

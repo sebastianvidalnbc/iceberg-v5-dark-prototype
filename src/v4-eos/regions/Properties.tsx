@@ -64,9 +64,10 @@ import {
 } from "../data";
 import { allowedChildType, maxChildrenFor } from "../elements";
 import { ancestorIdsOf, DESIGN_FIELD, findNodeById } from "../structureOps";
-import { LAYOUT_CATALOG } from "../layouts";
+import { isRetiredLayout, LAYOUT_CATALOG } from "../layouts";
 import { classifyWidget, WIDGET_FAMILY_HUE } from "../browse";
 import { analyzePanel, panelItemTitle, panelListsOf } from "../structure-panel";
+import { isArtFile, widgetArtUrl } from "../widget-art";
 
 // Widget-only wayfinding: the Offers / Segmentation collections list their
 // children by Offer Type, so each row gets the same family dot the Widgets list
@@ -128,7 +129,7 @@ interface PropertiesProps {
 const EXPERIMENTER_FIELD = "Experimenter Layouts";
 const EXPERIMENTER_OPTIONS = [
   "Experimenter Layouts",
-  ...LAYOUT_CATALOG.filter((d) => d.experiment).map((d) => d.name),
+  ...LAYOUT_CATALOG.filter((d) => d.experiment && !isRetiredLayout(d)).map((d) => d.name),
 ];
 
 const DEVICES: { key: "desktop" | "tablet" | "mobile"; name: string }[] = [
@@ -275,7 +276,7 @@ function PropertyControl({
 // (choosing sets the bundled demo asset; the × clears it) — the value flows to
 // the preview like every other field. The prototype ships a single bundled
 // image asset, so "Choose image…" sets that token rather than opening a picker.
-const DEMO_ASSET = "peacock-logo";
+const DEMO_ASSET = "streamly-logo";
 function AssetPicker({
   value,
   onEdit,
@@ -302,7 +303,11 @@ function AssetPicker({
         aria-hidden
         className="grid size-7 shrink-0 place-items-center overflow-hidden rounded bg-[var(--color-bg-subtle)] text-muted-foreground"
       >
-        <Icon name="image" size={15} />
+        {isArtFile(value) ? (
+          <img src={widgetArtUrl(value)} alt="" className="size-full object-cover" />
+        ) : (
+          <Icon name="image" size={15} />
+        )}
       </span>
       <span className={cn("min-w-0 flex-1 truncate", inspectorType.value)}>{value}</span>
       <button

@@ -198,7 +198,7 @@ export function PatternsSection() {
         <div className="w-full max-w-md rounded-md border border-border bg-[var(--color-bg-panel)] p-3">
           <PropertyRows>
             <PropertyRow label="Description">
-              <TextField defaultValue="What is Peacock" />
+              <TextField defaultValue="What is Streamly" />
             </PropertyRow>
             <CompactPropertyRow label="Layout">
               <SelectField value="Grid" options={["Grid", "Carousel", "List"]} />

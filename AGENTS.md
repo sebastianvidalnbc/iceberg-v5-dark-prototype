@@ -18,8 +18,8 @@ source is `src/v4-eos/`; sample data is illustrative and there is no backend.
 - Use Eos tokens from `src/v4-eos/ui-lib/tokens.css`, not raw values.
 - Preserve editor behavior: selection, expand/collapse, reorder, live preview,
   validation, and keyboard focus.
-- Keep Peacock renderer styling isolated. Do not use Eos tokens in
-  `src/v4-eos/renderer/` or Peacock tokens outside it.
+- Keep Streamly renderer styling isolated. Do not use Eos tokens in
+  `src/v4-eos/renderer/` or Streamly tokens outside it.
 - For authoring UX or IA changes, state which named pain point in
   `AUTHOR-EFFICIENCY.md` the change helps, ignores, or risks worsening.
 

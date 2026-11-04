@@ -10,7 +10,7 @@
 // classifyNode) and the VALUES come from each instance's `node.content`
 // (the `placeholder.content` analog). The renderer overlays content on the
 // schema defaults — it never mutates data. The render itself inherits the real
-// Peacock design system (renderer/brand.css), so every layout type renders as
+// Streamly design system (renderer/brand.css), so every layout type renders as
 // an on-brand section (plan-picker cards, hero, banner, FAQ, rail, grid, …).
 import {
   classifyNode,
@@ -20,6 +20,7 @@ import {
   type VariantWorkspace,
 } from "./data";
 import { previewRoleFor } from "./elements";
+import { POSTERS, SHOW_META, SHOW_TITLES } from "./widget-art";
 
 // A single product feature (bullet): the checkmark/icon + its text. `id` is the
 // feature node's Structure id, so clicking the bullet selects that node.
@@ -56,11 +57,13 @@ export interface PreviewCard {
 
 // A generic tile/row used by non-plan-picker layouts (FAQ Q/A, rail/grid tiles,
 // steps, comparison rows, footer columns). Synthesised on-brand so every layout
-// in the catalog renders a recognisable Peacock section.
+// in the catalog renders a recognisable Streamly section.
 export interface PreviewItem {
   title?: string;
   body?: string;
   icon?: string;
+  // Thumbnail or logo: a widget-art file name or image URL.
+  image?: string;
 }
 
 export type PreviewKind =
@@ -91,7 +94,7 @@ export interface PreviewSection {
   // The section's element instance id, so selecting/Pick-Section maps to it.
   nodeId: string;
   kind: PreviewKind;
-  // Peacock background treatment (from the layout's Select Background option).
+  // Streamly background treatment (from the layout's Select Background option).
   background: "light" | "dark" | "branded";
   eyebrow?: string;
   title: string;
@@ -103,6 +106,8 @@ export interface PreviewSection {
   // fields; rendered only by kinds that own a section CTA.
   cta?: string;
   ctaHref?: string;
+  // Background artwork (hero / banner / key art): a widget-art file name or URL.
+  image?: string;
   cards: PreviewCard[];
   // Plan-picker categories (Plans / Bundles …). Present when the section has a
   // `categories` collection; when 2+, the render shows a category toggle and
@@ -192,6 +197,7 @@ const TITLE_LABELS = [
   "Header Title",
 ];
 const SUBTITLE_LABELS = [
+  "Subheadline",
   "Description",
   "Subtitle",
   "Subheader",
@@ -437,7 +443,7 @@ function contentRootFor(
   return variations.find((v) => (v.children?.length ?? 0) > 0) ?? variations[0];
 }
 
-// Classify a section into a Peacock render kind from its role/label (and whether
+// Classify a section into a Streamly render kind from its role/label (and whether
 // it resolved to product cards). Every layout maps to a kind — nothing is blank.
 function classifyKind(
   section: StructureNode,
@@ -463,7 +469,7 @@ function classifyKind(
 }
 
 // Synthesise on-brand placeholder items for non-data-bound layout kinds so the
-// section renders a recognisable Peacock shape (real copy comes from the fields;
+// section renders a recognisable Streamly shape (real copy comes from the fields;
 // the tiles/rows are schematic until those layouts are modelled field-by-field).
 function synthItems(kind: PreviewKind): PreviewItem[] {
   switch (kind) {
@@ -474,9 +480,16 @@ function synthItems(kind: PreviewKind): PreviewItem[] {
         { title: "What devices are supported?", body: "Stream on web, mobile, tablet, and connected TV." },
       ];
     case "rail":
-      return Array.from({ length: 5 }, (_, i) => ({ title: `Title ${i + 1}` }));
+      return Array.from({ length: 6 }, (_, i) => ({
+        title: SHOW_TITLES[i % SHOW_TITLES.length],
+        body: SHOW_META[i % SHOW_META.length],
+        image: POSTERS[i % POSTERS.length],
+      }));
     case "grid":
-      return Array.from({ length: 6 }, (_, i) => ({ title: `Item ${i + 1}` }));
+      return Array.from({ length: 6 }, (_, i) => ({
+        title: SHOW_TITLES[(i + 2) % SHOW_TITLES.length],
+        image: POSTERS[(i + 3) % POSTERS.length],
+      }));
     case "comparison":
       return [
         { title: "4K UHD & HDR" },
@@ -574,6 +587,32 @@ function gatherCollections(node: StructureNode, out: StructureNode[]): void {
   }
 }
 
+// A value the renderer can show as an image: an image file or a URL.
+function isImageValue(value: string): boolean {
+  const v = value.trim();
+  return /\.(svg|png|jpe?g|webp)$/i.test(v) || /^https?:\/\//.test(v);
+}
+
+// Item thumbnail or logo authored on an item ("Image", "Image (thumbnail)").
+function itemImageIn(map: Record<string, string>): string | undefined {
+  for (const [label, value] of Object.entries(map)) {
+    const l = label.toLowerCase();
+    if (!/image|thumbnail|artwork|poster/.test(l) || /alt|aria|icon|video/.test(l)) continue;
+    if (value && isImageValue(value)) return value.trim();
+  }
+  return undefined;
+}
+
+// Section background artwork (desktop background, background image, key art).
+function sectionImageIn(map: Record<string, string>): string | undefined {
+  for (const [label, value] of Object.entries(map)) {
+    const l = label.toLowerCase();
+    if (!/background|image|artwork|key art/.test(l) || /alt|aria|logo|icon|video|mobile|tablet/.test(l)) continue;
+    if (value && isImageValue(value)) return value.trim();
+  }
+  return undefined;
+}
+
 // One collection item → a PreviewItem. Title/body come from fuzzy keyword
 // matches; when there's no body field but the item owns a nested collection
 // (footer column → links), its children's titles are joined as the body.
@@ -618,7 +657,7 @@ function buildItem(item: StructureNode, parent: StructureNode): PreviewItem | nu
   }
 
   if (!title && !body) return null;
-  return { title: title ?? item.label, body };
+  return { title: title ?? item.label, body, image: itemImageIn(map) };
 }
 
 // The authored items for a non-plan section: its primary content collection's
@@ -708,7 +747,7 @@ function buildSection(
       ? authoredItems
       : synthItems(kind);
 
-  // Background: the Select Background option (light / dark / branded). Peacock is
+  // Background: the Select Background option (light / dark / branded). Streamly is
   // dark-first, so default to dark when unset.
   const bgRaw = (pick(map, ["Select Background", "Background"]) ?? "dark").toLowerCase();
   const background: PreviewSection["background"] =
@@ -726,6 +765,7 @@ function buildSection(
     message: kind === "message" ? message : undefined,
     cta,
     ctaHref,
+    image: sectionImageIn(map),
     cards,
     categories,
     items,

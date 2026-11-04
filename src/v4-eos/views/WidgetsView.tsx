@@ -10,8 +10,7 @@ import { buildWidgetRows, routes, navigate, type WidgetRow, type WidgetFormat, t
 import type { WidgetChildRow } from "../browse";
 import { SortHeaderCell, compareSortValues, nextSort, type SortState } from "../ui-lib/SortableHeader";
 import { CreateWidgetDialog } from "../regions/CreateWidgetDialog";
-import { LAYOUT_TYPES, layoutTypeOf, type LayoutTypeId } from "../layout-identity";
-import { layoutDefForWidget } from "../layout-widgets";
+import { LAYOUT_TYPES, type LayoutTypeId } from "../layout-identity";
 
 type SortKey = "slug" | "widgetName" | "createdAt" | "modifiedAt";
 
@@ -203,10 +202,8 @@ function WidgetRowItem({
   // Same rule as Pages: only rows with subpages get a chevron; the others keep
   // the empty slot so slugs, format pills and status pills stay in one column.
   const hasSubpages = row.children.length > 0;
-  // A layout widget takes its layout's own type; anything else falls back to
-  // its slug family.
-  const layoutDef = row.layoutId ? layoutDefForWidget(row.slug) : undefined;
-  const layoutType = layoutDef ? layoutTypeOf(layoutDef) : WIDGET_LAYOUT_TYPE[row.type];
+  // A widget's type comes from its slug family.
+  const layoutType = WIDGET_LAYOUT_TYPE[row.type];
   const layoutName = LAYOUT_TYPES[layoutType].name;
   return (
     <Fragment>
@@ -245,6 +242,11 @@ function WidgetRowItem({
             {row.slug}
             {row.variantCount > 0 && (
               <span className="ui-ws-browse__slug-count">{row.variantCount} variants</span>
+            )}
+            {row.usedOn > 0 && (
+              <span className="ui-ws-browse__slug-count">
+                Used on {row.usedOn} {row.usedOn === 1 ? "page" : "pages"}
+              </span>
             )}
           </button>
         </span>

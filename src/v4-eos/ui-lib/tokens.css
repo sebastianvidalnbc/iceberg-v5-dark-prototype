@@ -22,7 +22,7 @@
 
    `[data-theme="light"]` is bound to the SAME light values here so a light
    island can be nested inside a dark ancestor (e.g. the Live Preview, which
-   shows real Peacock output and must not inherit the CMS dark theme). It carries
+   shows real Streamly output and must not inherit the CMS dark theme). It carries
    the full light palette so it fully overrides an enclosing dark scope. */
 :root,
 [data-theme="light"] {

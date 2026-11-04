@@ -1,5 +1,5 @@
 // Schema engine — turns the REAL Iceberg layout schemas (extracted from the
-// elements-peacock package into schemas/layoutSchemas.json) into (a) Structure
+// elements-streamly package into schemas/layoutSchemas.json) into (a) Structure
 // tree subtrees and (b) the schema-driven Properties panels those nodes render.
 //
 // This is the V4 analog of how production Iceberg drives its editor: a layout's
@@ -156,7 +156,7 @@ function mapLeafField(f: RawField): PropertyField | null {
     };
   }
   // text-like default (small / medium / mentionsInput / hrefSelector / number /
-  // alt-text / date-picker / colour-picker / peacock-voucher-url / …).
+  // alt-text / date-picker / colour-picker / streamly-voucher-url / …).
   return { label, value: defaultValueOf(f), kind: "text", required };
 }
 

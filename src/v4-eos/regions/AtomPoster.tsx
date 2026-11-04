@@ -1,6 +1,6 @@
 import type { AtomPosterId } from "../contentPages";
 
-// 4:3 title stills for the ATOM picker and Peacock hero. Graphic key art —
+// 4:3 title stills for the ATOM picker and Streamly hero. Graphic key art —
 // no likenesses. Width is the long edge; height is 3/4 of width.
 const ART: Record<AtomPosterId, { bg: string; ink: string; accent: string }> = {
   "scorpion-king": { bg: "#1a0e06", ink: "#f4d27a", accent: "#c47a22" },

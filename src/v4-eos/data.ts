@@ -7,6 +7,7 @@
 // (see WorkspaceShell). Structure/Preview/Properties always belong to the
 // active Variant.
 import { VARIANT_STRUCTURES } from "./variants";
+import { withCmsPages } from "./cms-pages";
 import {
   VARIANT_PREVIEWS,
   VARIANT_DEFAULT_SELECTION,
@@ -64,15 +65,27 @@ export type StructureObjectType =
   | "schema-collection"; // a `tabs` collection (add/remove items up to maxSize)
 
 // The section-level authoring mode shown on Sections.
-export type SectionDesign = "Custom" | "Legacy layout" | "Intelligent authoring";
+export type SectionDesign = "Custom" | "Intelligent authoring";
 
 // The system/domain ROLE of a Section, distinct from its authored label.
 export type SectionRole = "Page Title" | "Plan Picker" | "Footer" | (string & {});
 
 // Generic tree node reused by both the PAGES tree and Variant Structure trees.
+// Real list metadata for a page copied from production (cms-data/pages.txt).
+export interface CmsPageMeta {
+  status: "Draft" | "Published";
+  visibility: "Visible" | "Hidden";
+  created: string | null; // display, e.g. "Jul 24 25"
+  createdAt: number | null; // sort key (ms since epoch)
+  modified: string | null; // relative, as the CMS shows it
+  modifiedAt: number | null;
+}
+
 export interface TreeNode {
   id: string;
   label: string;
+  // Present on pages that exist in production; drives the Pages list columns.
+  cms?: CmsPageMeta;
   // 'page'   → a route row (rendered in mono)
   // 'variant'→ a selectable authored experience under a page
   // undefined→ a Structure object row
@@ -110,12 +123,20 @@ export interface TreeNode {
   // typed loosely to avoid a schemaModel → data type cycle.
   childSchema?: unknown[];
   // Optional inline status pill shown after the row label in the Explorer tree
-  // (e.g. an offer's "Live" flag §4, or a segment's Optimizely mapping §11).
+  // (e.g. an offer's "Live" flag §4, or a segment's Experiments mapping §11).
   badge?: string;
   badgeTone?: "success" | "warning" | "info" | "danger";
   // Structure-tree authoring state: a disabled layer is dimmed + excluded from
   // the experience but preserved (toggle via the row's Disable/Enable action).
   disabled?: boolean;
+  // Page ↔ Widget link (top-level sections only). A section that references a saved
+  // Widget carries that widget's slug and shows its content. Overriding it on the
+  // page sets `moduleDetached` (a local override, see page-modules.ts).
+  widgetSlug?: string;
+  moduleDetached?: boolean;
+  // Top-level section copied from a page template (a layout, not a widget). Editing
+  // it sets `moduleDetached` so the page reads as a custom page.
+  fromTemplate?: boolean;
 }
 
 // A Structure node is just a TreeNode (no page/variant type).
@@ -134,6 +155,11 @@ export interface VariantWorkspace {
   structure: StructureNode[];
   previewData: PreviewData;
   defaultSelectionId: string; // default selected Structure object
+  // The Page Template this page was built from (page-modules.ts). Undefined for
+  // pages that were not built from a template.
+  templateId?: string;
+  // Version of the template the page was created from (origin only).
+  templateVersion?: number;
 }
 
 // --- App Navigation (existing Iceberg IA; do not redesign) ------------------
@@ -158,7 +184,7 @@ export const V2_APP_NAV: AppNavItem[] = [
   { id: "nav-event-pages", label: "Event Pages" },
   { id: "nav-central-mgmt", label: "Central Mgmt" },
   { id: "nav-qa-queue", label: "QA Queue" },
-  { id: "nav-optimizely", label: "Optimizely" },
+  { id: "nav-experiments", label: "Experiments" },
   { id: "nav-scheduled-pages", label: "Scheduled Pages" },
   { id: "nav-redirects", label: "Redirects" },
   { id: "nav-services-cms", label: "Services CMS" },
@@ -167,7 +193,7 @@ export const V2_APP_NAV: AppNavItem[] = [
 
 // --- Explorer: PAGES --------------------------------------------------------
 // Leaf pages own Variants (type: "variant"); intermediate routes are Pages.
-export const PAGES_TREE: TreeNode[] = [
+const HAND_PAGES_TREE: TreeNode[] = [
   {
     id: "plans",
     label: "/plans",
@@ -189,7 +215,7 @@ export const PAGES_TREE: TreeNode[] = [
           { id: "pg-premium-test-2", label: "Premium_Test__2", type: "variant" },
         ],
       },
-      { id: "plans-appletv", label: "/plans/apple-tv-and-peacock", type: "page", kind: "path" },
+      { id: "plans-appletv", label: "/plans/apple-tv-and-streamly", type: "page", kind: "path" },
       { id: "plans-subscribe", label: "/plans/subscribe", type: "page", kind: "path" },
       { id: "plans-testing", label: "/plans/testing-variant", type: "page", kind: "path" },
     ],
@@ -201,26 +227,26 @@ export const PAGES_TREE: TreeNode[] = [
     type: "page",
     kind: "path",
     children: [
-      { id: "offer-rokt", label: "/offer/rokt", type: "page", kind: "path" },
-      { id: "offer-rokt-2mo", label: "/offer/rokt-2-months", type: "page", kind: "path" },
+      { id: "offer-brandn", label: "/offer/brandn", type: "page", kind: "path" },
+      { id: "offer-brandn-2mo", label: "/offer/brandn-2-months", type: "page", kind: "path" },
       { id: "offer-bravo", label: "/offer/bravo-insider-offer", type: "page", kind: "path" },
       { id: "offer-dish", label: "/offer/dish", type: "page", kind: "path" },
       { id: "offer-deportes", label: "/offer/deportes", type: "page", kind: "path" },
       { id: "offer-wof", label: "/offer/wheeloffortune", type: "page", kind: "path" },
       { id: "offer-livemaslive", label: "/offer/livemaslive", type: "page", kind: "path" },
       { id: "offer-premierleague", label: "/offer/premierleague", type: "page", kind: "path" },
-      { id: "offer-spotify1", label: "/offer/spotifyoffer1", type: "page", kind: "path" },
+      { id: "offer-brandg1", label: "/offer/brandgoffer1", type: "page", kind: "path" },
       { id: "offer-cox", label: "/offer/cox-customer-offer", type: "page", kind: "path" },
-      { id: "offer-peacock-2024", label: "/offer/peacock-2024", type: "page", kind: "path" },
+      { id: "offer-streamly-2024", label: "/offer/streamly-2024", type: "page", kind: "path" },
     ],
   },
   {
-    id: "instacart",
-    label: "/instacart",
+    id: "brando",
+    label: "/brando",
     type: "page",
     kind: "path",
     children: [
-      { id: "instacart-limit", label: "/instacart/limit", type: "page", kind: "path" },
+      { id: "brando-limit", label: "/brando/limit", type: "page", kind: "path" },
     ],
   },
   {
@@ -229,7 +255,7 @@ export const PAGES_TREE: TreeNode[] = [
     type: "page",
     kind: "path",
     children: [
-      { id: "ot-rokt", label: "/offer-terms/rokt", type: "page", kind: "path" },
+      { id: "ot-brandn", label: "/offer-terms/brandn", type: "page", kind: "path" },
       { id: "ot-medical", label: "/offer-terms/medical-first-responder", type: "page", kind: "path" },
       { id: "ot-copamundial", label: "/offer-terms/copamundialannual", type: "page", kind: "path" },
       { id: "ot-crossgrade", label: "/offer-terms/crossgradegeneral", type: "page", kind: "path" },
@@ -245,9 +271,19 @@ export const PAGES_TREE: TreeNode[] = [
     ],
   },
   { id: "news", label: "/news", type: "page", kind: "path", children: [] },
+  {
+    id: "sports",
+    label: "/sports",
+    type: "page",
+    kind: "path",
+    children: [{ id: "sports-template", label: "Sports", type: "variant" }],
+  },
   { id: "test", label: "/test", type: "page", kind: "path", children: [] },
   { id: "stream-movies", label: "/stream-movies", type: "page", kind: "path", children: [] },
 ];
+
+// Production page inventory merged in (see cms-pages.ts).
+export const PAGES_TREE: TreeNode[] = withCmsPages(HAND_PAGES_TREE);
 
 // Default: no page/variant preselected route, but open on the richest variant
 // so first paint shows a populated workspace.
@@ -260,8 +296,8 @@ export const DEFAULT_VARIANT_ID = "pg-0609"; // "0609 premium card test 2"
 // Explorer/Structure/Preview/Properties machinery; only the dataset differs.
 export const WIDGETS_TREE: TreeNode[] = [
   {
-    id: "wg-what-is-peacock",
-    label: "/what-is-peacock",
+    id: "wg-what-is-streamly",
+    label: "/what-is-streamly",
     type: "page",
     kind: "path",
     defaultExpanded: true,
@@ -339,7 +375,7 @@ export const DEFAULT_WIDGET_CONFIG_ID = "wg-qa-republish";
 // returns them verbatim — the same pattern canonical Page nodes use.
 
 // Options reused across Offer / Survey Response forms. These mirror the REAL
-// production Retention Service schema verbatim (elements-peacock
+// production Retention Service schema verbatim (elements-streamly
 // retention-service/schema.ts + type.ts).
 const OFFER_TYPES = ["Retention", "Cross Sell", "Downgrade", "Other"];
 const SURVEY_TYPES = ["Checkbox", "Text"];
@@ -354,18 +390,18 @@ const TODAY_ISO = new Date().toISOString().slice(0, 10);
 // §5 Human-readable plan/product each Cancellation Product Static ID maps to, so
 // authors never have to decode an opaque ID by hand.
 const STATIC_ID_PLAN_NAMES: Record<string, string> = {
-  peacock_premium_monthly: "Premium · Monthly",
-  peacock_premium_annual: "Premium · Annual",
-  peacock_premium_plus_monthly: "Premium Plus · Monthly",
-  peacock_premium_plus_annual: "Premium Plus · Annual",
+  streamly_premium_monthly: "Premium · Monthly",
+  streamly_premium_annual: "Premium · Annual",
+  streamly_premium_plus_monthly: "Premium Plus · Monthly",
+  streamly_premium_plus_annual: "Premium Plus · Annual",
 };
 const planNameForStaticId = (id: string): string =>
   STATIC_ID_PLAN_NAMES[id] ?? (id ? "Unrecognised plan ID" : "");
 
-// §11 Whether an mParticle segment is wired to an Optimizely audience (so it can
+// §11 Whether an mParticle segment is wired to an Experiments audience (so it can
 // run in experiments). Heuristic for the prototype — a real check would hit the
-// Optimizely mapping service — but it yields a realistic mapped/unmapped mix.
-const isSegmentMappedToOptimizely = (name: string): boolean =>
+// Experiments mapping service — but it yields a realistic mapped/unmapped mix.
+const isSegmentMappedToExperiments = (name: string): boolean =>
   !!name && !name.includes("NOOFFER") && !name.endsWith("SOLO");
 
 // Journey Flow select options (verbatim labels from the real schema). In
@@ -416,7 +452,7 @@ interface OfferData {
   id: string;
   type: string;
   // §3 top-level band: "Retention" (cancellation saves) vs "Acquisition"
-  // (partner / win-back offers, e.g. JetBlue), so the two are never intermingled.
+  // (partner / win-back offers, e.g. BrandM), so the two are never intermingled.
   category: string;
   // §4 the Journey Flow this offer is currently live in ("" ⇒ not live).
   liveInFlow: string;
@@ -445,12 +481,12 @@ const makeOffer = (
   category: extras.category ?? "Retention",
   liveInFlow: extras.liveInFlow ?? "",
   cancellationProductStaticId:
-    extras.cancellationProductStaticId ?? "peacock_premium_monthly",
+    extras.cancellationProductStaticId ?? "streamly_premium_monthly",
   segmentName,
   surveyResponseLabelKey: extras.surveyResponseLabelKey ?? "",
   suppressDefaultOffer: extras.suppressDefaultOffer ?? false,
   offerEndDate: extras.offerEndDate ?? "",
-  productVoucher: extras.productVoucher ?? "Peacock Premium",
+  productVoucher: extras.productVoucher ?? "Streamly Premium",
   voucherCode: extras.voucherCode ?? segmentName.replace(/^US\.CANCEL\./, ""),
   segmentation: extras.segmentation ?? {
     offerType: "Retention",
@@ -516,28 +552,28 @@ const buildOffers = (): OfferData[] => {
       }),
     );
   }
-  // §3 Acquisition band: partner / win-back offers (e.g. JetBlue) authored in a
+  // §3 Acquisition band: partner / win-back offers (e.g. BrandM) authored in a
   // clearly separate band from cancellation-save (Retention) offers.
   offers.push(
-    makeOffer("US.ACQ.JETBLUE.TRUEBLUE12M", {
+    makeOffer("US.ACQ.BRANDM.TRUEBLUE12M", {
       type: "Cross Sell",
       category: "Acquisition",
-      cancellationProductStaticId: "peacock_premium_annual",
-      productVoucher: "Peacock Premium",
-      liveInFlow: "JetBlue Partner",
-      segmentation: { offerType: "Acquisition", categoryTitle: "JetBlue", segmentNames: [] },
+      cancellationProductStaticId: "streamly_premium_annual",
+      productVoucher: "Streamly Premium",
+      liveInFlow: "BrandM Partner",
+      segmentation: { offerType: "Acquisition", categoryTitle: "BrandM", segmentNames: [] },
     }),
-    makeOffer("US.ACQ.JETBLUE.MOSAIC6M", {
+    makeOffer("US.ACQ.BRANDM.MOSAIC6M", {
       type: "Cross Sell",
       category: "Acquisition",
-      cancellationProductStaticId: "peacock_premium_plus_annual",
-      productVoucher: "Peacock Premium Plus",
-      segmentation: { offerType: "Acquisition", categoryTitle: "JetBlue", segmentNames: [] },
+      cancellationProductStaticId: "streamly_premium_plus_annual",
+      productVoucher: "Streamly Premium Plus",
+      segmentation: { offerType: "Acquisition", categoryTitle: "BrandM", segmentNames: [] },
     }),
     makeOffer("US.ACQ.WINBACK.30D", {
       type: "Other",
       category: "Acquisition",
-      cancellationProductStaticId: "peacock_premium_monthly",
+      cancellationProductStaticId: "streamly_premium_monthly",
       liveInFlow: "Win-back",
       segmentation: { offerType: "Acquisition", categoryTitle: "Win-back", segmentNames: [] },
     }),
@@ -588,12 +624,12 @@ const segmentNameNode = (
   name: string,
   i: number,
 ): StructureNode => {
-  const mapped = isSegmentMappedToOptimizely(name);
+  const mapped = isSegmentMappedToExperiments(name);
   return {
     id: `${keyPrefix}-seg-${i}`,
     label: name || `Segment ${i + 1}`,
     objectType: "segment-name",
-    // §11 surface Optimizely-mapping readiness inline in the tree.
+    // §11 surface Experiments-mapping readiness inline in the tree.
     badge: name ? (mapped ? "Mapped" : "Unmapped") : undefined,
     badgeTone: mapped ? "success" : "warning",
     props: {
@@ -609,12 +645,12 @@ const segmentNameNode = (
               "The mParticle audience key. Must match the segment configured in mParticle exactly.",
           },
           {
-            label: "Optimizely mapping",
+            label: "Experiments mapping",
             value: mapped
               ? "Mapped ✓"
               : "Unmapped — will not run in A/B tests",
             tooltip:
-              "Whether this mParticle segment is wired to an Optimizely audience. Unmapped segments are skipped by experiments.",
+              "Whether this mParticle segment is wired to an Experiments audience. Unmapped segments are skipped by experiments.",
           },
         ],
       },
@@ -623,7 +659,7 @@ const segmentNameNode = (
 };
 
 // --- Offer (a single offerMappings tab) -------------------------------------
-// Field order/labels/controls mirror the real Peacock retention schema exactly:
+// Field order/labels/controls mirror the real Streamly retention schema exactly:
 //   Type (select, required) → IF CUSTOMER IS CANCELLING: Cancellation Product
 //   Static ID (required) → AND: Segment Name (Optional) → AND: Survey Response
 //   Label Key (Optional) → THEN SHOW: Suppress default offer (toggle) +
@@ -782,7 +818,7 @@ const offerNode = (offer: OfferData): StructureNode => {
         label: "Category Title",
         value: seg.categoryTitle,
         tooltip:
-          "The segmentation category (e.g. D2C, JetBlue) this offer is filed under.",
+          "The segmentation category (e.g. D2C, BrandM) this offer is filed under.",
       },
       {
         label: "Segment Names",
@@ -921,7 +957,7 @@ const buildSegmentationArea = (): StructureNode => {
 // enhancement borrowed from the design prototype). Order is fixed; empty groups
 // are omitted.
 // §3 Offers split into two top-level bands by CATEGORY — Retention saves vs
-// Acquisition/partner offers (e.g. JetBlue) — so the two are never intermingled
+// Acquisition/partner offers (e.g. BrandM) — so the two are never intermingled
 // and can't be edited into each other by mistake. Order is fixed; empty bands
 // are omitted. Each band keeps objectType "offer-group" so the Explorer's
 // group-aware Offers search continues to work unchanged.
@@ -1258,8 +1294,8 @@ export interface CollectionProperties {
 }
 
 // Page sections resolve to a deliberate metadata state: Section ID + Design
-// mode radio (Custom / Legacy layout / Intelligent authoring). Intelligent
-// authoring surfaces an extra affordance (matching real Iceberg).
+// mode radio (Custom / Intelligent authoring). Intelligent authoring is the
+// main authoring mode and surfaces an extra affordance (matching real Iceberg).
 export interface SectionMetadata {
   eyebrow: string; // "SECTION"
   name: string; // authored label
@@ -1375,7 +1411,7 @@ function metadataFor(node: TreeNode): ResolvedProperties {
       role: node.role,
       sectionId: node.sectionId ?? node.id,
       design,
-      designOptions: ["Custom", "Legacy layout", "Intelligent authoring"],
+      designOptions: ["Custom", "Intelligent authoring"],
       intelligentAffordance: design === "Intelligent authoring",
       status: SECTION_STATUS[node.label.toLowerCase()],
     },
@@ -1509,7 +1545,7 @@ export function resolvePropertiesFor(
       name: nodeId,
       status: "draft",
       sectionId: nodeId,
-      designOptions: ["Custom", "Legacy layout", "Intelligent authoring"],
+      designOptions: ["Custom", "Intelligent authoring"],
       design: "Custom",
     },
   };
@@ -1537,7 +1573,7 @@ export function resolvePropertiesForVariant(
       name: nodeId,
       status: "draft",
       sectionId: nodeId,
-      designOptions: ["Custom", "Legacy layout", "Intelligent authoring"],
+      designOptions: ["Custom", "Intelligent authoring"],
       design: "Custom",
     },
   };

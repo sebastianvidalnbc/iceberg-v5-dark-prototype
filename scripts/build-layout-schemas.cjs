@@ -6,11 +6,11 @@
 //   NODE_PATH=<dir with lodash + query-string> \
 //     node scripts/build-layout-schemas.cjs <path to iceberg-commerce-main>
 //
-// How it works: bundles elements-peacock's core/schemas.ts with esbuild, calls
-// getSchemas('peacock') and keeps the `section` schemas (the layout list).
+// How it works: bundles elements-streamly's core/schemas.ts with esbuild, calls
+// getSchemas('streamly') and keeps the `section` schemas (the layout list).
 // Imports that are not in the archive are handled as follows:
-//   - @nowtv/<pkg>/lib/...  -> packages/<pkg>/src/... (monorepo source)
-//   - @gst-gc/peacock-toolkit (private, not in archive) -> empty stub.
+//   - @brandc/<pkg>/lib/...  -> packages/<pkg>/src/... (monorepo source)
+//   - @gst-gc/streamly-toolkit (private, not in archive) -> empty stub.
 //     Values built from it come out empty (e.g. font-size option lists).
 //   - other npm packages (lodash, query-string, ...) -> NODE_PATH.
 
@@ -25,13 +25,13 @@ if (!SOURCE) {
   process.exit(1);
 }
 const ROOT = path.resolve(SOURCE);
-const PEACOCK = path.join(ROOT, "packages", "iceberg-commerce-elements-peacock");
+const STREAMLY = path.join(ROOT, "packages", "iceberg-commerce-elements-streamly");
 const OUT_FILE = path.join(__dirname, "..", "src", "v4-eos", "schemas", "layoutSchemas.json");
 // Only these keys are kept; they are the ones the V4 schema engine reads.
 const KEYS = ["_id", "name", "editorOptions", "globalLayoutOptionData", "optionData"];
 
-if (!fs.existsSync(path.join(PEACOCK, "src", "core", "schemas.ts"))) {
-  console.error(`Not an Iceberg monorepo (missing ${PEACOCK}/src/core/schemas.ts)`);
+if (!fs.existsSync(path.join(STREAMLY, "src", "core", "schemas.ts"))) {
+  console.error(`Not an Iceberg monorepo (missing ${STREAMLY}/src/core/schemas.ts)`);
   process.exit(1);
 }
 
@@ -47,7 +47,7 @@ fs.writeFileSync(
       jsx: "react",
       esModuleInterop: true,
       resolveJsonModule: true,
-      baseUrl: PEACOCK,
+      baseUrl: STREAMLY,
       paths: { "@elements/core/*": ["src/core/*"] },
     },
   }),
@@ -57,9 +57,9 @@ const entry = path.join(work, "entry.ts");
 const sectionsFile = path.join(work, "sections.json");
 fs.writeFileSync(
   entry,
-  `import { getSchemas } from ${JSON.stringify(path.join(PEACOCK, "src/core/schemas"))};
+  `import { getSchemas } from ${JSON.stringify(path.join(STREAMLY, "src/core/schemas"))};
 import fs from "fs";
-const { type } = getSchemas("peacock");
+const { type } = getSchemas("streamly");
 fs.writeFileSync(${JSON.stringify(sectionsFile)}, JSON.stringify(Object.values(type.section)));
 `,
 );
@@ -68,15 +68,15 @@ const stubbed = new Set();
 const plugin = {
   name: "layout-schema-deps",
   setup(build) {
-    build.onResolve({ filter: /^@nowtv\/[^/]+/ }, async (args) => {
-      const [, pkg, ...rest] = args.path.match(/^@nowtv\/([^/]+)(?:\/(.*))?$/);
+    build.onResolve({ filter: /^@brandc\/[^/]+/ }, async (args) => {
+      const [, pkg, ...rest] = args.path.match(/^@brandc\/([^/]+)(?:\/(.*))?$/);
       const pkgRoot = path.join(ROOT, "packages", pkg);
       const sub = (rest.join("/") || "").replace(/^lib\//, "src/");
       const target = sub ? path.join(pkgRoot, sub) : path.join(pkgRoot, "src", "index.ts");
       const result = await build.resolve(target, { resolveDir: args.resolveDir, kind: args.kind });
       return result.errors.length ? { errors: result.errors } : result;
     });
-    build.onResolve({ filter: /^@gst-gc\/peacock-toolkit/ }, (args) => {
+    build.onResolve({ filter: /^@gst-gc\/streamly-toolkit/ }, (args) => {
       stubbed.add(args.importer.replace(ROOT, ""));
       return { path: args.path, namespace: "stub" };
     });

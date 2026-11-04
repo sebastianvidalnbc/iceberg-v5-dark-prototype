@@ -111,7 +111,7 @@ const LIGATURES: Record<IconName, string> = {
   server: "dns", // Services CMS — Material Symbol (documented gap)
   blocks: "widgets", // Widgets — Material Symbol (documented gap)
   cube: "hub", // Central Mgmt — Material Symbol (documented gap)
-  flask: "science", // Optimizely (experiments) — Material Symbol (documented gap)
+  flask: "science", // Experiments (experiments) — Material Symbol (documented gap)
   "calendar-clock": "schedule", // Scheduled Pages — curated Eos glyph (clock)
   help: "help", // Help — Material Symbol (documented gap)
   // Editor action bar (matches the real Iceberg editor CTAs)

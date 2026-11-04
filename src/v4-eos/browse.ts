@@ -10,6 +10,7 @@ import { allWidgets, productionWidgetId } from "./widget-create";
 import { PRODUCTION_WIDGET_SUBPAGES } from "./production-widget-subpages";
 import { addDays, dayKey, parseSampleDay } from "./schedule";
 import { widgetVariantsFor } from "./widget-variants";
+import { pagesUsingWidget } from "./page-modules";
 
 // The browse layer serves two parallel collection contexts that share identical
 // table machinery: Pages (PAGES_TREE) and Widgets (WIDGETS_TREE). A single
@@ -31,10 +32,10 @@ function hash(id: string): number {
 }
 
 const EDITORS = [
-  "Constantino, Bella",
-  "Bueno, Fernanda",
-  "Collins, Morgan",
-  "Vidal, Sebastian",
+  "Editor A",
+  "Editor B",
+  "Editor C",
+  "Editor D",
 ];
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"];
@@ -112,6 +113,29 @@ function pageChildCount(node: TreeNode): number {
 
 function toSlugRow(node: TreeNode, depth: number, groupId: string, parentId: string | null): SlugRow {
   const variantCount = variantChildCount(node);
+  if (node.cms) {
+    // Production values: status, visibility and dates from the CMS list.
+    const cms = node.cms;
+    return {
+      id: node.id,
+      slug: node.label,
+      depth,
+      groupId,
+      parentId,
+      hasChildren: pageChildCount(node) > 0,
+      childCount: pageChildCount(node),
+      variantCount,
+      status: cms.status,
+      protect: false,
+      visibility: cms.visibility,
+      unpublishDate: null,
+      created: cms.created ?? "—",
+      modified: cms.modified ?? "—",
+      unpublishAt: null,
+      createdAt: cms.createdAt,
+      modifiedAt: cms.modifiedAt,
+    };
+  }
   const h = hash(node.id);
   const hasCreated = variantCount > 0 || h % 2 === 0;
   const unpublishDate = h % 5 === 0 ? sampleDate(node.id, 7) : null;
@@ -174,7 +198,7 @@ export interface VariantRow {
   id: string;
   name: string;
   qaStatus: "Approved" | "In review" | "—";
-  optimizely: boolean;
+  experiments: boolean;
   published: boolean;
   // Scheduled release and un-publish days; the scheduled day is always before
   // the un-publish day (enforced by the variant table's date pickers).
@@ -199,7 +223,7 @@ function toVariantRow(node: TreeNode): VariantRow {
     id: node.id,
     name: node.label,
     qaStatus: h % 3 === 0 ? "Approved" : h % 3 === 1 ? "In review" : "—",
-    optimizely: h % 2 === 0,
+    experiments: h % 2 === 0,
     published: h % 4 === 0,
     scheduledAt,
     unpublishedAt,
@@ -373,8 +397,8 @@ export interface WidgetRow {
   children: WidgetChildRow[];
   /** Number of production variants; a widget with variants opens its Variants list. */
   variantCount: number;
-  /** Layout widgets only: the catalog layout the widget is built from. */
-  layoutId: string | null;
+  /** Pages with this widget as a linked (not custom) module. */
+  usedOn: number;
 }
 
 
@@ -402,7 +426,7 @@ export function buildWidgetRows(): WidgetRow[] {
         status: c.status,
       })),
       variantCount: widgetVariantsFor(w.slug).length,
-      layoutId: w.layoutId ?? null,
+      usedOn: pagesUsingWidget(w.slug).length,
     };
   });
 }

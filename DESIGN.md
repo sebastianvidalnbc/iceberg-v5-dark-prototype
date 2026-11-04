@@ -1,6 +1,6 @@
 ---
 name: Iceberg Authoring Chrome
-description: The Eos-based design system for the Iceberg CMS editor UI (authoring chrome only; the Peacock customer preview is a separate, isolated world).
+description: The Eos-based design system for the Iceberg CMS editor UI (authoring chrome only; the Streamly customer preview is a separate, isolated world).
 colors:
   opshub: "#ffffff"
   iceberg-blue: "#01699b"
@@ -131,7 +131,7 @@ components:
 **Creative North Star: "The Quiet Workbench"**
 
 Iceberg's editor is a calm, precise authoring surface where the work — the live
-Peacock page — is the hero and the chrome recedes around it. The design system is
+Streamly page — is the hero and the chrome recedes around it. The design system is
 built on Eos (Material 3), rendered in a warm-neutral light scheme, with a single
 brand accent (Iceberg Blue) reserved for meaning. It is an **Operate**-mode tool:
 scanability, consistency, and a stable "where am I / how do I get back" spine
@@ -145,10 +145,10 @@ deeper app backdrop, separated by tone and space before any line is drawn.
 Depth is flat at rest; a shadow appears only when a layer genuinely floats.
 
 This system dresses the **authoring chrome only**. The customer-facing preview is
-Peacock's own design world, rendered in an isolated iframe, and the two must
+Streamly's own design world, rendered in an isolated iframe, and the two must
 never borrow each other's tokens. The chrome deliberately avoids the look of a
 generic dark admin dashboard, heavy outlined cards, and any resemblance to the
-Peacock consumer UI it edits.
+Streamly consumer UI it edits.
 
 **Key Characteristics:**
 - Warm-neutral M3 surfaces with a single blue accent used sparingly.
@@ -199,8 +199,8 @@ tabs, and focus — never as a decorative fill. Everything else stays warm-neutr
 Its rarity is what makes it read as "actionable."
 
 **The Two-System Rule.** These tokens dress the authoring chrome only. The
-customer preview is Peacock's world; it must never adopt these tokens, and this
-chrome must never adopt Peacock's.
+customer preview is Streamly's world; it must never adopt these tokens, and this
+chrome must never adopt Streamly's.
 
 ## Typography
 
@@ -336,8 +336,8 @@ bar (never color alone).
 ### Don't:
 - **Don't** nest a bordered container inside another bordered container (no
   container-in-container wells).
-- **Don't** let the editor chrome resemble the Peacock customer UI, or import
-  Peacock tokens into it (and vice-versa).
+- **Don't** let the editor chrome resemble the Streamly customer UI, or import
+  Streamly tokens into it (and vice-versa).
 - **Don't** use pure `#ffffff` body text or pure-black borders; use the token
   roles.
 - **Don't** put a shadow on a resting surface.

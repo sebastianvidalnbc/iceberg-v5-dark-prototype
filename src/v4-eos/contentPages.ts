@@ -1,4 +1,4 @@
-// Peacock Content Pages — one territory template (content-page-us), not a
+// Streamly Content Pages — one territory template (content-page-us), not a
 // slug tree. ATOM supplies the title; this config is the shell around every
 // watch URL. Field ids follow the production CMS form (cms-schema + passes).
 
@@ -135,7 +135,7 @@ export interface ContentPageConfig {
   extraWidget3: string;
   footerNavWidget: string;
   stickyBannerWidget: string;
-  optimizely: boolean;
+  experiments: boolean;
   i18n: ContentPageI18n;
   passes: PassConfig[];
 }
@@ -324,16 +324,16 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
   videoEnd1: "Ready to keep watching?",
   videoEnd2: "Pick a plan to unlock this title.",
   videoPause1: "Paused",
-  videoPause2: "Continue with a Peacock plan.",
+  videoPause2: "Continue with a Streamly plan.",
   videoPauseCta: "See plans",
   videoPauseHref: "/plans",
-  whatIsWidget: "what-is-peacock",
+  whatIsWidget: "what-is-streamly",
   extraWidget1: "",
   extraWidget2: "",
   extraWidget3: "",
   footerNavWidget: "footer-nav",
   stickyBannerWidget: "",
-  optimizely: false,
+  experiments: false,
   i18n: {
     watch: "Watch",
     details: "Details",
@@ -363,7 +363,7 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
     minuteSymbol: "",
     series: "Series",
     movies: "Movies",
-    getPremium: "Watch on Peacock",
+    getPremium: "Watch on Streamly",
     mins: "Mins",
     viewAll: "View all",
     audioDescribedAltText: "Audio Described",
@@ -372,7 +372,7 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
     showMoreText: "",
     showFewerText: "",
     selectSeasonLabel: "",
-    heroButtonAria: "Watch on Peacock",
+    heroButtonAria: "Watch on Streamly",
     heroCriticsAria: "Rotten Tomatoes critics score",
     heroFanAria: "Rotten Tomatoes fan score",
     heroDescriptionReadMore: "Read More",
@@ -382,13 +382,13 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
     faqHowWatchTitle: "How can I watch {{title}}?",
     faqHowWatchShowAnswer: {
       textBeginning:
-        "Download the Peacock app and start streaming full episodes of",
+        "Download the Streamly app and start streaming full episodes of",
       afterTitleText: ".",
       urlText: "View the full list of supported devices",
       textEnd: ".",
     },
     faqHowWatchMovieAnswer: {
-      textBeginning: "Download the Peacock app and start streaming",
+      textBeginning: "Download the Streamly app and start streaming",
       afterTitleText: ".",
       urlText: "View the full list of supported devices",
       textEnd: ".",
@@ -396,13 +396,13 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
     faqWhereWatchTitle: "Where can I watch {{title}}?",
     faqWhereWatchShowAnswer: {
       textBeginning: "You can watch",
-      afterTitleText: "on Peacock. Just",
+      afterTitleText: "on Streamly. Just",
       urlText: "sign up",
       textEnd: "and stream every episode.",
     },
     faqWhereWatchMovieAnswer: {
       textBeginning: "You can watch",
-      afterTitleText: "on Peacock. Just",
+      afterTitleText: "on Streamly. Just",
       urlText: "sign up",
       textEnd: "and stream every episode.",
     },
@@ -416,36 +416,36 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
     faqSeasonsTitle: "How many seasons of {{title}} are there?",
     faqSeasonsSingleAnswer: {
       textBeginning: "There is currently {{availableSeasonCount}} season of",
-      afterTitleText: "available for streaming on Peacock.",
+      afterTitleText: "available for streaming on Streamly.",
       urlText: "",
       textEnd: "",
     },
     faqSeasonsPluralAnswer: {
-      textBeginning: "Peacock currently has {{availableSeasonCount}} seasons of",
+      textBeginning: "Streamly currently has {{availableSeasonCount}} seasons of",
       afterTitleText: "available for streaming.",
       urlText: "",
       textEnd: "",
     },
     showSubheading: "Watch Full Episodes of {{title}}",
     movieSubheading: "Watch {{title}}",
-    seriesMetadataTitle: "Watch {{title}} | Peacock",
-    seriesMetadataTitleFallback: "Watch Peacock Streaming Online",
+    seriesMetadataTitle: "Watch {{title}} | Streamly",
+    seriesMetadataTitleFallback: "Watch Streamly Streaming Online",
     seasonMetadataTitle:
-      "Watch {{title}} Season {{season}} Streaming Online | Peacock",
-    seasonMetadataTitleFallback: "Watch Peacock Streaming Online",
-    programmeMetadataTitle: "Watch {{title}} | Peacock",
-    programmeMetadataTitleFallback: "Watch Peacock Streaming Online",
+      "Watch {{title}} Season {{season}} Streaming Online | Streamly",
+    seasonMetadataTitleFallback: "Watch Streamly Streaming Online",
+    programmeMetadataTitle: "Watch {{title}} | Streamly",
+    programmeMetadataTitleFallback: "Watch Streamly Streaming Online",
     episodeMetadataTitle:
-      "Watch {{title}} Season {{seasonNumber}}, Episode {{episodeNumber}}: {{episodeName}} | Peacock",
-    episodeMetadataTitleFallback: "Watch Peacock Streaming Online",
+      "Watch {{title}} Season {{seasonNumber}}, Episode {{episodeNumber}}: {{episodeName}} | Streamly",
+    episodeMetadataTitleFallback: "Watch Streamly Streaming Online",
     episodeMetadataDescription:
-      "Peacock is your go-to streaming service for watching {{title}} Season {{seasonNumber}}, Episode {{episodeNumber}}: {{episodeName}}. Watch now!",
+      "Streamly is your go-to streaming service for watching {{title}} Season {{seasonNumber}}, Episode {{episodeNumber}}: {{episodeName}}. Watch now!",
     episodeMetadataDescriptionFallback:
-      "Peacock is your go-to streaming service for hit movies, TV shows, and live sports. Stream Peacock Originals, NBC and Bravo favorites, blockbuster films, NFL, Premier League, Big Ten Football, and more!",
+      "Streamly is your go-to streaming service for hit movies, TV shows, and live sports. Stream Streamly Originals, ACME and BrandP favorites, blockbuster films, NFL, Premier League, Big Ten Football, and more!",
     episodeMetadataKeywords:
       "{{title}} Season {{seasonNumber}}, Episode {{episodeNumber}}, Watch Title Season {{seasonNumber}}, Episode {{episodeNumber}}, Stream {{title}} Season {{seasonNumber}}, Episode {{episodeNumber}}, {{episodeName}}",
     episodeMetadataOgTitle:
-      "Watch {{title}} Season {{seasonNumber}} Episode {{episodeNumber}}: {{episodeName}} on Peacock",
+      "Watch {{title}} Season {{seasonNumber}} Episode {{episodeNumber}}: {{episodeName}} on Streamly",
   },
   passes: [
     pass("select", "Select", "Start Select", "/checkout/select"),
@@ -554,11 +554,11 @@ function usContentPageConfig(): ContentPageConfig {
     ...config,
     whatIsWidget: "",
     extraWidget1: "trailer-rail",
-    extraWidget2: "what-is-peacock",
+    extraWidget2: "what-is-streamly",
     extraWidget3: "",
     footerNavWidget: "seo-footer",
     stickyBannerWidget: "sticky-banner-widget-data",
-    optimizely: false,
+    experiments: false,
     legal: "",
     skipLinkMain: "",
     skipLinkFooter: "",
@@ -568,8 +568,8 @@ function usContentPageConfig(): ContentPageConfig {
     freeEpisodesHref: "/plans/all-monthly",
     premiumEpisodesHref: "/plans/all-monthly",
     mixedEpisodesHref: "/plans/all-monthly",
-    freeEpisodesText: "Sign up for Peacock to watch this episode.",
-    premiumEpisodesText: "Sign up for Peacock to watch this episode.",
+    freeEpisodesText: "Sign up for Streamly to watch this episode.",
+    premiumEpisodesText: "Sign up for Streamly to watch this episode.",
     allPlansBtnText: "Get Started",
     premiumBtnText: "Get Started",
     mixedBtnText: "Get Started",
@@ -623,7 +623,7 @@ const SEED_CONTENT_PAGES: ContentPageRecord[] = [
     status: "Published",
     created: "Mon 12 Oct 26",
     modified: "Mon 12 Oct 26",
-    editedBy: "Vidal, Sebastian",
+    editedBy: "Editor D",
     config: usContentPageConfig(),
   },
   {
@@ -635,7 +635,7 @@ const SEED_CONTENT_PAGES: ContentPageRecord[] = [
     status: "Draft",
     created: "Tue 22 Sep 26",
     modified: "Fri 02 Oct 26",
-    editedBy: "Bueno, Fernanda",
+    editedBy: "Editor B",
     config: cloneConfig(),
   },
 ];
@@ -677,7 +677,7 @@ export function createContentPage(input: {
     status: "Draft",
     created: "Just now",
     modified: "Just now",
-    editedBy: "Vidal, Sebastian",
+    editedBy: "Editor D",
     config: cloneConfig(),
   };
   records = [page, ...records];

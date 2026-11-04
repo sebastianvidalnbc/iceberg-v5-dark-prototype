@@ -53,7 +53,7 @@ Iceberg-local for now; some may later be proposed back to Eos (see
 - Page → Variant → Structure model
 - Sections, Section Content, Predecision / Control, Variant Categories
 - Products, Product Features, Price Cadence
-- Live preview (Peacock render + `postMessage` renderer)
+- Live preview (Streamly render + `postMessage` renderer)
 - PASS / validation, publishing
 - Drag/drop, copy/paste, duplicate, rename, disable
 - Retention widget, Offers, Segmentation, Survey Responses
@@ -63,9 +63,9 @@ Iceberg-local for now; some may later be proposed back to Eos (see
 
 ### Explicit non-goal
 
-> **Do NOT create or extract `@nbcu/iceberg-ui`.**
+> **Do NOT create or extract `@acme/iceberg-ui`.**
 > `src/v4-eos/ui-lib/README.md` frames `ui-lib` as a future standalone Iceberg
-> design-system package ("Preparing for extraction (`@nbcu/iceberg-ui`)"). That
+> design-system package ("Preparing for extraction (`@acme/iceberg-ui`)"). That
 > ambition is **retired**: it would fork the org design system. Iceberg consumes
 > Eos instead. The `ui-lib` folder is treated as legacy to be migrated onto Eos,
 > not published or grown.
@@ -421,7 +421,7 @@ rules these are reported first for approval.
   `ui-lib`'s primitives are **dead clones** in V4.
 - **Zero MUI/Material components.** "Material" today = the Material Symbols font
   + M3-derived token *values* only.
-- **`ui-lib` was explicitly aiming to become `@nbcu/iceberg-ui`** — directly
+- **`ui-lib` was explicitly aiming to become `@acme/iceberg-ui`** — directly
   opposite the Eos direction (now retired; see §1 non-goal).
 - **Control-height conflict** between the two systems (32/40/48 vs 36/32/40).
 - **`Select` has two incompatible implementations** (Radix portal vs native).

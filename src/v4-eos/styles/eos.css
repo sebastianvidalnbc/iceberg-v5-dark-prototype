@@ -525,7 +525,7 @@
 }
 
 /* ========================================================================== */
-/* DYNAMIC PREVIEW — customer-facing brand render (Peacock)                    */
+/* DYNAMIC PREVIEW — customer-facing brand render (Streamly)                    */
 /* This is CUSTOMER output, not CMS chrome, so it declares its OWN --brand-*   */
 /* scale and never consumes the tool's --color-* / Eos tokens. A brand refresh */
 /* must not touch the CMS, and a CMS token change must not move this pixel.    */

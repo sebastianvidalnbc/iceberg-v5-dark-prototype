@@ -27,7 +27,7 @@ npm run preview
 ## Application
 
 Source lives in `src/v4-eos/`. The main authoring app uses Eos styling, while
-`src/v4-eos/renderer/` is an isolated Peacock customer preview loaded in an
+`src/v4-eos/renderer/` is an isolated Streamly customer preview loaded in an
 iframe.
 
 Primary hash routes:

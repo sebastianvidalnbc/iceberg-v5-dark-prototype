@@ -1,6 +1,6 @@
-/* Customer-facing brand render (Peacock) — the CONTENT shown inside the preview
-   iframe. Self-contained on purpose: it declares its OWN Peacock design system
-   and never consumes the CMS's Eos tokens. Peacock is DARK-FIRST on a pure-black
+/* Customer-facing brand render (Streamly) — the CONTENT shown inside the preview
+   iframe. Self-contained on purpose: it declares its OWN Streamly design system
+   and never consumes the CMS's Eos tokens. Streamly is DARK-FIRST on a pure-black
    canvas with a gold BRAND GRADIENT primary CTA and uppercase labels.
 
    PROVENANCE (Commerce UI Kit, file EpM4nZGcDrbLmGhl2et7TUqW):
@@ -29,18 +29,18 @@ body,
   height: 100%;
 }
 body {
-  /* PROTOTYPE FONT SUBSTITUTE for Peacock Sans TF (proprietary — deliberately
+  /* PROTOTYPE FONT SUBSTITUTE for Streamly Sans TF (proprietary — deliberately
      NOT bundled or referenced). Plus Jakarta Sans is a free, Google-hosted
      geometric-humanist sans chosen for its wide proportions, tall x-height,
      strong 700/800 display weights and clean bold headlines — the closest
-     open-source stand-in for Peacock Sans's character. This is a substitute,
+     open-source stand-in for Streamly Sans's character. This is a substitute,
      not the real face. Loaded in renderer.html. */
   font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
 }
 
 .ui-brand {
-  /* === PEACOCK BRAND TOKENS (customer-facing Commerce roles) ============== */
+  /* === STREAMLY BRAND TOKENS (customer-facing Commerce roles) ============== */
   /* --- Colour: brand / gradient (primary CTA) --------------------------- */
   --pk-gold: #fccc12; /* [VERIFIED] brand-gradient/02 (WebButtonPrimary)   */
   --pk-gradient: linear-gradient(
@@ -83,7 +83,7 @@ body {
   /* === TYPE SCALE — VERIFIED "Toolkit Typography Specimen" ================= */
   /* Section 63956:33500 → Desktop Styles frame 63956:33547, read via Figma MCP
      (get_design_context, exact size/line-height/weight per named style).
-     Real face is "Peacock Sans TF": Book weight = 350, Bold = 700. We render
+     Real face is "Streamly Sans TF": Book weight = 350, Bold = 700. We render
      with the Plus Jakarta Sans PROTOTYPE SUBSTITUTE (see renderer.html),
      mapping Book→400 (no 350 cut is loaded) and Bold→700 — geometry is verified,
      the typeface is a stand-in. Each role is a CSS `font` shorthand
@@ -116,7 +116,7 @@ body {
   --pk-type-eyebrow: 700 15px/15px var(--pk-font); /* [VERIFIED] Card Title (uppercase)*/
   --pk-type-label: 700 10px/16px var(--pk-font); /* [VERIFIED] client/small/label    */
 
-  /* === EDITOR OVERLAY TOKENS (NOT Peacock — Iceberg authoring only) ======= */
+  /* === EDITOR OVERLAY TOKENS (NOT Streamly — Iceberg authoring only) ======= */
   /* Selection / hover / pick-mode affordances drawn OVER the brand render.
      Intentionally NOT in the --pk-* namespace so customer-facing brand tokens
      stay pure. See Phase 12. Iceberg blue, matches the CMS selection colour. */
@@ -158,7 +158,7 @@ body {
   top: 0;
   z-index: 5;
 }
-/* Real Peacock wordmark — official SVG exported from Commerce Nav 45799:660
+/* Real Streamly wordmark — official SVG exported from Commerce Nav 45799:660
    (.Web/Logo → Wordmark 47100:3994, "color - white"): white wordmark + the
    authentic multicolour feather. Rendered at the nav's verified 100px width. */
 .ui-brand__logo-img {
@@ -436,7 +436,7 @@ body {
 }
 .ui-brand__badge {
   /* [VERIFIED] status/recommended pill sits at the TOP-LEFT of the card
-     (IA "Current Plan" / "Recommended" 11051:8513, x40 y-16). Gold for Peacock. */
+     (IA "Current Plan" / "Recommended" 11051:8513, x40 y-16). Gold for Streamly. */
   position: absolute;
   top: -14px;
   left: var(--pk-plan-pad);
@@ -489,9 +489,9 @@ body {
   margin: 0;
 }
 /* Plans / Bundles category switcher (segmented control).
-   [FROM SCREENSHOT] Peacock Homepage Working File (4699:34053): a dark rounded
+   [FROM SCREENSHOT] Streamly Homepage Working File (4699:34053): a dark rounded
    capsule with a white active pill (black label) and a muted inactive label.
-   [PEACOCK-SPECIFIC COMPOSITION] — the IA Plan Picker's own selector is a
+   [STREAMLY-SPECIFIC COMPOSITION] — the IA Plan Picker's own selector is a
    Monthly/Annual *billing-cadence* control (Toggle 11027:8332 / "Billing Cadence
    CTA" tiles), a different concept; no standalone verified Plans/Bundles
    segmented component exists, so this stays a documented composition. */
@@ -629,6 +629,7 @@ body {
 /* --- Hero / banner --------------------------------------------------------- */
 .ui-brand__section[data-kind="hero"] {
   padding: 96px var(--pk-gutter); /* [PROTOTYPE-LOCAL] tall hero rhythm */
+  min-height: 440px; /* [PROTOTYPE-LOCAL] artwork hero keeps its height */
   --sec-bg: radial-gradient(120% 140% at 50% -10%, #2a2350 0%, #12111c 55%, #0b0b10 100%);
 }
 .ui-brand__section[data-kind="hero"] .ui-brand__title {
@@ -725,6 +726,34 @@ body {
   flex: none;
   width: 220px;
   aspect-ratio: 16 / 9;
+}
+/* Artwork tiles: posters (2:3) and logos (5:2). Sample art from public/widget-art. [PROTOTYPE-LOCAL] */
+.ui-brand__art {
+  flex: none;
+  width: 180px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ui-brand__grid .ui-brand__art {
+  width: auto;
+}
+.ui-brand__art-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--sec-card-border);
+}
+.ui-brand__art--logo .ui-brand__art-img {
+  aspect-ratio: 5 / 2;
+  object-fit: contain;
+  border: 0;
+}
+.ui-brand__art .ui-brand__tile-label {
+  display: block;
 }
 .ui-brand__tile-label {
   font-size: 13px;
@@ -899,7 +928,7 @@ body {
 }
 
 /* ==========================================================================
-   PREVIEW EDITOR OVERLAY  (Iceberg authoring affordances — NOT Peacock brand)
+   PREVIEW EDITOR OVERLAY  (Iceberg authoring affordances — NOT Streamly brand)
    --------------------------------------------------------------------------
    Selection / hover / pick-mode outlines drawn OVER the customer render. This
    block is intentionally isolated from the brand styles above and uses ONLY the

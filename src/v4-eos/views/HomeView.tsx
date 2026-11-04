@@ -55,7 +55,7 @@ interface Stat {
 const STATS: Stat[] = [
   { label: "QA Queue", value: 3, hint: "Pages in the QA queue", tone: "info", icon: "fact_check" },
   { label: "Warnings", value: 18, hint: "Pages with unavailable atom data", tone: "warning", icon: "warning" },
-  { label: "Optimizely On", value: 112, hint: "Pages with Optimizely switched on", tone: "experiment", icon: "science" },
+  { label: "Experiments On", value: 112, hint: "Pages with Experiments switched on", tone: "experiment", icon: "science" },
   { label: "Scheduled · Live", value: 9, hint: "Pages scheduled to go live", tone: "success", icon: "event_available" },
   { label: "Scheduled · Expire", value: 0, hint: "Pages scheduled to expire", tone: "neutral", icon: "event_busy" },
   { label: "Hidden Pages", value: 231, hint: "Hidden from search engines", tone: "info", icon: "visibility_off" },
@@ -205,7 +205,7 @@ export function HomeView() {
             }}
           >
             <MSym name="dns" size={14} />
-            Peacock Stable-int
+            Streamly Stable-int
           </span>
         </header>
 

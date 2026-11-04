@@ -80,7 +80,7 @@ function TitlePage({
   return (
     <>
       <header className="cp-preview__nav">
-        <span className="cp-preview__wordmark">peacock</span>
+        <span className="cp-preview__wordmark">streamly</span>
         <button type="button" className="cp-preview__nav-cta" tabIndex={-1}>
           Sign in
         </button>
@@ -153,7 +153,7 @@ function TitlePage({
           <details open>
             <summary>How can I watch {title.title}?</summary>
             <p>
-              {pass.ctaLabel} on Peacock with a {pass.title} plan.
+              {pass.ctaLabel} on Streamly with a {pass.title} plan.
               {config.filterRecommendedCarousel
                 ? " Recommendations are filtered to this pass."
                 : ""}
@@ -161,7 +161,7 @@ function TitlePage({
           </details>
           <details>
             <summary>Where can I watch {title.title}?</summary>
-            <p>Stream on peacocktv.com or the Peacock app.</p>
+            <p>Stream on streamlytv.com or the Streamly app.</p>
           </details>
         </section>
       </div>

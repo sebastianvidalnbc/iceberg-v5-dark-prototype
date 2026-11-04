@@ -169,7 +169,7 @@ const premiumCardStructure: StructureNode[] = [
                             children: [
                               nt("pc-product-features", "Product Features", "product-features-list", {
                                 children: [
-                                  nt("pc-feat-tv", "TV Favorites from NBC, Bravo & More", "feature"),
+                                  nt("pc-feat-tv", "TV Favorites from ACME, BrandP & More", "feature"),
                                   nt("pc-feat-sports", "Live Sports", "feature"),
                                   nt("pc-feat-downloads", "Downloads", "feature"),
                                 ],

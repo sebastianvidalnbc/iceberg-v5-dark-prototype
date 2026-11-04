@@ -164,7 +164,7 @@ function findLooseById(nodes: LooseNode[], id: string): LooseNode | undefined {
 }
 
 // §item7 Anna: "preview functionality for saved offers." A selected offer renders
-// as a representative customer-facing offer card in the preview (Peacock) zone —
+// as a representative customer-facing offer card in the preview (Streamly) zone —
 // styling is illustrative and deliberately distinct from the Eos editor chrome.
 function WidgetOfferPreview({ fields }: { fields: Record<string, string> }) {
   const today = new Date().toISOString().slice(0, 10);
@@ -174,7 +174,7 @@ function WidgetOfferPreview({ fields }: { fields: Record<string, string> }) {
   const staticId = fields["Cancellation Product Static ID"] || "";
   const prettyPlan = staticId
     ? staticId
-        .replace(/^peacock_/, "Peacock ")
+        .replace(/^streamly_/, "Streamly ")
         .replace(/_/g, " ")
         .replace(/\b\w/g, (c) => c.toUpperCase())
     : "your plan";
@@ -273,7 +273,7 @@ function AccessibilityScore({
 // instantly, so there is no handshake wait to surface.)
 type LiveStatus = "live" | "disabled";
 
-// Central workspace hosting the Peacock preview in a SEPARATE iframe document
+// Central workspace hosting the Streamly preview in a SEPARATE iframe document
 // (renderer.html), synchronised over postMessage — the V4 analog of the real
 // editor↔renderer bridge. Field edits patch the frame live; selecting a node
 // highlights it in the frame; Pick Section lets a click in the frame select the
@@ -290,7 +290,7 @@ export function LivePreview({
   onMvtChange,
 }: LivePreviewProps) {
   const isWidget = context === "widget";
-  // A layout widget is a page section, so it renders through the same Peacock
+  // A layout widget is a page section, so it renders through the same Streamly
   // preview as a page. Data widgets (Retention, offers) keep the JSON preview.
   const rendersAsPage =
     isWidget && (variant?.structure ?? []).some((n) => n.objectType === "page-section");
@@ -301,6 +301,8 @@ export function LivePreview({
   // Widget context: which environment the preview reflects (§1).
   const [previewEnv, setPreviewEnv] = useState("stable-int");
   const [ready, setReady] = useState(false);
+  // True when the renderer never answered (dev server stopped, iframe refused).
+  const [rendererDown, setRendererDown] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // Measure the available canvas so we can scale a real desktop-width iframe to
@@ -397,6 +399,7 @@ export function LivePreview({
       if (!data || data.source !== PREVIEW_SOURCE) return;
       if (data.type === "ready") {
         setReady(true);
+        setRendererDown(false);
         postRenderRef.current();
       } else if (data.type === "section-selected") {
         // Click-to-select is always on; picking no longer exits the (optional)
@@ -431,9 +434,17 @@ export function LivePreview({
   useEffect(() => {
     if (loadTick === 0) return;
     let n = 0;
+    setRendererDown(false);
     const id = window.setInterval(() => {
       postRenderRef.current();
-      if (readyRef.current || ++n > 15) window.clearInterval(id);
+      if (readyRef.current) {
+        window.clearInterval(id);
+        return;
+      }
+      if (++n > 15) {
+        window.clearInterval(id);
+        setRendererDown(true);
+      }
     }, 200);
     return () => window.clearInterval(id);
   }, [loadTick]);
@@ -598,6 +609,19 @@ export function LivePreview({
                 className="ui-preview__sizer"
                 style={{ width: sizerW || undefined, height: canvasSize.h || undefined }}
               >
+                {rendererDown && (
+                  <div
+                    className="ui-preview__empty"
+                    role="alert"
+                    style={{ position: "absolute", inset: 0, zIndex: 2, background: "var(--color-bg-canvas)" }}
+                  >
+                    <MSym name="cloud_off" size={40} className="ui-preview__empty-icon" />
+                    <p className="ui-preview__empty-title">Preview renderer not reachable</p>
+                    <p className="ui-preview__empty-sub">
+                      The preview loads from the local dev server. Keep it running, then reload this page.
+                    </p>
+                  </div>
+                )}
                 <div
                   className="ui-preview__frame"
                   style={{

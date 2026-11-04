@@ -4,3 +4,7 @@ dist/
 .DS_Store
 .playwright-mcp/
 npm-debug.log*
+
+# Real CMS captures (production slugs, variant names). Local only; never commit or deploy.
+src/v4-eos/cms-data/
+node_modules

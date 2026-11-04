@@ -40,7 +40,7 @@ export type ElementKind =
   | "collection" // an ordered list of child instances (+Add / Paste)
   | "notice"; // a deliberate "no configured content" instance
 
-// The preview RENDERER role — the analog of elements-peacock's
+// The preview RENDERER role — the analog of elements-streamly's
 // module-registry-async (element type → React render). The in-process preview
 // renderer (previewModel.ts + LivePreview/renderer) switches on this instead of
 // re-deriving from labels.
@@ -77,7 +77,7 @@ const metadata = (node: StructureNode): ResolvedProperties => ({
     role: node.role,
     sectionId: node.sectionId ?? node.id,
     design: node.design ?? "Custom",
-    designOptions: ["Custom", "Legacy layout", "Intelligent authoring"],
+    designOptions: ["Custom", "Intelligent authoring"],
     intelligentAffordance: (node.design ?? "Custom") === "Intelligent authoring",
   },
 });
@@ -308,7 +308,7 @@ export const ELEMENT_REGISTRY: Partial<
   },
 
   // --- Widget: Retention Service config ------------------------------------
-  // Mirrors the real elements-peacock retention-service jsonSchema: Journey
+  // Mirrors the real elements-streamly retention-service jsonSchema: Journey
   // Flows (fields) → Offers (tabs, minSize 0) → Segmentation (objectListDropdown:
   // Offer Type → Category Title → Segment Names) → Survey Responses (tabs,
   // minSize 1). Collections resolve live from children; leaves carry props.

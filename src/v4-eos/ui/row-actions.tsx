@@ -17,6 +17,8 @@ export interface RowActionsHandlers {
   onDuplicate: () => void;
   onCopy: () => void;
   onPaste: () => void;
+  /** Page sections only: save the section as a reusable widget. */
+  onSaveAsWidget?: () => void;
   onToggleDisabled: () => void;
   onDelete: () => void;
 }
@@ -32,6 +34,7 @@ export function RowActionsMenu({
   onDuplicate,
   onCopy,
   onPaste,
+  onSaveAsWidget,
   onToggleDisabled,
   onDelete,
 }: { label: string; minimal?: boolean } & RowActionsHandlers) {
@@ -71,6 +74,12 @@ export function RowActionsMenu({
           <MSym name="content_paste" size={16} />
           Paste
         </DropdownMenuItem>
+        {onSaveAsWidget && (
+          <DropdownMenuItem onSelect={onSaveAsWidget}>
+            <MSym name="widgets" size={16} />
+            Save as widget
+          </DropdownMenuItem>
+        )}
         {/* Duplicate / Disable / Delete are omitted in the minimal set (widget
             context) — only Rename · Copy · Paste are offered there. */}
         {!minimal && (

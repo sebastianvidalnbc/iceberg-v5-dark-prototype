@@ -5,14 +5,14 @@ import {
   type StructureNode,
   type TreeNode,
 } from "./data";
-import { buildLayoutNode } from "./layouts";
-import { LAYOUT_WIDGETS, layoutDefForWidget } from "./layout-widgets";
-import { WIDGET_VARIANTS } from "./widget-variants";
+import { buildLayoutNode, buildPlaceholderSection, getLayoutDef } from "./layouts";
+import { cloneWithNewIds } from "./structureOps";
 
 // Widget registry shared by the Widgets list, the editor collection and the
-// editor itself. Every production widget gets an editable config (empty
-// Structure until sections are added from the Layout Picker). Widgets created
-// in this session ("+" on the Widgets list) are prepended to the list.
+// editor itself. A widget is a saved section: production widgets (the CMS list,
+// mirrored) and widgets saved from a page section in this session ("Save as
+// widget", or "+" on the Widgets list). Layouts are not widgets; they are the
+// library that creates sections (see layouts.ts).
 
 const CREATED: ProductionWidget[] = [];
 
@@ -21,7 +21,7 @@ export function productionWidgetId(slug: string): string {
 }
 
 export function allWidgets(): ProductionWidget[] {
-  return [...CREATED, ...PRODUCTION_WIDGETS, ...LAYOUT_WIDGETS];
+  return [...CREATED, ...PRODUCTION_WIDGETS];
 }
 
 function emptyWidgetPreview(slug: string): PreviewData {
@@ -43,68 +43,19 @@ function registerConfig(id: string, slug: string, structure: StructureNode[] = [
   };
 }
 
-for (const w of PRODUCTION_WIDGETS) registerConfig(productionWidgetId(w.slug), w.slug);
+// Production widgets used by the starter templates carry real content, so a
+// page that references them shows a footer and a header. The rest stay empty
+// until sections are added in the editor.
+const SEEDED_PRODUCTION: Record<string, () => StructureNode[]> = {
+  "/seo-footer": () => {
+    const def = getLayoutDef("seo-footer");
+    return def ? [buildLayoutNode(def)] : [];
+  },
+  "/header": () => [buildPlaceholderSection("Header")],
+};
 
-// Set the section heading on a freshly built layout section. The value is stored
-// as an authored field override on the node that owns the field (the same path a
-// typed edit takes), so the preview and the Properties panel both read it. Labels
-// are matched in the preview's title priority order.
-const HEADING_LABELS = [
-  "Heading - H1",
-  "Heading",
-  "Header",
-  "Plan Picker Title",
-  "Faq Heading",
-  "Header Title",
-  "Title",
-  "Headline",
-];
-
-// Field labels can carry a qualifier ("Plan Picker Title (optional)"); match on the base.
-const baseLabel = (label: string) => label.replace(/\s*\(.*\)\s*$/, "").trim();
-
-function fieldLabelsOf(node: StructureNode): string[] {
-  const data = node.props?.kind === "fields" ? node.props.data : null;
-  return [...(data?.fields ?? []), ...(data?.groups ?? []).flatMap((g) => g.fields)].map(
-    (f) => f.label,
-  );
-}
-
-// The node that owns a field matching `base`, plus the field's exact label.
-function findField(node: StructureNode, base: string): { owner: StructureNode; label: string } | null {
-  // Collection items carry their own Title fields; the section heading never lives there.
-  if (node.objectType === "schema-collection") return null;
-  const label = fieldLabelsOf(node).find((l) => baseLabel(l) === base);
-  if (label) return { owner: node, label };
-  for (const c of node.children ?? []) {
-    const hit = findField(c, base);
-    if (hit) return hit;
-  }
-  return null;
-}
-
-function applyHeading(root: StructureNode, text: string): void {
-  for (const base of HEADING_LABELS) {
-    const hit = findField(root, base);
-    if (hit) {
-      hit.owner.content = { ...(hit.owner.content ?? {}), [hit.label]: text };
-      return;
-    }
-  }
-}
-
-// Layout widgets: one config per widget (its default section) and one per
-// sample variant, each built from the same catalog layout.
-for (const w of LAYOUT_WIDGETS) {
-  const def = layoutDefForWidget(w.slug);
-  if (!def) continue;
-  registerConfig(productionWidgetId(w.slug), w.slug, [buildLayoutNode(def)]);
-  for (const v of WIDGET_VARIANTS[w.slug] ?? []) {
-    const section = buildLayoutNode(def);
-    if (v.heading) applyHeading(section, v.heading);
-    registerConfig(v.id, w.slug, [section]);
-    WIDGET_CONFIGS[v.id].name = v.name;
-  }
+for (const w of PRODUCTION_WIDGETS) {
+  registerConfig(productionWidgetId(w.slug), w.slug, SEEDED_PRODUCTION[w.slug]?.() ?? []);
 }
 
 // Flat collection for the editor's left pane (Pages-style: one row per widget).
@@ -127,23 +78,24 @@ function listDate(ts: number): string {
   return `${wd} ${dd} ${mon} ${yy}`;
 }
 
-// "+" on the Widgets list (production's Create new Widget dialog): a blank HTML or
-// JSON widget. Production has no separate name, so the name becomes the slug
-// (`Hero Promo` -> `/hero-promo`). Sections are added in the editor. Returns the
-// new widget's editor id, or an error for the dialog to show.
-export function createBlankWidget(
-  name: string,
-  format: "HTML" | "JSON",
-): { id: string } | { error: string } {
+// A name becomes a slug: "Hero Promo" -> "/hero-promo". Null when nothing usable is left.
+function slugFor(name: string): string | null {
   const slug = `/${name
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")}`;
-  if (slug === "/") return { error: "Enter a name with at least one letter or number." };
-  if (allWidgets().some((w) => w.slug === slug)) {
-    return { error: `A widget with the slug ${slug} already exists.` };
-  }
+  return slug === "/" ? null : slug;
+}
+
+// A slug that no widget uses yet: "/hero-promo", then "/hero-promo-2", …
+function uniqueSlug(base: string): string {
+  let slug = base;
+  for (let i = 2; allWidgets().some((w) => w.slug === slug); i++) slug = `${base}-${i}`;
+  return slug;
+}
+
+function registerCreated(slug: string, format: "HTML" | "JSON", structure: StructureNode[]): string {
   const now = Date.now();
   CREATED.unshift({
     slug,
@@ -155,6 +107,39 @@ export function createBlankWidget(
     modifiedAt: now,
   });
   const id = productionWidgetId(slug);
-  registerConfig(id, slug, []);
-  return { id };
+  registerConfig(id, slug, structure);
+  return id;
+}
+
+// "+" on the Widgets list (production's Create new Widget dialog): a blank HTML or
+// JSON widget. Production has no separate name, so the name becomes the slug
+// (`Hero Promo` -> `/hero-promo`). Sections are added in the editor. Returns the
+// new widget's editor id, or an error for the dialog to show.
+export function createBlankWidget(
+  name: string,
+  format: "HTML" | "JSON",
+): { id: string } | { error: string } {
+  const slug = slugFor(name);
+  if (!slug) return { error: "Enter a name with at least one letter or number." };
+  if (allWidgets().some((w) => w.slug === slug)) {
+    return { error: `A widget with the slug ${slug} already exists.` };
+  }
+  return { id: registerCreated(slug, format, []) };
+}
+
+// "Save as widget" on a page section: the section's content becomes a saved
+// widget, named from the section label. Returns the new widget's slug. The page
+// keeps its own copy until the caller turns the section into a reference.
+export function saveSectionAsWidget(section: StructureNode): string {
+  const slug = uniqueSlug(slugFor(section.label) ?? "/widget");
+  const content: StructureNode = {
+    ...cloneWithNewIds(section),
+    widgetSlug: undefined,
+    moduleDetached: undefined,
+    fromTemplate: undefined,
+    badge: undefined,
+    badgeTone: undefined,
+  };
+  registerCreated(slug, "HTML", [content]);
+  return slug;
 }

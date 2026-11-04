@@ -558,7 +558,7 @@ export const OBJECT_PROPERTIES: Record<string, ObjectProperties> = {
   "pc-premium": productSchema("Premium", {
     badge: true,
     badgeText: "Best Value",
-    productLogo: "peacock-logo",
+    productLogo: "streamly-logo",
     productTitle: "Premium",
     productDescription:
       "Stream hit movies, bingeworthy shows, and live sports — plus new series the day after they air.",
@@ -642,7 +642,7 @@ export const OBJECT_PROPERTIES: Record<string, ObjectProperties> = {
       {
         label: "Disclaimer Text",
         value:
-          "Compatible device and Peacock account required. Live sports subject to regional availability.",
+          "Compatible device and Streamly account required. Live sports subject to regional availability.",
         kind: "textarea",
       },
     ],

@@ -368,8 +368,8 @@
   },
   "optionData": []
  },
- "section-peacock-catalogue": {
-  "_id": "section-peacock-catalogue",
+ "section-streamly-catalogue": {
+  "_id": "section-streamly-catalogue",
   "name": "Catalogue",
   "editorOptions": {
    "openDrawer": false,
@@ -1145,13 +1145,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -1176,13 +1176,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -1406,7 +1406,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true,
             "validations": [
              {
@@ -1476,7 +1476,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -1510,13 +1510,13 @@
          "show": "HAS_TX_ENABLED"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -1614,13 +1614,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -1645,13 +1645,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -1904,7 +1904,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true,
             "validations": [
              {
@@ -1974,7 +1974,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -2008,13 +2008,13 @@
          "show": "HAS_TX_ENABLED"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -2111,13 +2111,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -2142,13 +2142,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -2379,7 +2379,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true,
             "validations": [
              {
@@ -2449,7 +2449,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -2483,13 +2483,13 @@
          "show": "HAS_TX_ENABLED"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -2562,13 +2562,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -2593,13 +2593,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -2808,7 +2808,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true,
             "validations": [
              {
@@ -2860,7 +2860,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -2894,13 +2894,13 @@
          "show": "HAS_TX_ENABLED"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -2997,13 +2997,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -3028,13 +3028,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -3253,7 +3253,7 @@
         "previewData": "Lorem ipsum dolor sit amet"
        },
        {
-        "type": "peacock-voucher-url",
+        "type": "streamly-voucher-url",
         "id": "redirectMethod"
        },
        {
@@ -3304,13 +3304,13 @@
          "show": "HAS_TX_ENABLED"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -3378,13 +3378,13 @@
    {
     "id": "ariaLabel",
     "type": "small",
-    "name": "Carousel name announced by screen readers, e.g. \"Featured on Peacock\"",
+    "name": "Carousel name announced by screen readers, e.g. \"Featured on Streamly\"",
     "validations": [
      {
       "type": "required"
      }
     ],
-    "previewData": "Featured on Peacock"
+    "previewData": "Featured on Streamly"
    },
    {
     "id": "pauseLabel",
@@ -3612,13 +3612,13 @@
        }
       ],
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+       "ACME": "widget-art/backdrop-4.svg",
+       "BRANDB": "widget-art/backdrop-4.svg",
+       "BRANDC": "widget-art/backdrop-1.svg",
+       "BRANDD": "widget-art/backdrop-2.svg",
+       "NOWITALY": "widget-art/backdrop-2.svg",
+       "WOW": "widget-art/backdrop-4.svg",
+       "WOWAT": "widget-art/backdrop-4.svg"
       }
      },
      {
@@ -3662,13 +3662,13 @@
        }
       ],
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-2.svg",
+       "BRANDC": "widget-art/backdrop-4.svg",
+       "BRANDD": "widget-art/backdrop-4.svg",
+       "NOWITALY": "widget-art/backdrop-4.svg",
+       "WOW": "widget-art/backdrop-3.svg",
+       "WOWAT": "widget-art/backdrop-3.svg"
       }
      },
      {
@@ -3855,13 +3855,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -4059,13 +4059,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -4226,13 +4226,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -4418,13 +4418,13 @@
     "name": "Header Logo Image",
     "previewSelector": "header-logo",
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-2.svg",
+     "BRANDC": "widget-art/backdrop-4.svg",
+     "BRANDD": "widget-art/backdrop-4.svg",
+     "NOWITALY": "widget-art/backdrop-4.svg",
+     "WOW": "widget-art/backdrop-3.svg",
+     "WOWAT": "widget-art/backdrop-3.svg"
     },
     "mediaValidatorOptions": {
      "size": "small",
@@ -4481,13 +4481,13 @@
        }
       ],
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-3.svg",
+       "BRANDC": "widget-art/backdrop-2.svg",
+       "BRANDD": "widget-art/backdrop-2.svg",
+       "NOWITALY": "widget-art/backdrop-2.svg",
+       "WOW": "widget-art/backdrop-2.svg",
+       "WOWAT": "widget-art/backdrop-2.svg"
       }
      },
      {
@@ -4503,13 +4503,13 @@
       "name": "Logo Image",
       "previewSelector": "logo",
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-2.svg",
+       "BRANDC": "widget-art/backdrop-4.svg",
+       "BRANDD": "widget-art/backdrop-4.svg",
+       "NOWITALY": "widget-art/backdrop-4.svg",
+       "WOW": "widget-art/backdrop-3.svg",
+       "WOWAT": "widget-art/backdrop-3.svg"
       },
       "mediaValidatorOptions": {
        "size": "small",
@@ -4548,13 +4548,13 @@
       "name": "Channel Logo Image",
       "previewSelector": "channel-logo",
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-2.svg",
+       "BRANDC": "widget-art/backdrop-4.svg",
+       "BRANDD": "widget-art/backdrop-4.svg",
+       "NOWITALY": "widget-art/backdrop-4.svg",
+       "WOW": "widget-art/backdrop-3.svg",
+       "WOWAT": "widget-art/backdrop-3.svg"
       },
       "mediaValidatorOptions": {
        "size": "small",
@@ -4628,7 +4628,7 @@
         "name": "Primary CTA",
         "type": "moduleInstanceSelector",
         "previewSelector": "primary-cta",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "ignoreOverrides": true,
         "validations": [
          {
@@ -4726,13 +4726,13 @@
       "type": "mediaValidator",
       "previewSelector": "logo-image",
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-2.svg",
+       "BRANDC": "widget-art/backdrop-4.svg",
+       "BRANDD": "widget-art/backdrop-4.svg",
+       "NOWITALY": "widget-art/backdrop-4.svg",
+       "WOW": "widget-art/backdrop-3.svg",
+       "WOWAT": "widget-art/backdrop-3.svg"
       },
       "mediaValidatorOptions": {
        "type": "image",
@@ -4867,13 +4867,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -4906,13 +4906,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -5010,7 +5010,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true
            }
           ]
@@ -5052,7 +5052,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -5082,13 +5082,13 @@
          "size": "small"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         },
         "validations": [
          {
@@ -5149,13 +5149,13 @@
           ],
           "previewSelector": "rail-image",
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-3.svg",
+           "BRANDC": "widget-art/backdrop-2.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-2.svg",
+           "WOWAT": "widget-art/backdrop-2.svg"
           }
          },
          {
@@ -5187,13 +5187,13 @@
           ],
           "previewSelector": "logo-image",
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-2.svg",
+           "BRANDC": "widget-art/backdrop-4.svg",
+           "BRANDD": "widget-art/backdrop-4.svg",
+           "NOWITALY": "widget-art/backdrop-4.svg",
+           "WOW": "widget-art/backdrop-3.svg",
+           "WOWAT": "widget-art/backdrop-3.svg"
           }
          },
          {
@@ -5211,13 +5211,13 @@
           ],
           "previewSelector": "channel-logo",
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-2.svg",
+           "BRANDC": "widget-art/backdrop-4.svg",
+           "BRANDD": "widget-art/backdrop-4.svg",
+           "NOWITALY": "widget-art/backdrop-4.svg",
+           "WOW": "widget-art/backdrop-3.svg",
+           "WOWAT": "widget-art/backdrop-3.svg"
           }
          },
          {
@@ -5276,13 +5276,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -5315,13 +5315,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -5419,7 +5419,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true
            }
           ]
@@ -5461,7 +5461,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -5491,13 +5491,13 @@
          "size": "small"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         },
         "validations": [
          {
@@ -5560,13 +5560,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         }
        },
        {
@@ -5592,13 +5592,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -5689,7 +5689,7 @@
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
             "previewSelector": "primary-cta",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "ignoreOverrides": true
            }
           ]
@@ -5731,7 +5731,7 @@
             "id": "secondaryCtaCentralManagement",
             "name": "Secondary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondary-cta",
             "ignoreOverrides": true
            }
@@ -5761,13 +5761,13 @@
          "size": "small"
         },
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-3.svg",
+         "WOWAT": "widget-art/backdrop-3.svg"
         },
         "validations": [
          {
@@ -5870,13 +5870,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Home/motiontilewall/0812-motionwall-d2.mp4",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Hero/Halo/Desktop/Halo_Subs_EN.mp4",
-         "NOWGB": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-         "NOWIE": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-         "NOWITALY": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-2.svg",
+         "WOWAT": "widget-art/backdrop-2.svg"
         }
        },
        {
@@ -5897,13 +5897,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -6040,13 +6040,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Home/motiontilewall/0812-motionwall-d2.mp4",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Hero/Halo/Desktop/Halo_Subs_EN.mp4",
-         "NOWGB": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-         "NOWIE": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-         "NOWITALY": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4"
+         "ACME": "widget-art/backdrop-3.svg",
+         "BRANDB": "widget-art/backdrop-2.svg",
+         "BRANDC": "widget-art/backdrop-4.svg",
+         "BRANDD": "widget-art/backdrop-4.svg",
+         "NOWITALY": "widget-art/backdrop-4.svg",
+         "WOW": "widget-art/backdrop-2.svg",
+         "WOWAT": "widget-art/backdrop-2.svg"
         }
        },
        {
@@ -6067,13 +6067,13 @@
          }
         ],
         "previewData": {
-         "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-         "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-         "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-         "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-         "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-         "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+         "ACME": "widget-art/backdrop-4.svg",
+         "BRANDB": "widget-art/backdrop-4.svg",
+         "BRANDC": "widget-art/backdrop-1.svg",
+         "BRANDD": "widget-art/backdrop-2.svg",
+         "NOWITALY": "widget-art/backdrop-2.svg",
+         "WOW": "widget-art/backdrop-4.svg",
+         "WOWAT": "widget-art/backdrop-4.svg"
         }
        },
        {
@@ -6190,15 +6190,15 @@
    }
   ]
  },
- "section-ia-spotify": {
-  "_id": "section-ia-spotify",
+ "section-ia-brandg": {
+  "_id": "section-ia-brandg",
   "name": "iFrame",
   "globalLayoutOptionData": [],
   "optionData": [
    {
-    "id": "spotifyUrl",
+    "id": "brandgUrl",
     "type": "small",
-    "name": "Spotify Playlist ID (only provide the ID at the end of the Spotify URL eg: https://open.spotify.com/embed/playlist/{ID})",
+    "name": "Brandg Playlist ID (only provide the ID at the end of the Brandg URL eg: widget-art/backdrop-2.svg)",
     "validations": [
      {
       "type": "required"
@@ -6208,7 +6208,7 @@
    {
     "id": "height",
     "type": "small",
-    "name": "Height (eg. 400px) Note: If left blank defaults to Spotify's 352px",
+    "name": "Height (eg. 400px) Note: If left blank defaults to Brandg's 352px",
     "value": "100px"
    }
   ]
@@ -6239,13 +6239,13 @@
     ],
     "previewSelector": "supported-devices-image",
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+     "ACME": "widget-art/backdrop-4.svg",
+     "BRANDB": "widget-art/backdrop-4.svg",
+     "BRANDC": "widget-art/backdrop-1.svg",
+     "BRANDD": "widget-art/backdrop-2.svg",
+     "NOWITALY": "widget-art/backdrop-2.svg",
+     "WOW": "widget-art/backdrop-4.svg",
+     "WOWAT": "widget-art/backdrop-4.svg"
     }
    },
    {
@@ -6399,13 +6399,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Home/motiontilewall/0812-motionwall-d2.mp4",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Hero/Halo/Desktop/Halo_Subs_EN.mp4",
-           "NOWGB": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-           "NOWIE": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-           "NOWITALY": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-2.svg",
+           "BRANDC": "widget-art/backdrop-4.svg",
+           "BRANDD": "widget-art/backdrop-4.svg",
+           "NOWITALY": "widget-art/backdrop-4.svg",
+           "WOW": "widget-art/backdrop-2.svg",
+           "WOWAT": "widget-art/backdrop-2.svg"
           }
          },
          {
@@ -6425,13 +6425,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+           "ACME": "widget-art/backdrop-4.svg",
+           "BRANDB": "widget-art/backdrop-4.svg",
+           "BRANDC": "widget-art/backdrop-1.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-4.svg",
+           "WOWAT": "widget-art/backdrop-4.svg"
           }
          },
          {
@@ -6628,13 +6628,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Home/motiontilewall/0812-motionwall-d2.mp4",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Hero/Halo/Desktop/Halo_Subs_EN.mp4",
-           "NOWGB": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-           "NOWIE": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-           "NOWITALY": "https://web.static.nowtv.com/de/images/2023/12_2023/Trailer_2312/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer/WOW_True%20Detective_Night%20Country_%20Staffel_4_Trailer.mp4",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Events/2025/BULI_SoS/Trailer/250804_WOW_BuLi_SOS_2025_STUDIO_30_OLV_16x9_Master_1.mp4"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-2.svg",
+           "BRANDC": "widget-art/backdrop-4.svg",
+           "BRANDD": "widget-art/backdrop-4.svg",
+           "NOWITALY": "widget-art/backdrop-4.svg",
+           "WOW": "widget-art/backdrop-2.svg",
+           "WOWAT": "widget-art/backdrop-2.svg"
           }
          },
          {
@@ -6654,13 +6654,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+           "ACME": "widget-art/backdrop-4.svg",
+           "BRANDB": "widget-art/backdrop-4.svg",
+           "BRANDC": "widget-art/backdrop-1.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-4.svg",
+           "WOWAT": "widget-art/backdrop-4.svg"
           }
          },
          {
@@ -7165,13 +7165,13 @@
      }
     ],
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-2.svg",
+     "BRANDC": "widget-art/backdrop-4.svg",
+     "BRANDD": "widget-art/backdrop-4.svg",
+     "NOWITALY": "widget-art/backdrop-4.svg",
+     "WOW": "widget-art/backdrop-3.svg",
+     "WOWAT": "widget-art/backdrop-3.svg"
     },
     "previewSelector": "logoUrl"
    },
@@ -7348,13 +7348,13 @@
     "name": "Image",
     "previewSelector": "image",
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-     "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-     "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-3.svg",
+     "BRANDC": "widget-art/backdrop-2.svg",
+     "BRANDD": "widget-art/backdrop-2.svg",
+     "NOWITALY": "widget-art/backdrop-2.svg",
+     "WOW": "widget-art/backdrop-2.svg",
+     "WOWAT": "widget-art/backdrop-2.svg"
     },
     "mediaValidatorOptions": {
      "type": "image",
@@ -7666,13 +7666,13 @@
           ],
           "previewSelector": "image",
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+           "ACME": "widget-art/backdrop-4.svg",
+           "BRANDB": "widget-art/backdrop-4.svg",
+           "BRANDC": "widget-art/backdrop-1.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-4.svg",
+           "WOWAT": "widget-art/backdrop-4.svg"
           }
          },
          {
@@ -7821,13 +7821,13 @@
      }
     ],
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-2.svg",
+     "BRANDC": "widget-art/backdrop-4.svg",
+     "BRANDD": "widget-art/backdrop-4.svg",
+     "NOWITALY": "widget-art/backdrop-4.svg",
+     "WOW": "widget-art/backdrop-3.svg",
+     "WOWAT": "widget-art/backdrop-3.svg"
     }
    },
    {
@@ -7912,7 +7912,7 @@
         "id": "primaryCtaCentralManagement",
         "name": "Primary CTA",
         "type": "moduleInstanceSelector",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "previewSelector": "primaryCTA",
         "ignoreOverrides": true,
         "validations": [
@@ -10815,13 +10815,13 @@
      }
     ],
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+     "ACME": "widget-art/backdrop-4.svg",
+     "BRANDB": "widget-art/backdrop-4.svg",
+     "BRANDC": "widget-art/backdrop-1.svg",
+     "BRANDD": "widget-art/backdrop-2.svg",
+     "NOWITALY": "widget-art/backdrop-2.svg",
+     "WOW": "widget-art/backdrop-4.svg",
+     "WOWAT": "widget-art/backdrop-4.svg"
     }
    },
    {
@@ -11531,7 +11531,7 @@
           "id": "ctaCentralManagement",
           "type": "moduleInstanceSelector",
           "name": "CTA Module",
-          "filterByModule": "peacock-button",
+          "filterByModule": "streamly-button",
           "previewSelector": "CTAModule",
           "ignoreOverrides": true,
           "validations": [
@@ -11652,7 +11652,7 @@
                 "id": "planCardCtaCentralManagement",
                 "type": "moduleInstanceSelector",
                 "name": "CTA Module",
-                "filterByModule": "peacock-button",
+                "filterByModule": "streamly-button",
                 "previewSelector": "CTAModule",
                 "ignoreOverrides": true,
                 "validations": [
@@ -12040,7 +12040,7 @@
           "id": "primaryCtaCentralManagement",
           "name": "Primary CTA",
           "type": "moduleInstanceSelector",
-          "filterByModule": "peacock-button",
+          "filterByModule": "streamly-button",
           "previewSelector": "primaryCTA",
           "ignoreOverrides": true,
           "validations": [
@@ -12466,7 +12466,7 @@
             "id": "primaryCtaCentralManagement",
             "name": "Primary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "primaryCTA",
             "ignoreOverrides": true,
             "validations": [
@@ -12769,7 +12769,7 @@
           "id": "primaryCtaCentralManagement",
           "name": "Primary CTA",
           "type": "moduleInstanceSelector",
-          "filterByModule": "peacock-button",
+          "filterByModule": "streamly-button",
           "previewSelector": "primaryCTA",
           "ignoreOverrides": true,
           "validations": [
@@ -13179,7 +13179,7 @@
             "id": "ctaCentralManagement",
             "type": "moduleInstanceSelector",
             "name": "Primary CTA",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "CTA",
             "ignoreOverrides": true,
             "validations": [
@@ -13399,13 +13399,13 @@
        }
       ],
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-2.svg",
+       "BRANDC": "widget-art/backdrop-4.svg",
+       "BRANDD": "widget-art/backdrop-4.svg",
+       "NOWITALY": "widget-art/backdrop-4.svg",
+       "WOW": "widget-art/backdrop-3.svg",
+       "WOWAT": "widget-art/backdrop-3.svg"
       }
      },
      {
@@ -13530,7 +13530,7 @@
           "name": "Primary CTA",
           "type": "moduleInstanceSelector",
           "previewSelector": "primary-cta",
-          "filterByModule": "peacock-button",
+          "filterByModule": "streamly-button",
           "ignoreOverrides": true,
           "validations": [
            {
@@ -13624,7 +13624,7 @@
         "name": "Page CTA",
         "type": "moduleInstanceSelector",
         "previewSelector": "pageCta",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "ignoreOverrides": true,
         "validations": [
          {
@@ -13816,7 +13816,7 @@
           "id": "primaryCtaCentralManagement",
           "name": "Primary CTA",
           "type": "moduleInstanceSelector",
-          "filterByModule": "peacock-button",
+          "filterByModule": "streamly-button",
           "previewSelector": "primaryCTA",
           "ignoreOverrides": true,
           "validations": [
@@ -13978,7 +13978,7 @@
             "id": "secondPrimaryCtaCentralManagement",
             "name": "Second Primary CTA",
             "type": "moduleInstanceSelector",
-            "filterByModule": "peacock-button",
+            "filterByModule": "streamly-button",
             "previewSelector": "secondPrimaryCTA",
             "ignoreOverrides": true,
             "validations": [
@@ -14308,7 +14308,7 @@
           "id": "ctaCentralManagement",
           "name": "Primary CTA",
           "type": "moduleInstanceSelector",
-          "filterByModule": "peacock-button",
+          "filterByModule": "streamly-button",
           "previewSelector": "cta",
           "ignoreOverrides": true,
           "validations": [
@@ -14812,7 +14812,7 @@
                   "id": "ctaCentralManagement",
                   "name": "Primary CTA",
                   "type": "moduleInstanceSelector",
-                  "filterByModule": "peacock-button",
+                  "filterByModule": "streamly-button",
                   "previewSelector": "ctaButtonText",
                   "ignoreOverrides": true,
                   "validations": [
@@ -15166,7 +15166,7 @@
                   "id": "ctaCentralManagement",
                   "name": "Primary CTA",
                   "type": "moduleInstanceSelector",
-                  "filterByModule": "peacock-button",
+                  "filterByModule": "streamly-button",
                   "previewSelector": "ctaButtonText",
                   "ignoreOverrides": true,
                   "validations": [
@@ -15333,13 +15333,13 @@
      "size": "xlarge"
     },
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+     "ACME": "widget-art/backdrop-4.svg",
+     "BRANDB": "widget-art/backdrop-4.svg",
+     "BRANDC": "widget-art/backdrop-1.svg",
+     "BRANDD": "widget-art/backdrop-2.svg",
+     "NOWITALY": "widget-art/backdrop-2.svg",
+     "WOW": "widget-art/backdrop-4.svg",
+     "WOWAT": "widget-art/backdrop-4.svg"
     },
     "autoscale": true,
     "validations": [
@@ -15365,13 +15365,13 @@
      "size": "xlarge"
     },
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+     "ACME": "widget-art/backdrop-4.svg",
+     "BRANDB": "widget-art/backdrop-4.svg",
+     "BRANDC": "widget-art/backdrop-1.svg",
+     "BRANDD": "widget-art/backdrop-2.svg",
+     "NOWITALY": "widget-art/backdrop-2.svg",
+     "WOW": "widget-art/backdrop-4.svg",
+     "WOWAT": "widget-art/backdrop-4.svg"
     },
     "autoscale": true,
     "validations": [
@@ -15393,13 +15393,13 @@
      "type": "image"
     },
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-2.svg",
+     "BRANDC": "widget-art/backdrop-4.svg",
+     "BRANDD": "widget-art/backdrop-4.svg",
+     "NOWITALY": "widget-art/backdrop-4.svg",
+     "WOW": "widget-art/backdrop-3.svg",
+     "WOWAT": "widget-art/backdrop-3.svg"
     },
     "validations": [
      {
@@ -15539,7 +15539,7 @@
         "id": "primaryCtaCentralManagement",
         "type": "moduleInstanceSelector",
         "name": "Primary CTA",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "previewSelector": "primary-cta",
         "ignoreOverrides": true,
         "validations": [
@@ -15624,7 +15624,7 @@
         "id": "secondaryCtaCentralManagement",
         "type": "moduleInstanceSelector",
         "name": "Secondary CTA",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "previewSelector": "secondary-cta",
         "ignoreOverrides": true,
         "validations": [
@@ -15732,13 +15732,13 @@
      "size": "small"
     },
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-2.svg",
+     "BRANDC": "widget-art/backdrop-4.svg",
+     "BRANDD": "widget-art/backdrop-4.svg",
+     "NOWITALY": "widget-art/backdrop-4.svg",
+     "WOW": "widget-art/backdrop-3.svg",
+     "WOWAT": "widget-art/backdrop-3.svg"
     },
     "validations": [
      {
@@ -16002,13 +16002,13 @@
      }
     ],
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+     "ACME": "widget-art/backdrop-4.svg",
+     "BRANDB": "widget-art/backdrop-4.svg",
+     "BRANDC": "widget-art/backdrop-1.svg",
+     "BRANDD": "widget-art/backdrop-2.svg",
+     "NOWITALY": "widget-art/backdrop-2.svg",
+     "WOW": "widget-art/backdrop-4.svg",
+     "WOWAT": "widget-art/backdrop-4.svg"
     }
    },
    {
@@ -16096,13 +16096,13 @@
        }
       ],
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-       "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-       "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-2.svg",
+       "BRANDC": "widget-art/backdrop-4.svg",
+       "BRANDD": "widget-art/backdrop-4.svg",
+       "NOWITALY": "widget-art/backdrop-4.svg",
+       "WOW": "widget-art/backdrop-3.svg",
+       "WOWAT": "widget-art/backdrop-3.svg"
       },
       "previewSelector": "logo"
      },
@@ -16478,13 +16478,13 @@
           "name": "Image URL (optional: if there is no image then it will default to a text-based cast grid)",
           "previewSelector": "castImage",
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-3.svg",
+           "BRANDC": "widget-art/backdrop-2.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-2.svg",
+           "WOWAT": "widget-art/backdrop-2.svg"
           },
           "mediaValidatorOptions": {
            "size": "large",
@@ -16619,13 +16619,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-3.svg",
+           "BRANDC": "widget-art/backdrop-2.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-2.svg",
+           "WOWAT": "widget-art/backdrop-2.svg"
           }
          },
          {
@@ -16821,7 +16821,7 @@
         "id": "primaryCTACentralManagement",
         "type": "moduleInstanceSelector",
         "name": "Primary CTA",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "previewSelector": "primaryCTA",
         "ignoreOverrides": true,
         "validations": [
@@ -16986,13 +16986,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/poker-face/pokerface-seo-hero.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/web/home/imagecompressor/Desktop_AL_min.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/ENTS/Triple_Split_Hero_Mobile_25_September_v2.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Hero-imagery/Main/SPORTS/NOW-Sky-Sports-ROI-Sep24_mobile.jpg",
-           "WOW": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg",
-           "WOWAT": "https://web.static.nowtv.com/de/images/2025/10_2025/Onsite/Update/HEROS/HERO_OFFERS_GRID/Hero_OFFERS_Mobile_UK_grid.jpg"
+           "ACME": "widget-art/backdrop-4.svg",
+           "BRANDB": "widget-art/backdrop-4.svg",
+           "BRANDC": "widget-art/backdrop-1.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-4.svg",
+           "WOWAT": "widget-art/backdrop-4.svg"
           }
          },
          {
@@ -17119,13 +17119,13 @@
            }
           ],
           "previewData": {
-           "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-           "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-           "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-           "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+           "ACME": "widget-art/backdrop-3.svg",
+           "BRANDB": "widget-art/backdrop-3.svg",
+           "BRANDC": "widget-art/backdrop-2.svg",
+           "BRANDD": "widget-art/backdrop-2.svg",
+           "NOWITALY": "widget-art/backdrop-2.svg",
+           "WOW": "widget-art/backdrop-2.svg",
+           "WOWAT": "widget-art/backdrop-2.svg"
           }
          },
          {
@@ -17234,7 +17234,7 @@
     "previewData": "Lorem ipsum dolor sit amet"
    },
    {
-    "id": "peacockImgSrc",
+    "id": "streamlyImgSrc",
     "type": "mediaValidator",
     "name": "Logo",
     "mediaValidatorOptions": {
@@ -17247,28 +17247,28 @@
      }
     ],
     "previewData": {
-     "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-     "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-     "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-     "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-     "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+     "ACME": "widget-art/backdrop-3.svg",
+     "BRANDB": "widget-art/backdrop-2.svg",
+     "BRANDC": "widget-art/backdrop-4.svg",
+     "BRANDD": "widget-art/backdrop-4.svg",
+     "NOWITALY": "widget-art/backdrop-4.svg",
+     "WOW": "widget-art/backdrop-3.svg",
+     "WOWAT": "widget-art/backdrop-3.svg"
     },
-    "previewSelector": "peacockImgSrc"
+    "previewSelector": "streamlyImgSrc"
    },
    {
-    "id": "peacockImgAriaLabel",
+    "id": "streamlyImgAriaLabel",
     "type": "small",
     "name": "Logo Aria Label",
     "previewData": "Lorem alt text",
-    "previewSelector": "peacockImgSrc"
+    "previewSelector": "streamlyImgSrc"
    },
    {
     "id": "logoSizeMobile",
     "type": "select",
     "name": "Logo Size for Mobile/Tablet",
-    "previewSelector": "peacockImgSrc",
+    "previewSelector": "streamlyImgSrc",
     "selectOptions": [
      {
       "label": "xSmall",
@@ -17301,7 +17301,7 @@
     "id": "logoSizeDesktop",
     "type": "select",
     "name": "Logo Size for Desktop",
-    "previewSelector": "peacockImgSrc",
+    "previewSelector": "streamlyImgSrc",
     "selectOptions": [
      {
       "label": "xSmall",
@@ -17397,7 +17397,7 @@
         "id": "primaryCtaCentralManagement",
         "name": "Primary CTA",
         "type": "moduleInstanceSelector",
-        "filterByModule": "peacock-button",
+        "filterByModule": "streamly-button",
         "previewSelector": "primaryCTA",
         "ignoreOverrides": true,
         "validations": [
@@ -17488,13 +17488,13 @@
        }
       ],
       "previewData": {
-       "NBCU": "https://www.peacocktv.com/dam/growth/assets/Originals/theresort/the-resort-vertical-hero1.jpg",
-       "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/Website/Streaming-Soon/1.6/Shutter2.png",
-       "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "WOW": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg",
-       "WOWAT": "https://web.static.nowtv.com/images/NOWTV_2026/Design_Assets/Cinema/Highlight%20tiles/Q3/2026_Q3_July_Cinema%20PP_Highlight%20Tiles_Normal.jpg"
+       "ACME": "widget-art/backdrop-3.svg",
+       "BRANDB": "widget-art/backdrop-3.svg",
+       "BRANDC": "widget-art/backdrop-2.svg",
+       "BRANDD": "widget-art/backdrop-2.svg",
+       "NOWITALY": "widget-art/backdrop-2.svg",
+       "WOW": "widget-art/backdrop-2.svg",
+       "WOWAT": "widget-art/backdrop-2.svg"
       },
       "previewSelector": "image"
      },
@@ -17652,7 +17652,7 @@
               "id": "ctaCentralManagement",
               "name": "Primary CTA",
               "type": "moduleInstanceSelector",
-              "filterByModule": "peacock-button",
+              "filterByModule": "streamly-button",
               "previewSelector": "ctaText",
               "ignoreOverrides": true
              },
@@ -17999,7 +17999,7 @@
               "id": "ctaCentralManagement",
               "name": "Primary CTA",
               "type": "moduleInstanceSelector",
-              "filterByModule": "peacock-button",
+              "filterByModule": "streamly-button",
               "previewSelector": "ctaText",
               "ignoreOverrides": true
              },
@@ -18421,13 +18421,13 @@
             "type": "mediaValidator",
             "previewSelector": "image",
             "previewData": {
-             "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-             "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-             "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-             "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+             "ACME": "widget-art/backdrop-3.svg",
+             "BRANDB": "widget-art/backdrop-2.svg",
+             "BRANDC": "widget-art/backdrop-4.svg",
+             "BRANDD": "widget-art/backdrop-4.svg",
+             "NOWITALY": "widget-art/backdrop-4.svg",
+             "WOW": "widget-art/backdrop-3.svg",
+             "WOWAT": "widget-art/backdrop-3.svg"
             },
             "mediaValidatorOptions": {
              "type": "image",
@@ -18781,13 +18781,13 @@
             "type": "mediaValidator",
             "previewSelector": "image",
             "previewData": {
-             "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-             "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-             "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-             "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+             "ACME": "widget-art/backdrop-3.svg",
+             "BRANDB": "widget-art/backdrop-2.svg",
+             "BRANDC": "widget-art/backdrop-4.svg",
+             "BRANDD": "widget-art/backdrop-4.svg",
+             "NOWITALY": "widget-art/backdrop-4.svg",
+             "WOW": "widget-art/backdrop-3.svg",
+             "WOWAT": "widget-art/backdrop-3.svg"
             },
             "mediaValidatorOptions": {
              "type": "image",
@@ -18899,13 +18899,13 @@
              "size": "small"
             },
             "previewData": {
-             "NBCU": "https://www.peacocktv.com/dam/growth/assets/Collections/hallmark/hallmark-channel-min.png",
-             "SKYSHOWTIME": "https://www.skyshowtime.com/dam/commerce/assets/new/SST_Main_logo.png",
-             "NOWGB": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "NOWIE": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "NOWITALY": "https://web.static.nowtv.com/images/NOWTV_2025/Design_Assets/Gold/Channel_logos/SPORTS/TX/NOW-Sports-Sky-Sports-Action_logo.svg",
-             "WOW": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png",
-             "WOWAT": "https://web.static.nowtv.com/de/images/2025/GOLD/Saver/02/40.png"
+             "ACME": "widget-art/backdrop-3.svg",
+             "BRANDB": "widget-art/backdrop-2.svg",
+             "BRANDC": "widget-art/backdrop-4.svg",
+             "BRANDD": "widget-art/backdrop-4.svg",
+             "NOWITALY": "widget-art/backdrop-4.svg",
+             "WOW": "widget-art/backdrop-3.svg",
+             "WOWAT": "widget-art/backdrop-3.svg"
             },
             "autoscale": true,
             "validations": [
@@ -19237,8 +19237,8 @@
    }
   ]
  },
- "peacock-section-client-overlay": {
-  "_id": "peacock-section-client-overlay",
+ "streamly-section-client-overlay": {
+  "_id": "streamly-section-client-overlay",
   "name": "Overlay",
   "optionData": [
    {
@@ -19298,8 +19298,8 @@
    }
   ]
  },
- "peacock-video-overlay": {
-  "_id": "peacock-video-overlay",
+ "streamly-video-overlay": {
+  "_id": "streamly-video-overlay",
   "name": "Background Video Overlay",
   "optionData": [
    {
@@ -19681,8 +19681,8 @@
    }
   ]
  },
- "peacock-background-color-split": {
-  "_id": "peacock-background-color-split",
+ "streamly-background-color-split": {
+  "_id": "streamly-background-color-split",
   "name": "Background Color Split",
   "optionData": [
    {

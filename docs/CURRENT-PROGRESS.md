@@ -9,7 +9,7 @@ V4 (`src/v4-eos/`) is the active prototype: Iceberg authoring rebuilt on Eos.
 It covers Home, Pages → Variants → Page editor, Widgets → Widget editor, Content
 Pages → Content Pages editor, and an in-app Design System catalog. The editors
 share a three-region layout (Explorer / Live Preview / Properties) with a
-Peacock customer render in an isolated iframe.
+Streamly customer render in an isolated iframe.
 
 ## Completed (recent, newest first)
 
@@ -49,7 +49,7 @@ Peacock customer render in an isolated iframe.
   `docs/eos-design-system.md` §7. The V4 adaptations (4px inset column,
   stacked field labels, subheader chevron, sentence-case headers) are listed
   in §7.9.
-- The renderer (Peacock) and the authoring UI (Eos) never share tokens.
+- The renderer (Streamly) and the authoring UI (Eos) never share tokens.
 - UX changes must name the `AUTHOR-EFFICIENCY.md` pain point they help, ignore
   or risk. The Properties redesign was consistency work and didn't target one.
 

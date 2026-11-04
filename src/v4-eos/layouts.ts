@@ -4,7 +4,7 @@
 // entry here is a REAL Iceberg section layout: the id/name/experiment flag come
 // straight from the production schemas, and each `preview` points at the real
 // Mobile/Desktop preview art shipped in the elements package (copied into
-// public/layout-previews/**, proposition = nbcu/Peacock).
+// public/layout-previews/**, proposition = acme/Streamly).
 //
 // A layout is a Section template; its editable fields come from the element
 // registry (by objectType) and the seeded values live on each instance's
@@ -55,12 +55,22 @@ export interface LayoutDef {
   preview?: LayoutPreview;
 }
 
+// Layouts the Layout Picker and the Experimenter list no longer offer: the
+// legacy (non-IA) Highlights and Catalogue. Their catalog entries stay so pages
+// that already use them still render.
+const RETIRED_LAYOUT_IDS = new Set(["highlights", "catalogue"]);
+export function isRetiredLayout(def: LayoutDef): boolean {
+  return RETIRED_LAYOUT_IDS.has(def.id);
+}
+
 // Build a fresh, pre-filled page-section subtree for a catalog layout, straight
 // from its real schema (every field + nested collection the design team defined,
 // seeded so the tree/preview aren't empty). Falls back to a titled content
 // section only if the schema id somehow isn't present.
 export function buildLayoutNode(def: LayoutDef): StructureNode {
   const node = buildSectionFromSchema(def.schemaId, def.name, def.name) ?? simple(def.name);
+  // Intelligent authoring is the default mode for IA layouts.
+  if (def.schemaId.startsWith("section-ia-")) node.design = "Intelligent authoring";
   // A new section lands filled with sample content (see layout-samples.ts).
   fillSampleContent(node, def.id, def.name);
   return node;
@@ -97,6 +107,12 @@ function contentSection(
   };
 }
 
+// A custom section with no catalog layout (e.g. "Intro copy" in a starter
+// template). It is not linked to any Widget.
+export function buildPlaceholderSection(label: string): StructureNode {
+  return simple(label);
+}
+
 // Fallback section for the rare case a schema id is missing — drops a titled
 // content section so insertion still works and the tree stays consistent.
 function simple(name: string): StructureNode {
@@ -114,7 +130,7 @@ const dm = (id: string): LayoutPreview => ({
 const uiOnly = (id: string): LayoutPreview => ({ ui: `${id}-ui.png` });
 
 // --- The catalog ------------------------------------------------------------
-// The full set of production Iceberg layouts (proposition = Peacock / NBCU).
+// The full set of production Iceberg layouts (proposition = Streamly / ACME).
 
 export const LAYOUT_CATALOG: LayoutDef[] = [
   // ---- Plan Pickers --------------------------------------------------------
@@ -343,7 +359,7 @@ export const LAYOUT_CATALOG: LayoutDef[] = [
     group: "Media & Grids",
     icon: "grid",
     preview: dm("catalogue"),
-    schemaId: "section-peacock-catalogue",
+    schemaId: "section-streamly-catalogue",
   },
   {
     id: "channels-guide",
@@ -540,10 +556,10 @@ export const LAYOUT_CATALOG: LayoutDef[] = [
   {
     id: "iframe",
     name: "iFrame",
-    description: "Embeds a Spotify playlist by its ID.",
+    description: "Embeds a Brandg playlist by its ID.",
     group: "Media & Grids",
     icon: "blocks",
-    schemaId: "section-ia-spotify",
+    schemaId: "section-ia-brandg",
   },
   {
     id: "choose-title",

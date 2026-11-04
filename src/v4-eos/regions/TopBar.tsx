@@ -17,10 +17,10 @@ export function TopBar() {
         <button
           type="button"
           className="ui-topbar__env"
-          aria-label="Environment: Peacock INT-NFT"
+          aria-label="Environment: Streamly INT-NFT"
         >
           <OpsHubEnvMark className="ui-topbar__env-chip" />
-          <span className="ui-topbar__env-label">Peacock: INT-NFT</span>
+          <span className="ui-topbar__env-label">Streamly: INT-NFT</span>
           <MSym name="keyboard_arrow_down" size={18} />
         </button>
 

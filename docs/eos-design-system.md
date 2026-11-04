@@ -375,7 +375,7 @@ Toolbar filter **triggers** share the 36px control row with search. Shorter 32px
 | Height | **48px** (`--toolbar-h`) |
 | Background (Dock) | **`#000000`** |
 | Horizontal pad | **18px** |
-| Left lockup | 24×24 peacock/GS mark + **“OpsHub”** 16px / 500 / 24px lh / 0.15 tracking · Inter (or product sans) · white |
+| Left lockup | 24×24 streamly/GS mark + **“OpsHub”** 16px / 500 / 24px lh / 0.15 tracking · Inter (or product sans) · white |
 | Right cluster | Env switcher → App menu (24px) → Account (32px hit, 24px icon) · gap **12px** |
 
 **Environment switcher (single-select):**
@@ -388,7 +388,7 @@ Toolbar filter **triggers** share the 36px control row with search. Shorter 32px
 | INT-NFT | `INT-NFT` | `#275996` |
 
 - Control height **32px**, pill radius **64px**, border 1px (white/α on Dock; env accent on Overlay light bars).
-- Contents: mini peacock mark + **badge chip** (8px bold label on white or filled bar) + label `Peacock: {Env}` (12px / 500) + 18px chevron.
+- Contents: mini streamly mark + **badge chip** (8px bold label on white or filled bar) + label `Streamly: {Env}` (12px / 500) + 18px chevron.
 - Menu: surface popover, one option selected at a time; Escape / outside click closes.
 - **Tokens:** `--opshub`, `--opshub-fg`, `--opshub-env-prod|proton|stable|intnft`.
 

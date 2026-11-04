@@ -242,7 +242,7 @@ export interface HistoryEntry {
   tone?: "success" | "info" | "warning" | "default";
 }
 const WIDGET_HISTORY: HistoryEntry[] = [
-  { when: "Today · 09:42", who: "you", action: "Edited", note: "Added JetBlue acquisition band", tone: "default" },
+  { when: "Today · 09:42", who: "you", action: "Edited", note: "Added BrandM acquisition band", tone: "default" },
   { when: "Yesterday · 16:10", who: "M. Rivera", action: "Published", note: "to Production", tone: "success" },
   { when: "Yesterday · 15:30", who: "M. Rivera", action: "Sent to QA", tone: "info" },
   { when: "2 days ago · 11:05", who: "A. Chen", action: "Scheduled", note: "for release Fri 09:00", tone: "warning" },

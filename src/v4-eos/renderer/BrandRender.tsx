@@ -6,18 +6,18 @@ import type {
   PreviewItem,
 } from "../previewModel";
 import { CommerceWebButton } from "./components/CommerceWebButton";
-// Real Peacock wordmark exported from Commerce Nav 45799:660 (.Web/Logo →
-// Wordmark 47100:3994). Official asset — white wordmark + gradient feather.
-import peacockLogo from "./assets/peacock-wordmark.svg";
+import { widgetArtUrl } from "../widget-art";
+// Dummy placeholder wordmark (stands in for the real brand logo).
+import streamlyLogo from "./assets/streamly-wordmark.svg";
 // Verified Commerce checkmark (44540:975, 24×24, green-500 #05AC3F).
 import commerceCheck from "./assets/commerce-check.svg";
 
-// Customer-facing brand render (Peacock), living INSIDE the preview iframe. It
+// Customer-facing brand render (Streamly), living INSIDE the preview iframe. It
 // renders the WHOLE variant as a vertical stack of sections (like a Figma frame
 // showing every element), NOT just the selected layer. Each selectable element
 // carries a `data-node-id` so the CMS can (a) outline the selected node and
 // (b) receive a Pick Section click that selects it. Styling inherits the real
-// Peacock design system from brand.css (dark canvas, gold CTA, branded cards).
+// Streamly design system from brand.css (dark canvas, gold CTA, branded cards).
 
 // Feature-bullet check — the VERIFIED Commerce checkmark asset (Notifications
 // canvas 43369:459 → _Viewing Notification Icon → Type=Checkmark 44540:975,
@@ -60,10 +60,10 @@ function BrandCard({
         {card.badge ? <span className="ui-brand__badge">{card.badge}</span> : null}
         <div className="ui-brand__card-top">
           {/* Product Logo (schema "Product Logo") — the product/brand mark above
-              the title. Rendered from the bundled Peacock wordmark asset when a
+              the title. Rendered from the bundled Streamly wordmark asset when a
               logo is authored on the card. */}
           {card.logo ? (
-            <img className="ui-brand__card-logo" src={peacockLogo} alt="" />
+            <img className="ui-brand__card-logo" src={streamlyLogo} alt="" />
           ) : null}
           <div className="ui-brand__card-head">
             {card.eyebrow ? (
@@ -179,7 +179,7 @@ function PlanCards({
 }
 
 // Plans / Bundles segmented toggle — shown when a plan picker has 2+ categories
-// (the real Peacock category switcher). Switching swaps the rendered card set.
+// (the real Streamly category switcher). Switching swaps the rendered card set.
 function Plans({
   section,
   selectedId,
@@ -248,15 +248,32 @@ function Faq({ items }: { items: PreviewItem[] }) {
   );
 }
 
+// An item with artwork: a poster (title + copy under the image) or a logo tile
+// (the logo carries its own name, so no caption). Logos are the "logo-" files.
+function ArtTile({ item }: { item: PreviewItem }) {
+  const logo = /^logo-/.test(item.image ?? "");
+  return (
+    <figure className={logo ? "ui-brand__art ui-brand__art--logo" : "ui-brand__art"}>
+      <img className="ui-brand__art-img" src={widgetArtUrl(item.image ?? "")} alt="" loading="lazy" />
+      {!logo && item.title ? <figcaption className="ui-brand__tile-label">{item.title}</figcaption> : null}
+      {!logo && item.body ? <span className="ui-brand__tile-sub">{item.body}</span> : null}
+    </figure>
+  );
+}
+
 function Rail({ items }: { items: PreviewItem[] }) {
   return (
     <div className="ui-brand__rail">
-      {items.map((it, i) => (
-        <div key={i} className="ui-brand__tile ui-brand__tile--wide">
-          <span className="ui-brand__tile-label">{it.title}</span>
-          {it.body ? <span className="ui-brand__tile-sub">{it.body}</span> : null}
-        </div>
-      ))}
+      {items.map((it, i) =>
+        it.image ? (
+          <ArtTile key={i} item={it} />
+        ) : (
+          <div key={i} className="ui-brand__tile ui-brand__tile--wide">
+            <span className="ui-brand__tile-label">{it.title}</span>
+            {it.body ? <span className="ui-brand__tile-sub">{it.body}</span> : null}
+          </div>
+        ),
+      )}
     </div>
   );
 }
@@ -264,11 +281,15 @@ function Rail({ items }: { items: PreviewItem[] }) {
 function Grid({ items }: { items: PreviewItem[] }) {
   return (
     <div className="ui-brand__grid">
-      {items.map((it, i) => (
-        <div key={i} className="ui-brand__tile">
-          <span className="ui-brand__tile-label">{it.title}</span>
-        </div>
-      ))}
+      {items.map((it, i) =>
+        it.image ? (
+          <ArtTile key={i} item={it} />
+        ) : (
+          <div key={i} className="ui-brand__tile">
+            <span className="ui-brand__tile-label">{it.title}</span>
+          </div>
+        ),
+      )}
     </div>
   );
 }
@@ -355,6 +376,12 @@ function BrandSection({
 }) {
   const { kind } = section;
   const showHeader = kind !== "footer";
+  // Hero and banner take their background artwork, under a dark scrim so the
+  // white copy and CTA stay readable. Light backgrounds keep the flat colour.
+  const art =
+    (kind === "hero" || kind === "banner") && section.background !== "light" && section.image
+      ? section.image
+      : undefined;
   return (
     <section
       className="ui-brand__section"
@@ -363,6 +390,16 @@ function BrandSection({
       data-align={section.alignment}
       data-node-id={section.nodeId}
       data-selected={section.nodeId === selectedId ? "true" : undefined}
+      data-art={art ? "true" : undefined}
+      style={
+        art
+          ? {
+              backgroundImage: `linear-gradient(90deg, rgba(8,8,14,0.85) 0%, rgba(8,8,14,0.45) 60%, rgba(8,8,14,0.15) 100%), url("${widgetArtUrl(art)}")`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }
+          : undefined
+      }
       onClick={() => onPick(section.nodeId)}
     >
       {showHeader && (section.eyebrow || section.title || section.subtitle) ? (
@@ -430,7 +467,7 @@ export function BrandRender({
   return (
     <div className="ui-brand" data-pick={pickMode ? "true" : undefined}>
       <header className="ui-brand__header">
-        <img className="ui-brand__logo-img" src={peacockLogo} alt="Peacock" />
+        <img className="ui-brand__logo-img" src={streamlyLogo} alt="Streamly" />
         <div className="ui-brand__nav">
           <CommerceWebButton buttonType="secondary" size="compact">
             Sign In

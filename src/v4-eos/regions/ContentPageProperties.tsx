@@ -529,9 +529,9 @@ export function ContentPageProperties({
                 <ReferenceSelector id="w-sticky" label="Sticky Banner Widget Data" value={config.stickyBannerWidget} onChange={(v) => onPatch({ stickyBannerWidget: v })} />
                 <Toggle
                   id="opt"
-                  label="Optimizely enabled"
-                  checked={config.optimizely}
-                  onChange={(v) => onPatch({ optimizely: v })}
+                  label="Experiments enabled"
+                  checked={config.experiments}
+                  onChange={(v) => onPatch({ experiments: v })}
                 />
               </>
             )}

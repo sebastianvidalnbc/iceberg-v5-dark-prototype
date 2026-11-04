@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button, IconButton } from "../ui-lib/Button";
 import { Icon } from "../ui-lib/Icon";
+import { CreatePageDialog } from "../regions/CreatePageDialog";
 import { Badge, StatusDot } from "../ui-lib/Badge";
 import { SearchInput } from "../ui-lib/TextInput";
 import { EmptyState } from "../ui-lib/EmptyState";
@@ -80,7 +81,10 @@ function orderRows(allRows: SlugRow[], sort: SortState<SortKey>, flat: boolean):
 // clickable through to the Variants view. All CTAs besides search/filters/
 // pagination are prototype no-ops.
 export function PagesView() {
-  const allRows = useMemo(() => buildSlugRows(), []);
+  // Bumped after a page is created so the list rebuilds from the updated tree.
+  const [treeVersion, setTreeVersion] = useState(0);
+  const [createOpen, setCreateOpen] = useState(false);
+  const allRows = useMemo(() => buildSlugRows(), [treeVersion]);
   // Every top-level slug gets a default hue for its marker bar. Colour is not
   // user-selectable on this list.
   const hueByGroup = useMemo(() => {
@@ -158,9 +162,23 @@ export function PagesView() {
       <header className="ui-ws-browse__head">
         <div className="ui-ws-browse__title">
           <h1 className="ui-ws-browse__h1">Pages</h1>
-          <IconButton icon="plus" aria-label="Create page" className="ui-ws-browse__add" />
+          <IconButton
+            icon="plus"
+            aria-label="Create page"
+            className="ui-ws-browse__add"
+            onClick={() => setCreateOpen(true)}
+          />
         </div>
       </header>
+      <CreatePageDialog
+        open={createOpen}
+        onOpenChange={setCreateOpen}
+        onCreated={(variantId, openEditor) => {
+          setTreeVersion((v) => v + 1);
+          if (openEditor) navigate(routes.editor("page", variantId));
+        }}
+        onOpenExisting={(pageId) => navigate(routes.variants(pageId))}
+      />
 
       <div className="ui-ws-browse__toolbar">
         <SearchInput

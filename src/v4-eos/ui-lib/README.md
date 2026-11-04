@@ -72,7 +72,7 @@ success where relevant).
 - **Legacy token aliases** in `tokens.css` exist only for V1's `index.css`
   back-compat and are marked as such — do not use them for new work.
 
-## Preparing for extraction (`@nbcu/iceberg-ui`)
+## Preparing for extraction (`@acme/iceberg-ui`)
 
 The long-term goal is for this folder to become a standalone package usable by
 other internal apps. It is **not** a package yet — do not publish. Status of the

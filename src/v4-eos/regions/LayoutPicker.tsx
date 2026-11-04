@@ -11,7 +11,7 @@ import { Button } from "@/v4-eos/ui/button";
 import { SearchInput } from "@/v4-eos/ui/panel";
 import { ScrollArea } from "@/v4-eos/ui/scroll-area";
 import { MSym } from "@/v4-eos/ui/msym";
-import { LAYOUT_CATALOG, type LayoutDef, type LayoutGroup } from "../layouts";
+import { isRetiredLayout, LAYOUT_CATALOG, type LayoutDef, type LayoutGroup } from "../layouts";
 import { LAYOUT_TYPES, layoutTypeOf } from "../layout-identity";
 
 const GROUP_ORDER: LayoutGroup[] = [
@@ -22,6 +22,9 @@ const GROUP_ORDER: LayoutGroup[] = [
   "Structure",
   "Logic & Targeting",
 ];
+
+// Retired (legacy) layouts are not offered for new sections.
+const PICKER_LAYOUTS = LAYOUT_CATALOG.filter((l) => !isRetiredLayout(l));
 
 const PREVIEW_BASE = `${import.meta.env.BASE_URL}layout-previews/`;
 
@@ -112,8 +115,8 @@ export function LayoutPicker({
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return LAYOUT_CATALOG;
-    return LAYOUT_CATALOG.filter(
+    if (!q) return PICKER_LAYOUTS;
+    return PICKER_LAYOUTS.filter(
       (l) =>
         l.name.toLowerCase().includes(q) ||
         l.description.toLowerCase().includes(q) ||

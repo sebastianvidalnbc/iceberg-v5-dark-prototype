@@ -1,7 +1,7 @@
 import React from "react";
 
 // Preview-local Commerce Web Button — a faithful reconstruction of the verified
-// Peacock Commerce UI Kit "Web Button" (Buttons canvas 43240:4373):
+// Streamly Commerce UI Kit "Web Button" (Buttons canvas 43240:4373):
 //   WebButtonPrimary   59078:3556  — brand-gradient bg, #000 label   [VERIFIED]
 //   WebButtonSecondary 59078:3568  — #323538 @64% + material blur     [VERIFIED]
 //   WebButtonTertiary  59078:3585  — text button, #fff @ ~80% label   [VERIFIED]

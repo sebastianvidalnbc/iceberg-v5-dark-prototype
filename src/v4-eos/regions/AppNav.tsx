@@ -18,7 +18,7 @@ const NAV_ICONS: Record<string, IconName> = {
   "Event Pages": "calendar",
   "Central Mgmt": "cube",
   "QA Queue": "clipboard-check",
-  Optimizely: "flask",
+  Experiments: "flask",
   "Scheduled Pages": "calendar-clock",
   Redirects: "redirect",
   "Services CMS": "server",

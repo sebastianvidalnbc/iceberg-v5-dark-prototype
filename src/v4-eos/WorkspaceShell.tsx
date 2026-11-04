@@ -7,7 +7,12 @@ import {
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import { AppShell } from "./AppShell";
-import { widgetCollectionTree } from "./widget-create";
+import { saveSectionAsWidget, widgetCollectionTree } from "./widget-create";
+import {
+  asWidgetReference,
+  hasLiveReference,
+  refreshReferences,
+} from "./widget-links";
 import { Explorer } from "./regions/Explorer";
 import { LivePreview } from "./regions/LivePreview";
 import { Properties } from "./regions/Properties";
@@ -31,6 +36,7 @@ import {
   type NavDestination,
 } from "./data";
 import { findPageForVariant, routes, navigate } from "./browse";
+import { markModuleEdited, unlinkNewRoots } from "./page-modules";
 import {
   appendChild,
   cloneKeepIds,
@@ -78,7 +84,7 @@ function seedMemory(variantId: string): ExperienceMemory {
   return {
     expanded: seedExpandedFor(variantId),
     selectedNodeId: variant ? variant.defaultSelectionId : "",
-    structure: variant ? cloneKeepIds(variant.structure) : [],
+    structure: variant ? refreshReferences(cloneKeepIds(variant.structure)) : [],
   };
 }
 
@@ -371,18 +377,29 @@ export function WorkspaceShell({
     [isPage, selectedExperienceId]
   );
 
+  // On a page, editing inside a linked module turns it into a custom module.
+  const touchModule = useCallback(
+    (nodes: StructureNode[], nodeId: string) =>
+      isPage ? markModuleEdited(nodes, nodeId) : nodes,
+    [isPage]
+  );
+
   const handleRenameNode = useCallback(
     (nodeId: string, label: string) => {
       const trimmed = label.trim();
       if (!trimmed) return;
-      updateStructure((nodes) => renameNode(nodes, nodeId, trimmed));
+      updateStructure((nodes) => renameNode(touchModule(nodes, nodeId), nodeId, trimmed));
     },
-    [updateStructure]
+    [updateStructure, touchModule]
   );
 
   const handleDuplicateNode = useCallback(
-    (nodeId: string) => updateStructure((nodes) => duplicateNode(nodes, nodeId)),
-    [updateStructure]
+    (nodeId: string) =>
+      updateStructure((nodes) => {
+        const next = duplicateNode(nodes, nodeId);
+        return isPage ? unlinkNewRoots(nodes, next) : next;
+      }),
+    [updateStructure, isPage]
   );
 
   const handleCopyNode = useCallback(
@@ -400,16 +417,20 @@ export function WorkspaceShell({
       // Fresh ids each paste so repeated pastes never collide.
       const toInsert = cloneWithNewIds(clipboard);
       updateStructure(
-        (nodes) => insertAfter(nodes, afterId, toInsert),
+        (nodes) => {
+          const next = insertAfter(nodes, afterId, toInsert);
+          return isPage ? unlinkNewRoots(nodes, next) : next;
+        },
         toInsert.id,
       );
     },
-    [clipboard, updateStructure]
+    [clipboard, updateStructure, isPage]
   );
 
   const handleToggleDisabled = useCallback(
-    (nodeId: string) => updateStructure((nodes) => toggleDisabled(nodes, nodeId)),
-    [updateStructure]
+    (nodeId: string) =>
+      updateStructure((nodes) => toggleDisabled(touchModule(nodes, nodeId), nodeId)),
+    [updateStructure, touchModule]
   );
 
   const handleDeleteNode = useCallback(
@@ -439,8 +460,60 @@ export function WorkspaceShell({
     []
   );
 
+  // "Save as widget" on a page section: its content becomes a saved widget, and
+  // the section turns into a reference to that widget.
+  const handleSaveAsWidget = useCallback(
+    (nodeId: string) => {
+      if (!isPage || !selectedExperienceId) return;
+      const cur = pageMemory[selectedExperienceId];
+      const section = cur ? findNodeById(cur.structure, nodeId) : null;
+      if (!section) return;
+      const slug = saveSectionAsWidget(section);
+      const reference = asWidgetReference(section, slug);
+      setPageMemory((prev) => {
+        const mem = prev[selectedExperienceId];
+        if (!mem) return prev;
+        return {
+          ...prev,
+          [selectedExperienceId]: {
+            ...mem,
+            structure: mem.structure.map((n) => (n.id === nodeId ? reference : n)),
+          },
+        };
+      });
+    },
+    [isPage, selectedExperienceId, pageMemory]
+  );
+
+  // Widget edits flow to the pages that reference the widget. While a widget is
+  // open its editor memory is the source of truth: push a changed structure into
+  // the widget registry, then refresh every page's live references to it.
+  useEffect(() => {
+    const changed: string[] = [];
+    for (const [configId, mem] of Object.entries(widgetMemory)) {
+      const config = WIDGET_CONFIGS[configId];
+      if (!config) continue;
+      if (JSON.stringify(config.structure) === JSON.stringify(mem.structure)) continue;
+      config.structure = mem.structure;
+      changed.push(config.name);
+    }
+    if (changed.length === 0) return;
+    setPageMemory((prev) => {
+      const next = { ...prev };
+      for (const k of Object.keys(next)) {
+        for (const slug of changed) {
+          if (hasLiveReference(next[k].structure, slug)) {
+            next[k] = { ...next[k], structure: refreshReferences(next[k].structure, slug) };
+          }
+        }
+      }
+      return next;
+    });
+  }, [widgetMemory]);
+
   // Apply the chosen layout: build a fresh pre-filled section subtree and insert
   // it at the target slot, then select + expand it so the author lands on it.
+  // A layout added on a page is a copy of the layout, not a widget reference.
   const handleChooseLayout = useCallback(
     (layoutId: string) => {
       const def = getLayoutDef(layoutId);
@@ -486,7 +559,7 @@ export function WorkspaceShell({
         const parent = findNodeById(cur.structure, parentId);
         const child =
           (parent && buildSchemaChild(parent)) ?? createChildNode(childType);
-        const structure = appendChild(cur.structure, parentId, child);
+        const structure = appendChild(touchModule(cur.structure, parentId), parentId, child);
         const expanded = new Set(cur.expanded).add(parentId);
         return {
           ...prev,
@@ -499,7 +572,7 @@ export function WorkspaceShell({
         };
       });
     },
-    [isPage, selectedExperienceId]
+    [isPage, selectedExperienceId, touchModule]
   );
 
   // Edit a property field on the selected object (live). This writes the value
@@ -511,17 +584,19 @@ export function WorkspaceShell({
   const handleEditField = useCallback(
     (nodeId: string, label: string, value: string) => {
       if (label === DESIGN_FIELD) {
-        updateStructure((nodes) => setNodeDesign(nodes, nodeId, value as StructureNode["design"]));
+        updateStructure((nodes) =>
+          setNodeDesign(touchModule(nodes, nodeId), nodeId, value as StructureNode["design"])
+        );
         return;
       }
       updateStructure((nodes) => {
-        const next = setNodeContent(nodes, nodeId, label, value);
+        const next = setNodeContent(touchModule(nodes, nodeId), nodeId, label, value);
         const node = findNodeById(nodes, nodeId);
         const title = value.trim();
         return node && isNameField(node, label) && title ? renameNode(next, nodeId, title) : next;
       });
     },
-    [updateStructure]
+    [updateStructure, touchModule]
   );
 
   // The selected instance's authored VALUES.
@@ -851,6 +926,7 @@ export function WorkspaceShell({
             onDeleteNode={handleDeleteNode}
             onMoveNode={handleMoveNode}
             onRequestAddLayout={handleRequestAddLayout}
+            onSaveAsWidget={isPage ? handleSaveAsWidget : undefined}
           />
           {/* Drag handle: resize the Explorer column (tree/collection) against
               the preview, up to a max width. */}

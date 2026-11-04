@@ -128,7 +128,7 @@ export function VariantsView({ pageId }: { pageId: string }) {
         <div className="ui-ws-browse__row ui-ws-browse__row--head" role="row">
           <span role="columnheader">Variant Name</span>
           <span role="columnheader">QA Status</span>
-          <span role="columnheader">Optimizely</span>
+          <span role="columnheader">Experiments</span>
           <span role="columnheader">Publish</span>
           <span role="columnheader">Scheduled time</span>
           <span role="columnheader">Un-Published time</span>
@@ -205,10 +205,10 @@ function VariantRowItem({
       </span>
       <span role="cell">{qaBadge(row.qaStatus)}</span>
       <span
-        className={`ui-ws-browse__optimizely${row.optimizely ? " is-on" : ""}`}
+        className={`ui-ws-browse__experiments${row.experiments ? " is-on" : ""}`}
         role="cell"
-        title={row.optimizely ? "Optimizely is on" : "Optimizely is off"}
-        aria-label={row.optimizely ? "Optimizely on" : "Optimizely off"}
+        title={row.experiments ? "Experiments is on" : "Experiments is off"}
+        aria-label={row.experiments ? "Experiments on" : "Experiments off"}
       >
         <Icon name="flask" size={16} />
       </span>
