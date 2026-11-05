@@ -358,7 +358,7 @@ export function StarterPreview({
 }) {
   const url = `streamlytv.com${slug || "/new-page"}`;
   return (
-    <div className="flex flex-col gap-3 p-5">
+    <div className="flex flex-col gap-3 px-8 py-5">
       <div>
         <h3 className="text-[length:var(--type-title-md-size)] leading-[length:var(--type-title-md-lh)] font-semibold text-foreground">
           {template ? template.name : "Blank page"}

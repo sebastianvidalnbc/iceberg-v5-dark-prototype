@@ -4,7 +4,6 @@ import {
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
 } from "@/v4-eos/ui/dialog";
 import { Input } from "@/v4-eos/ui/input";
@@ -98,15 +97,6 @@ export function CreatePageDialog({
       }}
     >
       <DialogContent className="w-[1040px] max-w-[calc(100vw-48px)] gap-0 p-0">
-        <DialogHeader className="gap-1 px-6 pt-6">
-          <DialogTitle className="text-[length:var(--type-title-lg-size)] leading-[length:var(--type-title-lg-lh)] font-semibold text-foreground">
-            Create new Page
-          </DialogTitle>
-          <DialogDescription className="text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] text-[var(--color-text-secondary)]">
-            Name the page, then start blank or from a starter template.
-          </DialogDescription>
-        </DialogHeader>
-
         <form
           className="flex flex-col"
           onSubmit={(e) => {
@@ -114,7 +104,16 @@ export function CreatePageDialog({
             if (canCreate) create(true);
           }}
         >
-          <div className="flex flex-col gap-2 px-6 pt-5 pb-5">
+          <div className="flex items-start justify-between gap-8 border-b border-[var(--color-border-subtle)] px-8 pt-8 pb-4">
+            <div className="flex flex-col gap-0.5">
+              <DialogTitle className="text-[length:var(--type-title-lg-size)] leading-[length:var(--type-title-lg-lh)] font-semibold text-foreground">
+                Create new Page
+              </DialogTitle>
+              <DialogDescription className="text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] text-[var(--color-text-secondary)]">
+                Name the page, then start blank or from a starter template.
+              </DialogDescription>
+            </div>
+            <div className="flex w-[460px] shrink-0 flex-col gap-1.5">
             <label htmlFor="create-page-name" className="ui-field__label">
               Name
             </label>
@@ -166,14 +165,15 @@ export function CreatePageDialog({
                 </div>
               )}
             </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-[280px_minmax(0,1fr)] border-t border-[var(--color-border-default)]">
             <div className="flex min-h-0 flex-col border-r border-[var(--color-border-default)]">
-              <div className="flex h-9 items-center px-3 text-[length:var(--type-label-lg-size)] leading-[length:var(--type-label-lg-lh)] font-semibold text-foreground">
+              <div className="flex h-9 items-center px-8 text-[length:var(--type-label-lg-size)] leading-[length:var(--type-label-lg-lh)] font-semibold text-foreground">
                 Start from
               </div>
-              <ScrollArea className="h-[52vh] min-h-0">
+              <ScrollArea className="h-[calc(64vh-2.25rem)] min-h-0">
                 <div className="flex flex-col px-2 pb-2" role="group" aria-label="Start from">
                   {RAIL_OPTIONS.map((o, i) => {
                     const active = start === o.id;
@@ -185,7 +185,7 @@ export function CreatePageDialog({
                           aria-pressed={active}
                           onClick={() => setStart(o.id)}
                           className={
-                            "flex h-[60px] w-full flex-col justify-center gap-0.5 rounded-[var(--radius-sm)] px-3 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 " +
+                            "flex h-[60px] w-full flex-col justify-center gap-0.5 rounded-[var(--radius-sm)] px-6 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 " +
                             (active
                               ? "bg-[var(--color-bg-selected)] shadow-[inset_3px_0_0_var(--color-action-primary)]"
                               : "hover:bg-[var(--color-bg-hover)]")
@@ -205,12 +205,12 @@ export function CreatePageDialog({
               </ScrollArea>
             </div>
 
-            <ScrollArea className="h-[52vh] min-h-0 bg-[var(--color-bg-preview-canvas)]">
+            <ScrollArea className="h-[64vh] min-h-0 bg-[var(--color-bg-preview-canvas)]">
               <StarterPreview template={selected} slug={slug} />
             </ScrollArea>
           </div>
 
-          <DialogFooter className="flex-row items-center justify-between gap-2 border-t border-[var(--color-border-default)] px-6 py-4">
+          <DialogFooter className="flex-row items-center justify-between gap-2 border-t border-[var(--color-border-default)] px-8 py-4">
             <span className="flex items-center gap-1.5 text-[length:var(--type-body-sm-size)] leading-[length:var(--type-body-sm-lh)] text-[var(--color-text-secondary)]">
               <MSym name="info" size={14} />
               {selected
