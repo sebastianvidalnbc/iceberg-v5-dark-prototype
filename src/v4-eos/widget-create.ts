@@ -1,5 +1,5 @@
 import { PRODUCTION_WIDGETS, type ProductionWidget } from "./production-widgets";
-import { TOP50_WIDGET_SECTIONS } from "./widget-top50";
+import { TOP50_VARIANT_TEMPLATES, TOP50_WIDGET_SECTIONS } from "./widget-top50";
 import { widgetVariantsFor } from "./widget-variants";
 import {
   WIDGET_CONFIGS,
@@ -77,13 +77,40 @@ for (const w of PRODUCTION_WIDGETS) {
   }
 }
 
+// Captured variant template -> the V5 layout that renders it. A template with no
+// layout here (e.g. SPORTS CONTENT OFFERING) keeps its name as a placeholder.
+const TEMPLATE_LAYOUT: Record<string, string> = {
+  Banner: "banner",
+  "Video rail": "video-multiple",
+  "Footer SEO (IA)": "seo-footer",
+  "Plan Picker - Multi Difference": "plan-picker-multi-diff",
+};
+
+// One captured variant section ("section-1" in production), built from its template.
+function variantSection(template: string): StructureNode {
+  const def = getLayoutDef(TEMPLATE_LAYOUT[template] ?? "");
+  if (def) {
+    const node = buildLayoutNode(def);
+    node.label = "section-1";
+    return node;
+  }
+  const node = buildPlaceholderSection("section-1");
+  if (template) node.role = template;
+  return node;
+}
+
 // Each variant is its own editor workspace (production opens a variant, not the
-// widget). Its structure is the widget's captured section: per-variant structure
-// is not captured yet, so every variant starts from the same placeholder.
+// widget). Its structure is the section captured from that variant's editor; a
+// variant with no captured template falls back to the widget's section.
 for (const w of PRODUCTION_WIDGETS) {
   const sections = TOP50_WIDGET_SECTIONS[w.slug];
   for (const v of widgetVariantsFor(w.slug)) {
-    registerConfig(v.id, v.name, sections ? sections.map((label) => buildPlaceholderSection(label)) : []);
+    const template = TOP50_VARIANT_TEMPLATES[v.id];
+    const structure =
+      template !== undefined
+        ? [variantSection(template)]
+        : (sections ?? []).map((label) => buildPlaceholderSection(label));
+    registerConfig(v.id, v.name, structure);
     if (sections) WIDGET_CONFIGS[v.id].previewData = TOP50_PREVIEW;
   }
 }
