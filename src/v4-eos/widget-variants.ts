@@ -18,6 +18,20 @@ export interface WidgetVariant {
 }
 
 const PRODUCTION_VARIANTS: Record<string, WidgetVariant[]> = {
+  // The retention widget's variant carries its configuration (Widget Settings,
+  // Journey Flows); its config is registered in widget-create.ts.
+  "/retention-service-config-us": [
+    {
+      id: "wg-qa-republish",
+      name: "qa-republish-Copy of default",
+      qaStatus: "—",
+      published: true,
+      scheduledAt: null,
+      createdDate: "Fri 02 Oct 26",
+      modifiedDate: "Fri 02 Oct 26",
+      modifiedBy: "—",
+    },
+  ],
   "/basket-upsell-config": [
     {
       id: "wv-basket-copy-of-variant-1",

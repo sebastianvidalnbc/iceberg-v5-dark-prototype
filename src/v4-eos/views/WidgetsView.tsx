@@ -297,7 +297,9 @@ function WidgetRowItem({
                 onClick={() => navigate(routes.widgetVariants(row.id))}
                 title="Open the variants list"
               >
-                <Badge variant="info">{row.variantCount} variants</Badge>
+                <Badge variant="info">
+                  {row.variantCount} {row.variantCount === 1 ? "variant" : "variants"}
+                </Badge>
               </button>
             )}
           </span>

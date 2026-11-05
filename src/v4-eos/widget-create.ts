@@ -106,14 +106,20 @@ function variantSection(template: string): StructureNode {
 // Each variant is its own editor workspace (production opens a variant, not the
 // widget). Its structure is the section captured from that variant's editor; a
 // variant with no captured template falls back to the widget's section.
+// Variants whose configuration is a known widget structure, not a layout template.
+const SHARED_VARIANT_STRUCTURES: Record<string, StructureNode[]> = {
+  "wg-qa-republish": WIDGET_STRUCTURES["wg-qa-republish"] ?? [],
+};
+
 for (const w of PRODUCTION_WIDGETS) {
   const sections = TOP50_WIDGET_SECTIONS[w.slug];
   for (const v of widgetVariantsFor(w.slug)) {
     const template = TOP50_VARIANT_TEMPLATES[v.id];
     const structure =
-      template !== undefined
+      SHARED_VARIANT_STRUCTURES[v.id] ??
+      (template !== undefined
         ? [variantSection(template)]
-        : (sections ?? []).map((label) => buildPlaceholderSection(label));
+        : (sections ?? []).map((label) => buildPlaceholderSection(label)));
     registerConfig(v.id, v.name, structure);
     if (sections) WIDGET_CONFIGS[v.id].previewData = TOP50_PREVIEW;
   }
