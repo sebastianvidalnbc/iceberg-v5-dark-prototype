@@ -378,7 +378,7 @@ export function ContentPageProperties({
             {group === "memberships" && (
               <PropertyRow label="Passes" help="Select a pass in the outline to edit it.">
                 <p className={inspectorType.value}>
-                  Select, Premium / Premium Plus, STARZ, and Free. Free is
+                  Select, Premium / Premium Plus, BRANDY, and Free. Free is
                   feature-flagged in production.
                 </p>
               </PropertyRow>

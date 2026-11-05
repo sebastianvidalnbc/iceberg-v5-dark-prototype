@@ -215,7 +215,7 @@ const HAND_PAGES_TREE: TreeNode[] = [
           { id: "pg-premium-test-2", label: "Premium_Test__2", type: "variant" },
         ],
       },
-      { id: "plans-appletv", label: "/plans/apple-tv-and-streamly", type: "page", kind: "path" },
+      { id: "plans-brandttv", label: "/plans/brandt-tv-and-streamly", type: "page", kind: "path" },
       { id: "plans-subscribe", label: "/plans/subscribe", type: "page", kind: "path" },
       { id: "plans-testing", label: "/plans/testing-variant", type: "page", kind: "path" },
     ],
@@ -497,7 +497,7 @@ const makeOffer = (
 
 // Programmatically extend the real seeds up to 81 offers to demonstrate scale.
 const OFFER_PATTERNS = ["SAVED1YQ", "SAVED6MQ", "SAVECCG", "WINBACK", "LOYALTY"];
-const OFFER_PLANS = ["SOLO", "DUAL", "WWE", "PREMIUM", "PLUS"];
+const OFFER_PLANS = ["SOLO", "DUAL", "BrandW", "PREMIUM", "PLUS"];
 
 // Distribute realistic Offer Types across the seeds so the by-type grouping is
 // populated (mostly Retention, with Cross Sell / Downgrade / Other mixed in).
@@ -532,7 +532,7 @@ const buildOffers = (): OfferData[] => {
   // read-only STATUS panel have real values to show (others stay "Not live").
   offers[0].liveInFlow = "Cancel Save";
   offers[1].liveInFlow = "Cancel Save";
-  offers[4].liveInFlow = "WWE Win-back";
+  offers[4].liveInFlow = "BrandW Win-back";
   // §item4 seed end dates: one already lapsed (Expired cue), two upcoming, so the
   // STATUS badge and the Offer End Date field have real values to demonstrate.
   offers[0].offerEndDate = "2025-12-31";
@@ -937,7 +937,7 @@ const buildSegmentationArea = (): StructureNode => {
         ],
       },
       {
-        title: "WWE",
+        title: "BrandW",
         names: ["US.CANCEL.299SAVED6MQ425WWE", "US.CANCEL.299SAVED6MQ425SOLO"],
       },
     ]),

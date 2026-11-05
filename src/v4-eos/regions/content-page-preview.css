@@ -1,7 +1,5 @@
 /* Isolated Streamly island for the Content Pages preview. Tokens come from the
    Commerce UI Kit notes in renderer/brand.css — never from Eos. */
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
-
 .cp-preview {
   --pk-gold: #fccc12;
   --pk-gradient: linear-gradient(180deg, #ffe000 0%, #fccc12 50%, #ffa800 100%);

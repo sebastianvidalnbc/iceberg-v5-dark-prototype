@@ -7,7 +7,6 @@ import { EmptyState } from "../ui-lib/EmptyState";
 import { DateField } from "../ui-lib/DateField";
 import { Switch } from "../ui/switch";
 import { navigate, routes } from "../browse";
-import { WIDGET_CONFIGS } from "../data";
 import { allWidgets, productionWidgetId } from "../widget-create";
 import { widgetVariantsFor, type WidgetVariant } from "../widget-variants";
 
@@ -93,9 +92,7 @@ export function WidgetVariantsView({ widgetId }: { widgetId: string }) {
             <WidgetVariantRow
               key={v.id}
               variant={v}
-              onOpen={() =>
-                navigate(routes.editor("widget", WIDGET_CONFIGS[v.id] ? v.id : widgetId))
-              }
+              onOpen={() => navigate(routes.editor("widget", v.id))}
               onChange={(patch) => updateVariant(v, patch)}
             />
           ))

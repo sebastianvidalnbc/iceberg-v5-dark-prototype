@@ -19,7 +19,7 @@ import {
 const PASS_OPTIONS: { label: string; value: PassType }[] = [
   { label: "Select", value: "select" },
   { label: "Premium", value: "premium" },
-  { label: "STARZ", value: "starz" },
+  { label: "BRANDY", value: "brandy" },
   { label: "Free", value: "free" },
 ];
 

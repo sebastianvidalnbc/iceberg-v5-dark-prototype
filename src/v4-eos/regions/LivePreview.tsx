@@ -430,10 +430,14 @@ export function LivePreview({
   // model even when the "ready" ping is lost: a cross-document mount race, or a
   // long-lived iframe that desynced during a dev/HMR session. Paired with the
   // renderer-side re-announce, both ends of the bridge now self-heal.
+  // The check starts when the iframe mounts (hasContent), not only on its load
+  // event: a document stuck on a slow asset never fires onLoad, and the old
+  // gating left the canvas blank with no message.
   const [loadTick, setLoadTick] = useState(0);
   useEffect(() => {
-    if (loadTick === 0) return;
+    if (!hasContent) return;
     let n = 0;
+    setReady(false);
     setRendererDown(false);
     const id = window.setInterval(() => {
       postRenderRef.current();
@@ -447,7 +451,7 @@ export function LivePreview({
       }
     }, 200);
     return () => window.clearInterval(id);
-  }, [loadTick]);
+  }, [loadTick, hasContent]);
 
   // Widget context: data widgets (Retention Service) have no page render. Show
   // the real "Preview JSON in Module" picker — pick a module to render the
@@ -616,9 +620,9 @@ export function LivePreview({
                     style={{ position: "absolute", inset: 0, zIndex: 2, background: "var(--color-bg-canvas)" }}
                   >
                     <MSym name="cloud_off" size={40} className="ui-preview__empty-icon" />
-                    <p className="ui-preview__empty-title">Preview renderer not reachable</p>
+                    <p className="ui-preview__empty-title">Preview is taking too long to load</p>
                     <p className="ui-preview__empty-sub">
-                      The preview loads from the local dev server. Keep it running, then reload this page.
+                      Reload this page to try again. Edits will show once the preview is ready.
                     </p>
                   </div>
                 )}

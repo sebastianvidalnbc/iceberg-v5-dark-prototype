@@ -2,7 +2,7 @@
 // slug tree. ATOM supplies the title; this config is the shell around every
 // watch URL. Field ids follow the production CMS form (cms-schema + passes).
 
-export type PassType = "free" | "select" | "premium" | "starz";
+export type PassType = "free" | "select" | "premium" | "brandy";
 
 export interface PassConfig {
   passType: PassType;
@@ -450,7 +450,7 @@ export const DEFAULT_CONTENT_PAGE: ContentPageConfig = {
   passes: [
     pass("select", "Select", "Start Select", "/checkout/select"),
     pass("premium", "Premium / Premium Plus", "Go Premium", "/checkout/premium"),
-    pass("starz", "STARZ", "Add STARZ", "/checkout/starz"),
+    pass("brandy", "BRANDY", "Add BRANDY", "/checkout/brandy"),
     pass("free", "Free", "Watch free", "/free"),
   ],
 };
@@ -468,7 +468,7 @@ export const CONTENT_PAGE_OUTLINE: OutlineNode[] = [
     children: [
       { id: "pass-select", label: "Select" },
       { id: "pass-premium", label: "Premium / Premium Plus" },
-      { id: "pass-starz", label: "STARZ" },
+      { id: "pass-brandy", label: "BRANDY" },
     ],
   },
   {

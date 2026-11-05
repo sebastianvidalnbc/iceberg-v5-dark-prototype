@@ -1,6 +1,7 @@
-// Variants for widgets (the "Variants for /slug" list). Production variants were
-// captured for /basket-upsell-config.
-
+// Variants for widgets (the "Variants for /slug" list). Lists are captured from the
+// live CMS: /basket-upsell-config (live, read 5 Nov 2026) and the 50 most recently
+// used widgets (widget-top50.ts). Author names are not captured.
+import { TOP50_WIDGET_VARIANTS } from "./widget-top50";
 
 export interface WidgetVariant {
   id: string;
@@ -16,19 +17,8 @@ export interface WidgetVariant {
   heading?: string;
 }
 
-// Captured from production "Variants for /basket-upsell-config".
 const PRODUCTION_VARIANTS: Record<string, WidgetVariant[]> = {
   "/basket-upsell-config": [
-    {
-      id: "wv-basket-dummy",
-      name: "Dummy Widget",
-      qaStatus: "—",
-      published: false,
-      scheduledAt: null,
-      createdDate: "Tue 20 Oct 26",
-      modifiedDate: "Wed 21 Oct 26",
-      modifiedBy: "Editor E",
-    },
     {
       id: "wv-basket-copy-of-variant-1",
       name: "Copy of variant 1",
@@ -37,7 +27,7 @@ const PRODUCTION_VARIANTS: Record<string, WidgetVariant[]> = {
       scheduledAt: null,
       createdDate: "Mon 20 Jul 26",
       modifiedDate: "Mon 20 Jul 26",
-      modifiedBy: "Editor H",
+      modifiedBy: "—",
     },
     {
       id: "wv-basket-variant-1",
@@ -47,15 +37,15 @@ const PRODUCTION_VARIANTS: Record<string, WidgetVariant[]> = {
       scheduledAt: null,
       createdDate: "Tue 19 May 26",
       modifiedDate: "Tue 19 May 26",
-      modifiedBy: "Editor H",
+      modifiedBy: "—",
     },
   ],
 };
 
-// Sample variants for a handful of layouts, keyed by layout id (the widget's slug
-// is worked out from the layout, so a suffixed slug still lines up).
+// Variant lists keyed by widget slug (leading slash included).
 export const WIDGET_VARIANTS: Record<string, WidgetVariant[]> = {
   ...PRODUCTION_VARIANTS,
+  ...TOP50_WIDGET_VARIANTS,
 };
 
 export function widgetVariantsFor(slug: string): WidgetVariant[] {

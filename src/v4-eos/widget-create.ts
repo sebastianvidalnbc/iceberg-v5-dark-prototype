@@ -1,4 +1,6 @@
 import { PRODUCTION_WIDGETS, type ProductionWidget } from "./production-widgets";
+import { TOP50_WIDGET_SECTIONS } from "./widget-top50";
+import { widgetVariantsFor } from "./widget-variants";
 import {
   WIDGET_CONFIGS,
   type PreviewData,
@@ -54,8 +56,36 @@ const SEEDED_PRODUCTION: Record<string, () => StructureNode[]> = {
   "/header": () => [buildPlaceholderSection("Header")],
 };
 
+// The 50 most recently used widgets carry the section captured from their
+// published variant. Their rendered preview is not captured, so the preview
+// says so rather than showing an empty widget.
+const TOP50_PREVIEW: PreviewData = {
+  title: "Preview not captured",
+  subtitle: "Production render",
+  tone: "neutral",
+  body: "The rendered production preview is not captured. The structure shows the published variant's section.",
+};
+
 for (const w of PRODUCTION_WIDGETS) {
-  registerConfig(productionWidgetId(w.slug), w.slug, SEEDED_PRODUCTION[w.slug]?.() ?? []);
+  const id = productionWidgetId(w.slug);
+  const sections = TOP50_WIDGET_SECTIONS[w.slug];
+  if (sections && !SEEDED_PRODUCTION[w.slug]) {
+    registerConfig(id, w.slug, sections.map((label) => buildPlaceholderSection(label)));
+    WIDGET_CONFIGS[id].previewData = TOP50_PREVIEW;
+  } else {
+    registerConfig(id, w.slug, SEEDED_PRODUCTION[w.slug]?.() ?? []);
+  }
+}
+
+// Each variant is its own editor workspace (production opens a variant, not the
+// widget). Its structure is the widget's captured section: per-variant structure
+// is not captured yet, so every variant starts from the same placeholder.
+for (const w of PRODUCTION_WIDGETS) {
+  const sections = TOP50_WIDGET_SECTIONS[w.slug];
+  for (const v of widgetVariantsFor(w.slug)) {
+    registerConfig(v.id, v.name, sections ? sections.map((label) => buildPlaceholderSection(label)) : []);
+    if (sections) WIDGET_CONFIGS[v.id].previewData = TOP50_PREVIEW;
+  }
 }
 
 // Flat collection for the editor's left pane (Pages-style: one row per widget).

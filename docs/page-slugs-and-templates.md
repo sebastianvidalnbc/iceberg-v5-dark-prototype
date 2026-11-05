@@ -8,8 +8,8 @@ Pages list export from 3 Nov 2026. Source for the page types is
 
 | Top level | Subpages | Notes |
 |---|---|---|
-| `/faqs` | 1 | `mastercard` |
-| `/offer` | 10 | blackfriday, brandn, reba-fans, monopolyatmcdonalds2026, brandn-2-months, bravo-insider-offer, dish, brandgoffer1, cox-customer-offer, streamly-2024 |
+| `/faqs` | 1 | `Brands` |
+| `/offer` | 10 | blackfriday, brandn, reba-fans, brandq-at-brandr2026, brandn-2-months, bravo-insider-offer, dish, brandgoffer1, cox-customer-offer, streamly-2024 |
 | `/brando` | 1 | `limit` |
 | `/offer-terms` | ~70 | Separate tree from `/offer`. Includes offer-terms, young-adult, teacher, student, military, medical-first-responder, brand offers |
 | `/news` | 1 | `presidential-election` |
@@ -20,18 +20,18 @@ Pages list export from 3 Nov 2026. Source for the page types is
 | `/dr` | 16 | suits, the-valley, top-chef, oppenheimer, and others |
 | `/stream-event` | 6 | national-dog-show, macys-thanksgiving-parade, emmy-awards, eurovision, live-mas-live, bravocon |
 | `/partners` | 1 | `brandiupgrade` |
-| `/plans` | 12 | plans, subscribe-to-watch, all-monthly-test, all-monthly, apple-tv-and-streamly, subscribe, testing-variant, all-annual, premium-monthly, channels, sports, premium-annual |
+| `/plans` | 12 | plans, subscribe-to-watch, all-monthly-test, all-monthly, brandt-tv-and-streamly, subscribe, testing-variant, all-annual, premium-monthly, channels, sports, premium-annual |
 | `/soccer` | 1 | `en-espanol` |
-| `/add-ons` | 3 | starz, starz-test, partnerships-template |
+| `/add-ons` | 3 | brandy, brandy-test, partnerships-template |
 | `/error` | 4 | non-adult-profile, basketfail-signedout, basketfail-signedin, maintenance |
 | `/sweepstakes` | 1 | `meundies` |
 | `/quick-access` | 1 | `terms` |
-| `/bundle` | 1 | `apple-tv` |
+| `/bundle` | 1 | `brandt-tv` |
 | `/voting-terms` | 1 | `love-island` |
 | `/stream-news` | 1 | `morning-news-live` |
 
 All other slugs are standalone top-level pages (for example `/home`, `/terms`,
-`/mastercard`, `/teacher`, and the `/qa-…` pages).
+`/Brands`, `/teacher`, and the `/qa-…` pages).
 
 ## Page types found in code
 
@@ -65,11 +65,11 @@ template section.
 | News | `/news/presidential-election` | Offer → Breadcrumbs → Hero → Stream debates → ACME News NOW companion → Coming Soon → Plan picker → News content rail → Politics rail → Docs → FAQs |
 | News (landing) | `/stream-news/morning-news-live` | Sticky nav → Offer banner → Hero → Latest headlines → Always-on → Local affiliates → Shutter → FAQs → What is Streamly? → Footer |
 | Movie | `/stream-movies/minions-and-monsters` | Offer → Hero → empty → Plan picker → Description → Cast → Video → Merchandising → You May Also Like → New movies rail |
-| TV show | `/stream-tv/law-and-order` | Offer → Hero (IA) → empty → Plan picker → Description (IA) → apple → Episodes (IA) → Videos → Cast (IA) |
+| TV show | `/stream-tv/law-and-order` | Offer → Hero (IA) → empty → Plan picker → Description (IA) → brandt → Episodes (IA) → Videos → Cast (IA) |
 | Event | `/stream-event/national-dog-show` | Offer → Hero (IA) → empty → Plan picker → Description (IA) → carousels |
 | Campaign grid | `/campaign/films` | empty → Hero → Grid → empty → Plan picker → carousels |
 | Direct response / landing | `/dr/suits` | Offer → empty → Hero control/variant → Trailer → Show description → Whole Lot More → D/M rails → Plan picker → Device fam → FAQs → SEO footer |
-| Partner / bundle / add-on | `/partners/brandiupgrade`, `/bundle/apple-tv`, `/add-ons/starz` | Hero → value sections → Plan picker → Steps / Instructions → FAQ |
+| Partner / bundle / add-on | `/partners/brandiupgrade`, `/bundle/brandt-tv`, `/add-ons/brandy` | Hero → value sections → Plan picker → Steps / Instructions → FAQ |
 | Plan page | `/plans/all-monthly` | Title → See What → Premium card → empty |
 | Terms / sweepstakes | `/offer-terms/military`, `/sweepstakes/meundies` | T&C (IA) → empty sections |
 | Error | `/error/non-adult-profile` | section-1 … section-6 (no named modules) |
@@ -82,14 +82,14 @@ Notes:
 
 ## Real module structure (rendered page snapshots, ICEBERG 2.0 folder)
 
-Source: `Iceberg - Edit Page - faqs_mastercard.html` (OneDrive, ICEBERG 2.0/ICEBERG).
+Source: `Iceberg - Edit Page - faqs_Brands.html` (OneDrive, ICEBERG 2.0/ICEBERG).
 This is the only full page-level snapshot available; the rest are CMS screenshots.
 
-**FAQ template (`/faqs/mastercard`), top to bottom:**
+**FAQ template (`/faqs/Brands`), top to bottom:**
 1. Header (`ia-header`, with nav logo and buttons)
 2. Section 1 (`section-custom`):
    - Rich text: "Frequently Asked Questions" (title)
-   - Rich text: "1) Mastercard World Elite and World Legend" (group heading)
+   - Rich text: "1) Brands World Elite and World Legend" (group heading)
    - FAQs (`streamly-faqs`)
 3. Section 2 (`section-custom`):
    - Rich text (group heading)
@@ -133,9 +133,9 @@ DNC, RNC, Coming Soon, and Copy. Each saved section has its own rich-text, butto
 Module types on this page: `streamly-polyatomic-rich-text`, `streamly-faqs`, `streamly-carousel`,
 `streamly-button`, `responsive-image`, `section-reference`, plus widget slots.
 
-**Exact FAQ structure from the same JSON (`faqs/mastercard`, in `Iceberg - Edit Page - faqs_mastercard.html`):**
-Fixed: `cookie-banner`, `header`, `footer` widgets. Dynamic: section-2 "Mastercard World FAQs" (rich text + `streamly-faqs`);
-section-1 "Mastercard World Elite FAQs" (2 rich text + `streamly-faqs`). The other 18 dynamic sections
+**Exact FAQ structure from the same JSON (`faqs/Brands`, in `Iceberg - Edit Page - faqs_Brands.html`):**
+Fixed: `cookie-banner`, `header`, `footer` widgets. Dynamic: section-2 "Brands World FAQs" (rich text + `streamly-faqs`);
+section-1 "Brands World Elite FAQs" (2 rich text + `streamly-faqs`). The other 18 dynamic sections
 are empty. The rendered-HTML reading above is incomplete,
 so use this JSON for FAQ.
 
@@ -191,7 +191,7 @@ Glossary, checked against the production Help > Glossary article (written 2023, 
 
 **Evidence from the page JSON:** global references are visible. Widget slots (`widget`) and saved-section
 references (`section-reference` to `S-…`) are global. Inline modules are local to the page.
-- FAQ (`faqs/mastercard`): 3 global widget slots, 5 inline modules (rich text, `streamly-faqs`), no references.
+- FAQ (`faqs/Brands`): 3 global widget slots, 5 inline modules (rich text, `streamly-faqs`), no references.
 - News (`news/presidential-election`): 7 global widget slots, 34 saved-section references, 30 inline modules (excluding empty placeholders).
 - Sports (`sports`): 8 global widget slots, 8 saved-section references, 4 `section-ia-*` templates, 5 inline rich text + 2 images.
 
@@ -200,7 +200,7 @@ references (`section-reference` to `S-…`) are global. Inline modules are local
    (`Iceberg - Content Pages.html`). This tells us which pages are global content pages.
 2. **One content-page snapshot** (Edit Page, Webpage Complete): confirms that a content page has a fixed set of modules.
 3. **Parent template snapshots** for news and FAQ: `/news` and `/faqs`. Comparing them with the child pages
-   (`/news/presidential-election`, `/faqs/mastercard`) shows which changes make a page custom.
+   (`/news/presidential-election`, `/faqs/Brands`) shows which changes make a page custom.
 
 **Efficiency pain points (per `AUTHOR-EFFICIENCY.md`):** helps #1 (one template change reaches a set of pages),
 #6 (stop building bespoke pages from scratch), #3 (global widgets shared across territories).

@@ -176,7 +176,7 @@ export const WIDGET_COPY: Record<string, WidgetCopy> = {
     title: "Why Streamly",
     items: [
       { title: "Thousands of hours", body: "Shows, movies and Originals added every week." },
-      { title: "Live sports", body: "Premier League, WWE and more, live and on demand." },
+      { title: "Live sports", body: "Premier League, BrandW and more, live and on demand." },
       { title: "Watch anywhere", body: "Stream on your phone, tablet, laptop and TV." },
       { title: "Cancel anytime", body: "Change or cancel your plan from your account." },
     ],
