@@ -63,6 +63,7 @@ export function RendererApp() {
           selectedId: data.selectedId,
           pickMode: data.pickMode,
         });
+        post({ source: PREVIEW_SOURCE, type: "rendered" });
       } else if (data.type === "pick-mode") {
         setState((prev) => ({ ...prev, pickMode: data.enabled }));
       }

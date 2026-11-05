@@ -3,6 +3,7 @@ import { TOP50_VARIANT_TEMPLATES, TOP50_WIDGET_SECTIONS } from "./widget-top50";
 import { widgetVariantsFor } from "./widget-variants";
 import {
   WIDGET_CONFIGS,
+  WIDGET_STRUCTURES,
   type PreviewData,
   type StructureNode,
   type TreeNode,
@@ -49,6 +50,9 @@ function registerConfig(id: string, slug: string, structure: StructureNode[] = [
 // page that references them shows a footer and a header. The rest stay empty
 // until sections are added in the editor.
 const SEEDED_PRODUCTION: Record<string, () => StructureNode[]> = {
+  // The retention service widget: Configurations (Widget Settings, Journey Flows)
+  // and Authoring (Offers, Segmentation, Survey Responses).
+  "/retention-service-config-us": () => WIDGET_STRUCTURES["wg-qa-republish"] ?? [],
   "/seo-footer": () => {
     const def = getLayoutDef("seo-footer");
     return def ? [buildLayoutNode(def)] : [];
@@ -116,13 +120,19 @@ for (const w of PRODUCTION_WIDGETS) {
 }
 
 // Flat collection for the editor's left pane (Pages-style: one row per widget).
+// Each widget lists its variants underneath; a variant row opens its own workspace.
 export function widgetCollectionTree(): TreeNode[] {
   return allWidgets().map((w) => ({
     id: productionWidgetId(w.slug),
     label: w.slug,
     type: "page",
     kind: "path",
-    children: [],
+    children: widgetVariantsFor(w.slug).map((v) => ({
+      id: v.id,
+      label: v.name,
+      type: "variant",
+      children: [],
+    })),
   }));
 }
 

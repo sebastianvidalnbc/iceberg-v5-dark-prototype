@@ -1,16 +1,27 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { Button, IconButton } from "../ui-lib/Button";
 import { Badge } from "../ui-lib/Badge";
-import { MSym } from "../ui/msym";
 import { SearchInput } from "../ui-lib/TextInput";
 import { FilterChip } from "../ui-lib/FilterChip";
 import { TableFooter } from "../ui-lib/TableFooter";
 import { EmptyState } from "../ui-lib/EmptyState";
-import { buildWidgetRows, routes, navigate, type WidgetRow, type WidgetFormat, type WidgetType } from "../browse";
-import type { WidgetChildRow } from "../browse";
+import { BrowseGroupHeader, useGroupHues } from "../ui-lib/BrowseGroupHeader";
 import { SortHeaderCell, compareSortValues, nextSort, type SortState } from "../ui-lib/SortableHeader";
+import {
+  buildWidgetRows,
+  groupHueVars,
+  groupWidgetRows,
+  WIDGET_TYPE_ORDER,
+  WIDGET_TYPE_SWATCH,
+  routes,
+  navigate,
+  type GroupSwatch,
+  type WidgetChildRow,
+  type WidgetFormat,
+  type WidgetRow,
+  type WidgetType,
+} from "../browse";
 import { CreateWidgetDialog } from "../regions/CreateWidgetDialog";
-import { LAYOUT_TYPES, type LayoutTypeId } from "../layout-identity";
 
 type SortKey = "slug" | "widgetName" | "createdAt" | "modifiedAt";
 
@@ -34,68 +45,87 @@ function sortValue(row: WidgetRow, key: SortKey): string | number {
   }
 }
 
-// Widget family → the layout type it is built from. Rows take that type's
-// colour, the same one the Layout Picker and Structure Explorer use.
-const WIDGET_LAYOUT_TYPE: Record<WidgetType, LayoutTypeId> = {
-  Retention: "content",
-  "Plan Picker": "plan-picker",
-  Promotions: "commerce",
-  Banner: "hero",
-  Media: "media",
-  SEO: "footer",
-  Legal: "structure",
-  Other: "structure",
-};
-
 // Production format glyphs (list-item.component): HTML → "</>", JSON → "{…}".
 function formatGlyph(format: WidgetFormat): string {
   return format === "HTML" ? "</>" : "{…}";
 }
 
-// Widgets list — the real production Widgets screen (259 widgets), now a flat
-// table: Format filter (All / HTML / JSON), slug search, sortable columns.
-// "+" opens production's Create new Widget dialog (name + HTML/JSON template).
+// Widgets list, in the V4 layout: rows grouped by widget Type (Retention first)
+// under collapsible headers, with a Type filter row and a HTML/JSON format filter.
+// A widget with variants shows a "N variants" badge; its chevron expands the
+// variants inline, and each variant opens its own editor. "+" opens the Create
+// new Widget dialog.
 export function WidgetsView() {
   // Bumped when a widget is created, so the rows include it.
   const [rowsVersion, setRowsVersion] = useState(0);
   const allRows = useMemo(() => buildWidgetRows(), [rowsVersion]);
+  const { swatchFor, setGroupHue } = useGroupHues();
   const [query, setQuery] = useState("");
   const [formatFilter, setFormatFilter] = useState<"all" | WidgetFormat>("all");
-  const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
+  const [typeFilter, setTypeFilter] = useState<"all" | WidgetType>("all");
   const [sort, setSort] = useState<SortState<SortKey>>({ key: "modifiedAt", dir: "desc" });
   const onSort = (key: SortKey) => setSort((prev) => nextSort(prev, key));
-  const [createOpen, setCreateOpen] = useState(false);
-  // Rows expand independently to show the pages each widget is used on.
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
+  // Rows expand independently to show their variants and pages.
   const [openIds, setOpenIds] = useState<Set<string>>(() => new Set());
+  // Per-Type collapse memory for the group section headers.
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<WidgetType>>(() => new Set());
+  const [createOpen, setCreateOpen] = useState(false);
+
+  const q = query.trim().toLowerCase();
+  const searched = q
+    ? allRows.filter((r) => r.slug.toLowerCase().includes(q) || r.widgetName.toLowerCase().includes(q))
+    : allRows;
+
+  const formatCounts = useMemo(() => {
+    const acc: Record<WidgetFormat, number> = { HTML: 0, JSON: 0 };
+    for (const r of searched) acc[r.format] += 1;
+    return acc;
+  }, [searched]);
+
+  const formatted =
+    formatFilter === "all" ? searched : searched.filter((r) => r.format === formatFilter);
+
+  // Per-Type counts over the current search + format results drive the Type chips.
+  const typeCounts = useMemo(() => {
+    const acc = {} as Record<WidgetType, number>;
+    for (const r of formatted) acc[r.type] = (acc[r.type] ?? 0) + 1;
+    return acc;
+  }, [formatted]);
+
+  // If the active type has no matches after a search, fall back to All.
+  const effectiveType = typeFilter !== "all" && !typeCounts[typeFilter] ? "all" : typeFilter;
+
+  const filtered = useMemo(() => {
+    const base = effectiveType === "all" ? formatted : formatted.filter((r) => r.type === effectiveType);
+    // Sort before grouping and paging, so each group keeps the chosen order.
+    return [...base].sort((a, b) =>
+      compareSortValues(sortValue(a, sort.key), sortValue(b, sort.key), sort.dir),
+    );
+  }, [formatted, effectiveType, sort]);
+
+  useEffect(() => setPage(0), [q, formatFilter, effectiveType, pageSize, sort]);
+
+  const pageRows = filtered.slice(page * pageSize, page * pageSize + pageSize);
+  const groups = groupWidgetRows(pageRows);
+
+  // Searching, or narrowing to one type, opens every visible group.
+  const forceOpen = q !== "" || effectiveType !== "all";
+  const isCollapsed = (t: WidgetType) => !forceOpen && collapsedGroups.has(t);
+
   const toggleRow = (id: string) =>
     setOpenIds((cur) => {
       const next = new Set(cur);
       next.has(id) ? next.delete(id) : next.add(id);
       return next;
     });
-
-  const q = query.trim().toLowerCase();
-  const searched = q ? allRows.filter((r) => r.slug.toLowerCase().includes(q)) : allRows;
-
-  const formatCounts = useMemo(() => {
-    const acc: Record<WidgetFormat, number> = { HTML: 0, JSON: 0 };
-    for (const r of allRows) acc[r.format] += 1;
-    return acc;
-  }, [allRows]);
-
-  const filtered = useMemo(() => {
-    const base =
-      formatFilter === "all" ? searched : searched.filter((r) => r.format === formatFilter);
-    // Sort before paging so each page is a slice of the full order.
-    return [...base].sort((a, b) =>
-      compareSortValues(sortValue(a, sort.key), sortValue(b, sort.key), sort.dir),
-    );
-  }, [searched, formatFilter, sort]);
-
-  useEffect(() => setPage(0), [q, formatFilter, pageSize, sort]);
-
-  const pageRows = filtered.slice(page * pageSize, page * pageSize + pageSize);
+  const toggleGroup = (t: WidgetType) =>
+    setCollapsedGroups((prev) => {
+      const next = new Set(prev);
+      next.has(t) ? next.delete(t) : next.add(t);
+      return next;
+    });
 
   return (
     <div className="ui-ws-browse">
@@ -128,10 +158,19 @@ export function WidgetsView() {
 
       <div className="ui-ws-browse__filters">
         <FilterChip
-          label={`All (${allRows.length})`}
-          active={formatFilter === "all"}
-          onClick={() => setFormatFilter("all")}
+          label={`All (${searched.length})`}
+          active={effectiveType === "all"}
+          onClick={() => setTypeFilter("all")}
         />
+        {WIDGET_TYPE_ORDER.filter((t) => typeCounts[t] > 0).map((t) => (
+          <FilterChip
+            key={t}
+            label={`${t} (${typeCounts[t]})`}
+            active={effectiveType === t}
+            onClick={() => setTypeFilter((f) => (f === t ? "all" : t))}
+          />
+        ))}
+        <span className="ui-ws-browse__filter-sep" aria-hidden="true" />
         {(["HTML", "JSON"] as WidgetFormat[]).map((f) => (
           <FilterChip
             key={f}
@@ -150,20 +189,38 @@ export function WidgetsView() {
           <span role="columnheader" aria-label="Actions" />
         </div>
 
-        {pageRows.length === 0 ? (
+        {groups.length === 0 ? (
           <EmptyState
             title="No widgets match your search"
-            description="Try a different slug or clear the search and format filter."
+            description="Try a different slug or clear the search and filters."
           />
         ) : (
-          pageRows.map((r) => (
-            <WidgetRowItem
-              key={r.id}
-              row={r}
-              expanded={openIds.has(r.id)}
-              onToggle={() => toggleRow(r.id)}
-            />
-          ))
+          groups.map((g) => {
+            const collapsed = isCollapsed(g.type);
+            const swatch = swatchFor(g.type, WIDGET_TYPE_SWATCH[g.type]);
+            return (
+              <Fragment key={g.type}>
+                <BrowseGroupHeader
+                  name={g.type}
+                  count={g.rows.length}
+                  collapsed={collapsed}
+                  swatch={swatch}
+                  onToggle={() => toggleGroup(g.type)}
+                  onSwatchChange={(id) => setGroupHue(g.type, id)}
+                />
+                {!collapsed &&
+                  g.rows.map((r) => (
+                    <WidgetRowItem
+                      key={r.id}
+                      row={r}
+                      swatch={swatch}
+                      expanded={openIds.has(r.id)}
+                      onToggle={() => toggleRow(r.id)}
+                    />
+                  ))}
+              </Fragment>
+            );
+          })
         )}
       </div>
 
@@ -189,31 +246,24 @@ export function WidgetsView() {
 
 function WidgetRowItem({
   row,
+  swatch,
   expanded,
   onToggle,
 }: {
   row: WidgetRow;
+  swatch: GroupSwatch;
   expanded: boolean;
   onToggle: () => void;
 }) {
-  // Same rule as Pages: a widget with variants opens its Variants list, otherwise the editor.
-  const open = () =>
-    navigate(row.variantCount > 0 ? routes.widgetVariants(row.id) : routes.editor("widget", row.id));
-  // Same rule as Pages: only rows with subpages get a chevron; the others keep
-  // the empty slot so slugs, format pills and status pills stay in one column.
-  const hasSubpages = row.children.length > 0;
-  // A widget's type comes from its slug family.
-  const layoutType = WIDGET_LAYOUT_TYPE[row.type];
-  const layoutName = LAYOUT_TYPES[layoutType].name;
+  const hasVariants = row.variants.length > 0;
+  const hasChildren = hasVariants || row.children.length > 0;
+  // A widget with no variants or pages is itself the editable experience.
+  const openSelf = () => navigate(routes.editor("widget", row.id));
   return (
     <Fragment>
-      <div
-        className="ui-ws-browse__row ui-ws-browse__row--widgets ui-ws-browse__row--categorized"
-        data-layout-type={layoutType}
-        role="row"
-      >
+      <div className="ui-ws-browse__row ui-ws-browse__row--widgets" role="row" style={groupHueVars(swatch)}>
         <span className="ui-ws-browse__slug ui-ws-browse__primary" role="cell">
-          {hasSubpages ? (
+          {hasChildren ? (
             <IconButton
               icon={expanded ? "chevron-down" : "chevron-right"}
               aria-label={expanded ? "Collapse" : "Expand"}
@@ -225,30 +275,32 @@ function WidgetRowItem({
             <span className="ui-ws-browse__chevron-spacer" aria-hidden="true" />
           )}
           <span className="ui-ws-browse__markers">
-            <span
-              className="layout-chip"
-              data-layout-type={layoutType}
-              title={layoutName}
-              aria-label={layoutName}
-            >
-              <MSym name={LAYOUT_TYPES[layoutType].icon} size={14} />
-            </span>
+            <span className="ui-ws-browse__widget-fam-dot" aria-hidden="true" />
             <span className="ui-ws-browse__format" title={row.format} aria-label={row.format}>
               {formatGlyph(row.format)}
             </span>
           </span>
           <Badge variant={row.status === "Published" ? "success" : "default"}>{row.status}</Badge>
-          <button type="button" className="ui-ws-browse__slug-link" onClick={open}>
-            {row.slug}
-            {row.variantCount > 0 && (
-              <span className="ui-ws-browse__slug-count">{row.variantCount} variants</span>
+          {/* Slug and variant badge share one grid cell, so the badge stays on the slug's line. */}
+          <span className="ui-ws-browse__slug-name">
+            <button
+              type="button"
+              className="ui-ws-browse__slug-link"
+              onClick={hasChildren ? onToggle : openSelf}
+            >
+              {row.slug}
+            </button>
+            {hasVariants && (
+              <button
+                type="button"
+                className="ui-ws-browse__variants-link"
+                onClick={() => navigate(routes.widgetVariants(row.id))}
+                title="Open the variants list"
+              >
+                <Badge variant="info">{row.variantCount} variants</Badge>
+              </button>
             )}
-            {row.usedOn > 0 && (
-              <span className="ui-ws-browse__slug-count">
-                Used on {row.usedOn} {row.usedOn === 1 ? "page" : "pages"}
-              </span>
-            )}
-          </button>
+          </span>
         </span>
         <span role="cell" className="ui-ws-browse__name">{row.widgetName}</span>
         <span role="cell" className="ui-ws-browse__muted">{row.created}</span>
@@ -260,15 +312,27 @@ function WidgetRowItem({
           <IconButton icon="trash" aria-label="Delete" size="sm" variant="tertiary" />
         </span>
       </div>
-      {expanded && (
+      {hasChildren && expanded && (
         <div className="ui-ws-browse__widget-children" role="rowgroup">
-          <div className="ui-ws-browse__widget-children-label">Pages :</div>
-          {row.children.length === 0 ? (
-            <div className="ui-ws-browse__widget-child" role="row">
-              <span className="ui-ws-browse__muted">Subpages not captured in this preview yet.</span>
-            </div>
-          ) : (
-            row.children.map((c) => <WidgetChildItem key={c.id} child={c} />)
+          {hasVariants && (
+            <>
+              <div className="ui-ws-browse__widget-children-label">Variants:</div>
+              {row.variants.map((v) => (
+                <WidgetChildItem
+                  key={v.id}
+                  child={v}
+                  onOpen={() => navigate(routes.editor("widget", v.id))}
+                />
+              ))}
+            </>
+          )}
+          {row.children.length > 0 && (
+            <>
+              <div className="ui-ws-browse__widget-children-label">Pages:</div>
+              {row.children.map((c) => (
+                <WidgetChildItem key={c.id} child={c} />
+              ))}
+            </>
           )}
         </div>
       )}
@@ -276,13 +340,19 @@ function WidgetRowItem({
   );
 }
 
-// Subpage = a page that uses this widget. Read-only here: the page itself is
-// authored in the Pages editor, not from the Widgets list.
-function WidgetChildItem({ child }: { child: WidgetChildRow }) {
+// A variant opens its editor. A page that uses the widget is read-only here: the
+// page itself is authored in the Pages editor.
+function WidgetChildItem({ child, onOpen }: { child: WidgetChildRow; onOpen?: () => void }) {
   return (
     <div className="ui-ws-browse__widget-child" role="row">
       <Badge variant={child.status === "Published" ? "success" : "default"}>{child.status}</Badge>
-      <span className="ui-ws-browse__slug-link">{child.name}</span>
+      {onOpen ? (
+        <button type="button" className="ui-ws-browse__slug-link" onClick={onOpen}>
+          {child.name}
+        </button>
+      ) : (
+        <span className="ui-ws-browse__slug-link">{child.name}</span>
+      )}
     </div>
   );
 }

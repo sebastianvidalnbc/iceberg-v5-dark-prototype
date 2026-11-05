@@ -401,6 +401,10 @@ export function LivePreview({
         setReady(true);
         setRendererDown(false);
         postRenderRef.current();
+      } else if (data.type === "rendered") {
+        // Any applied render proves the frame is live, even if "ready" landed earlier.
+        setReady(true);
+        setRendererDown(false);
       } else if (data.type === "section-selected") {
         // Click-to-select is always on; picking no longer exits the (optional)
         // highlight mode, so the author can keep clicking element to element.
@@ -437,7 +441,8 @@ export function LivePreview({
   useEffect(() => {
     if (!hasContent) return;
     let n = 0;
-    setReady(false);
+    // Don't reset `ready` here: the renderer's "ready" can land before this effect
+    // re-runs on the iframe's load event, and a reset would wait for a ping that never comes.
     setRendererDown(false);
     const id = window.setInterval(() => {
       postRenderRef.current();
@@ -639,10 +644,7 @@ export function LivePreview({
                     className="ui-preview__iframe"
                     title="Live preview"
                     src={RENDERER_URL}
-                    onLoad={() => {
-                      setReady(false);
-                      setLoadTick((t) => t + 1);
-                    }}
+                    onLoad={() => setLoadTick((t) => t + 1)}
                   />
                 </div>
                 {audience !== "default" && (

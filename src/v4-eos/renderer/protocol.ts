@@ -27,6 +27,8 @@ export type CmsToPreview =
 // iframe → CMS.
 export type PreviewToCms =
   | { source: "iceberg-preview"; type: "ready" }
+  // Acknowledges a "render" was applied, so the CMS knows the frame is live.
+  | { source: "iceberg-preview"; type: "rendered" }
   // A card/section was clicked while Pick Section mode is active.
   | { source: "iceberg-preview"; type: "section-selected"; nodeId: string };
 

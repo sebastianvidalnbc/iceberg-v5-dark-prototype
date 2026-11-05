@@ -731,14 +731,17 @@ export function Explorer({
 
   // Widget Structure tabs (Configurations / Authoring) sit in the pane header
   // with the title, so the tab state lives here. A widget with sections but no
-  // configuration nodes (e.g. built from a layout) opens on Authoring.
+  // configuration nodes (e.g. built from a layout) opens on Authoring. Each
+  // experience picks its own default, so switching from a variant back to a
+  // widget with configuration returns to Configurations.
   const [structureTab, setStructureTab] = useState<StructureTab>("config");
   const structureNodes = activeExperience?.structure ?? [];
   const hasConfigNodes = structureNodes.some((n) => WIDGET_CONFIG_NODE_IDS.has(n.id));
   const hasContentNodes = structureNodes.some((n) => !WIDGET_CONFIG_NODE_IDS.has(n.id));
   useEffect(() => {
-    if (!hasConfigNodes && hasContentNodes) setStructureTab("content");
-  }, [hasConfigNodes, hasContentNodes]);
+    if (hasConfigNodes) setStructureTab("config");
+    else if (hasContentNodes) setStructureTab("content");
+  }, [activeExperience?.id, hasConfigNodes, hasContentNodes]);
 
   // Pages / Structure split (percentage of the Explorer height for the Pages
   // pane). Default is intentionally compact so Structure gets more room.

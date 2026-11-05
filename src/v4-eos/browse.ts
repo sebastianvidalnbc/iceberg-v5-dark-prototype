@@ -394,7 +394,10 @@ export interface WidgetRow {
   /** Sort keys (ms since epoch) for the date columns. */
   createdAt: number;
   modifiedAt: number;
+  /** Pages that use this widget (read-only). */
   children: WidgetChildRow[];
+  /** The widget's variants; each one opens its own editor. */
+  variants: WidgetChildRow[];
   /** Number of production variants; a widget with variants opens its Variants list. */
   variantCount: number;
   /** Pages with this widget as a linked (not custom) module. */
@@ -424,6 +427,11 @@ export function buildWidgetRows(): WidgetRow[] {
         id: `${id}-sub-${i}`,
         name: c.name,
         status: c.status,
+      })),
+      variants: widgetVariantsFor(w.slug).map((v) => ({
+        id: v.id,
+        name: v.name,
+        status: v.published ? "Published" : "Draft",
       })),
       variantCount: widgetVariantsFor(w.slug).length,
       usedOn: pagesUsingWidget(w.slug).length,

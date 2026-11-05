@@ -283,6 +283,13 @@ export function WorkspaceShell({
       if (isPage) {
         setSelectedPageId(routeId);
         setSelectedVariantId(null);
+      } else if (WIDGET_CONFIGS[routeId]) {
+        // A widget row opens its own config, so its structure and preview show.
+        setSelectedWidgetId(null);
+        setSelectedWidgetConfigId(routeId);
+        setWidgetMemory((prev) =>
+          prev[routeId] ? prev : { ...prev, [routeId]: seedWidgetMemory(routeId) }
+        );
       } else {
         setSelectedWidgetId(routeId);
         setSelectedWidgetConfigId(null);
