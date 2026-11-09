@@ -190,6 +190,7 @@
   /* Toast border, customer preview frame, offer card and widget family hues
      (light values are the previous literals; dark values are in the dark block). */
   --color-toast-border: rgba(255, 255, 255, 0.08);
+  --color-bg-group-header: #f5f5f5;   /* = bg-subtle; collapsible group band */
   --color-preview-frame-bg: #ffffff;
   --color-offer-bg-from: #241546;
   --color-offer-bg-to: #0b0b1a;
@@ -383,6 +384,9 @@
   --color-toast-bg: #2f3032;
   --color-toast-bg-hover: #3a3b3d;
   --color-toast-border: rgba(255, 255, 255, 0.08);
+
+  /* Collapsible group band (Plan Picker, Promotions, ...): one step lighter than the panel. */
+  --color-bg-group-header: #252628;   /* P15 */
 
   /* App-nav chrome — the rail sits on the deepest neutral. */
   --color-nav-chrome-bg: #101113;
